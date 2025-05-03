@@ -11,22 +11,22 @@ function RequestService() {
   const [description, setDescription] = useState("");
   const [service, setService] = useState<any>([]);
   const [selectedService, setSelectedService] = useState<string[]>([]);
-  useEffect(() => {
-    getService();
-  }, []);
+  // useEffect(() => {
+  //   getService();
+  // }, []);
 
-  const getService = async () => {
-    await axios
-      .get(apiConstants.getService)
-      .then((response) => {
-        setService(response.data);
-      })
-      .catch(() => {
-        showToast("Failed to get Services", {
-          type: "error",
-        });
-      });
-  };
+  // const getService = async () => {
+  //   await axios
+  //     .get(apiConstants.getService)
+  //     .then((response) => {
+  //       setService(response.data);
+  //     })
+  //     .catch(() => {
+  //       showToast("Failed to get Services", {
+  //         type: "error",
+  //       });
+  //     });
+  // };
   const handleSubmit = async () => {
     if (selectedService.length < 1) {
       showToast("Select Service Request", {

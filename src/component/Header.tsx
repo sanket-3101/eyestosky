@@ -30,7 +30,14 @@ function Header() {
     //       data-lock-picture="img/!logged-user.jpg"
     //     />
     //   );
-    // }
+    //
+    return <img
+      src={
+        'https://avatar.iran.liara.run/public/boy?username=Ash'}
+      alt="Testing"
+      className="rounded-circle"
+      data-lock-picture="img/!logged-user.jpg"
+    />
   };
 
   // if (Object.keys(profileDetails).length === 0) return null;
@@ -60,7 +67,7 @@ function Header() {
           style={{ cursor: "pointer" }}
         >
           <a className={showDropDown ? "show" : ""}>
-            {/* <figure className="profile-picture">{getProfileImage()}</figure> */}
+            <figure className="profile-picture">{getProfileImage()}</figure>
             <div className="profile-info">
               <span className="name">
                 Welcome, Test

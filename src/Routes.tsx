@@ -73,7 +73,7 @@ const Routes: React.FC = () => {
             <Route path="contact-us" element={<ContactUs />} />
             <Route path="profile" element={<Profile />} />
             <Route path="notification" element={<Notification />} />
-            <Route path="service-request" element={<RequestService />} />
+            {/* <Route path="service-request" element={<RequestService />} /> */}
           </Route>
         </RouteConfig>
       </Suspense>

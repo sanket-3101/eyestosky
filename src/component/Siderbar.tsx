@@ -56,30 +56,30 @@ function Sidebar() {
             </NavLink>
           </li>
 
-          <li>
+          {/* <li>
             <NavLink to="/service-request" className="nav-link">
               <i className="bx bx-info-square" aria-hidden="true" />
               <span>Service Request</span>
             </NavLink>
-          </li>
+          </li> */}
 
           <li>
-            <NavLink to="/dispute-request" className="nav-link">
+            <NavLink to="/notification" className="nav-link">
               <i className="bx bxs-contact" aria-hidden="true" />
-              <span>Contact Us Request Status</span>
+              <span>CMS Page</span>
             </NavLink>
           </li>
           
 
 
-          <li className="nav-item position-relative">
+          {/* <li className="nav-item position-relative">
             <NavLink to="/notification" className="nav-link d-flex align-items-center">
               <i className="bx bx-bell" aria-hidden="true" />
               <span className="w-100">Notification</span>
               {showNotificationMark && <div className="ms-5 p-2 bg-danger border border-light rounded-circle border-0"></div>}
             </NavLink>
 
-          </li>
+          </li> */}
           <li>
             <NavLink to="/profile" className="nav-link">
               <i className="bx bx-user" aria-hidden="true" />

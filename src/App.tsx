@@ -23,26 +23,26 @@ function App() {
   );
 
 
-  useEffect(() => {
-    onMessage(messaging, (payload: any) => {
-      console.log(payload)
-      const { title, body } = payload.notification;
-      dispatch(showNotificationMark(true))
-      toast.info(<CustomToast title={title} message={body} />, {
-        position: "top-right",
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        className: 'custom-toast',  // Optional class for further styling
-        autoClose: false,
-        // onClick: () => {
-        //   navigate('/notification');  // Redirect to your desired route
-        // }
-      });
-    })
-  }, [])
+  // useEffect(() => {
+  //   onMessage(messaging, (payload: any) => {
+  //     console.log(payload)
+  //     const { title, body } = payload.notification;
+  //     dispatch(showNotificationMark(true))
+  //     toast.info(<CustomToast title={title} message={body} />, {
+  //       position: "top-right",
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       className: 'custom-toast',  // Optional class for further styling
+  //       autoClose: false,
+  //       // onClick: () => {
+  //       //   navigate('/notification');  // Redirect to your desired route
+  //       // }
+  //     });
+  //   })
+  // }, [])
 
   useEffect(() => {
     const token = localStorage.getItem("auth_token");

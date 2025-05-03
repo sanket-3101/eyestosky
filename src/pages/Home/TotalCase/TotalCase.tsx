@@ -5,41 +5,42 @@ import { TotalCasesType, apiConstants } from "../../../constant/constant";
 
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
+import { busnessOwenerMock } from "../../../constant/mock";
 
 function TotalCase() {
   const navigate = useNavigate();
-  const [cases, setCases] = useState<TotalCasesType | null | any>(null);
+  // const [cases, setCases] = useState<TotalCasesType | null | any>(null);
 
   const [loading, setLoading] = useState(false);
   const columns = [
     {
       id: "1",
-      name: "Lawyer Name",
-      fieldName: "lawyer",
+      name: "Name",
+      fieldName: "name",
       style: {
         width: "10%",
       },
     },
     {
       id: "2",
-      name: "Case Title",
-      fieldName: "title",
+      name: "Address",
+      fieldName: "address",
       style: {
         width: "10%",
       },
     },
     {
       id: "3",
-      name: "Description",
-      fieldName: "description",
+      name: "Email",
+      fieldName: "email",
       style: {
         width: "40%",
       },
     },
     {
       id: "4",
-      name: "Action Required",
-      fieldName: "orders",
+      name: "Description",
+      fieldName: "description",
       style: {
         width: "40%",
       },
@@ -73,7 +74,7 @@ function TotalCase() {
   // };
 
   const onActionClick = (data: any) => {
-    navigate(`view-case/${data._id}`);
+    // navigate(`view-case/${data._id}`);
   };
 
   return loading ? (
@@ -82,7 +83,7 @@ function TotalCase() {
     <section className="card">
       <div className="card-body">
         <TableSection
-          data={[]}
+          data={busnessOwenerMock}
           columns={columns}
           onActionClick={onActionClick}
           // onPageChange={(pageNumber: number) =>

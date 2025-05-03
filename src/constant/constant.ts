@@ -80,3 +80,5 @@ export interface DisputeRequestType {
     itemsPerPage: number,
     totalPage: number,
 }
+
+

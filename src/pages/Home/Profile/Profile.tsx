@@ -14,63 +14,82 @@ function Profile() {
   });
   const dispatch = useAppDispatch();
   const handleChange = (data: any) => {
-    setUserDetails({
-      ...userDetails,
-      ...data,
-    });
+    // setUserDetails({
+    //   ...userDetails,
+    //   ...data,
+    // });
   };
 
   useEffect(() => {
-    if(profileDetails) {
-      setUserDetails({...profileDetails})
-    }
-  }, [profileDetails])
+      setUserDetails({
+        name: {
+          salutation: 'Mr',
+          firstName: 'Test',
+          fullName: "Mr Test User",
+          lastName: 'User'
+        },
+        designation: 'Test',
+        email: 'Testing@gmail.com',
+        mobile: "+917359756473",
+        moblieCode: "+91",
+        origanization: "Test",
+        userType: "ceo",
+        profilePicture: {
+            key: "1",
+            url: "https://avatar.iran.liara.run/public/boy?username=Ash"
+        },
+        whatsappMobile: "+917359756473"
+      })
+    
+  }, [])
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      try {
-        const formData = new FormData();
-        formData.append("profileImage", e.target.files[0]);
+    
+    // if (e.target.files && e.target.files.length > 0) {
+    //   try {
+    //     const formData = new FormData();
+    //     formData.append("profileImage", e.target.files[0]);
 
-        // Make a POST request to your server with the FormData
-        const response = await axios.post(
-          apiConstants.baseUrl + apiConstants.updateProfileImage,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+    //     // Make a POST request to your server with the FormData
+    //     const response = await axios.post(
+    //       apiConstants.baseUrl + apiConstants.updateProfileImage,
+    //       formData,
+    //       {
+    //         headers: {
+    //           "Content-Type": "multipart/form-data",
+    //         },
+    //       }
+    //     );
 
-        console.log("Image uploaded successfully:", response.data);
+    //     console.log("Image uploaded successfully:", response.data);
 
-        if (response.data) {
-          const updateProfile = {
-            ...userDetails,
-            profilePicture: {
-              ...response.data.data,
-            },
-          };
-          setUserDetails({
-            ...updateProfile,
-          });
-          setUserProfileDetails({
-            ...updateProfile,
-          });
-          showToast("Profile Pic updated Succesfully", {
-            type: "success",
-          });
-        }
-      } catch (error) {
-        console.error("Error uploading image:", error);
-        showToast("Error while uploading Pic", {
-          type: "error",
-        });
-      }
-    }
+    //     if (response.data) {
+    //       const updateProfile = {
+    //         ...userDetails,
+    //         profilePicture: {
+    //           ...response.data.data,
+    //         },
+    //       };
+    //       setUserDetails({
+    //         ...updateProfile,
+    //       });
+    //       setUserProfileDetails({
+    //         ...updateProfile,
+    //       });
+    //       showToast("Profile Pic updated Succesfully", {
+    //         type: "success",
+    //       });
+    //     }
+    //   } catch (error) {
+    //     console.error("Error uploading image:", error);
+    //     showToast("Error while uploading Pic", {
+    //       type: "error",
+    //     });
+    //   }
+    // }
   };
 
   const handleSubmit = async () => {
+    return
     const requestObject = {
       name: {
         firstName: userDetails.name.firstName,

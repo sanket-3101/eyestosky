@@ -6,6 +6,7 @@ import TableSection from "../../../component/Table/Table";
 import { useNavigate } from "react-router-dom";
 import { showNotificationMark } from "../../../redux/slice/Auth";
 import { useDispatch } from "react-redux";
+import { CMS_PAGES_MOCK } from "../../../constant/mock";
 function Notification() {
   const [details, setDetails] = useState<DisputeRequestType | null | any>(null);
 
@@ -19,11 +20,6 @@ function Notification() {
       fieldName: "title",
     },
     {
-      id: "2",
-      name: "Description",
-      fieldName: "description",
-    },
-    {
       id: "3",
       name: "Action",
       style: {
@@ -32,47 +28,49 @@ function Notification() {
     },
   ];
 
-  useEffect(() => {
-    getDetails({
-      pageNumber: 1,
-      search: "",
-    });
-    dispatch(showNotificationMark(false))
-  }, []);
+  // useEffect(() => {
+  //   getDetails({
+  //     pageNumber: 1,
+  //     search: "",
+  //   });
+  //   dispatch(showNotificationMark(false))
+  // }, []);
 
-  const getDetails = async (data: any) => {
-    const details = {
-      search: data.search,
-      startIndex: data.pageNumber,
-    };
-    await axios.get(apiConstants.getNotification(details)).then((response) => {
-      setDetails(response);
-      setLoading(false);
-    });
-  };
+  // const getDetails = async (data: any) => {
+  //   const details = {
+  //     search: data.search,
+  //     startIndex: data.pageNumber,
+  //   };
+  //   await axios.get(apiConstants.getNotification(details)).then((response) => {
+  //     setDetails(response);
+  //     setLoading(false);
+  //   });
+  // };
 
-  const onActionClick = (data : any) => {
-    if(data._case) {
-      navigate(`/total-case/view-case/${data._case}`);
-    }else {
-      alert('Action will only work for case notification')
-    }
-  }
-  return loading ? (
+  // const onActionClick = (data : any) => {
+  //   if(data._case) {
+  //     navigate(`/total-case/view-case/${data._case}`);
+  //   }else {
+  //     alert('Action will only work for case notification')
+  //   }
+  // }
+  return false ? (
     <Loader />
   ) : (
     <section className="card">
       <div className="card-body">
         <TableSection
-          data={details}
+          data={CMS_PAGES_MOCK}
           columns={columns}
           onPageChange={(pageNumber: number) =>
-            getDetails({ search: "", pageNumber: pageNumber })
+            // getDetails({ search: "", pageNumber: pageNumber })
+             {}
           }
           onSearchChange={(value: string) =>
-            getDetails({ search: value, pageNumber: details.startIndex })
+            // getDetails({ search: value, pageNumber: details.startIndex })
+            {}
           }
-          onActionClick={(rowData : any) => onActionClick(rowData)}
+          onActionClick={(rowData : any) => {}}
         />
       </div>
     </section>
