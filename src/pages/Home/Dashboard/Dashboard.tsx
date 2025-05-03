@@ -20,35 +20,35 @@ function Dashboard() {
   const profileDetails = useAppSelector((state) => state.auth); 
   const firebaseToken = useAppSelector((state) => state.auth.firebaseToken);
   
-  console.log('fIREBASE TOKEN ===>', firebaseToken)
-  useEffect(() => {
-    // Get current date
-    const currentDate = moment();
+  // console.log('fIREBASE TOKEN ===>', firebaseToken)
+  // useEffect(() => {
+  //   // Get current date
+  //   const currentDate = moment();
 
-    // Get first day of the current month
-    const firstDayOfMonth = currentDate.clone().startOf("month");
+  //   // Get first day of the current month
+  //   const firstDayOfMonth = currentDate.clone().startOf("month");
 
-    // Get last day of the current month
-    const lastDayOfMonth = currentDate.clone().endOf("month");
+  //   // Get last day of the current month
+  //   const lastDayOfMonth = currentDate.clone().endOf("month");
 
-    // Format dates in yyyy-mm-dd format
-    const startDate = firstDayOfMonth.format("YYYY-MM-DD");
-    const endDate = lastDayOfMonth.format("YYYY-MM-DD");
+  //   // Format dates in yyyy-mm-dd format
+  //   const startDate = firstDayOfMonth.format("YYYY-MM-DD");
+  //   const endDate = lastDayOfMonth.format("YYYY-MM-DD");
 
-    console.log(startDate, endDate);
-    const data = {
-      startDate,
-      endDate
-    };
-    getCases(data);
-  }, []);
+  //   console.log(startDate, endDate);
+  //   const data = {
+  //     startDate,
+  //     endDate
+  //   };
+  //   getCases(data);
+  // }, []);
 
 
-  useEffect(() => {
-    if(Object.keys(profileDetails.profileDetails).length) {
-      getFirebaseToken(dispatch)
-    }
-  }, [profileDetails])
+  // useEffect(() => {
+  //   if(Object.keys(profileDetails.profileDetails).length) {
+  //     getFirebaseToken(dispatch)
+  //   }
+  // }, [profileDetails])
   const getCasesBgColor = (orders: { priority: string }[]) => {
     const lastOrder = orders[0];
     if (lastOrder) {
@@ -146,7 +146,7 @@ function Dashboard() {
   };
   return (
     <div style={{ background: "white", height: "90vh", padding: "3%" }}>
-      <FullCalendar
+      {/* <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{
           left: "prev,next today",
@@ -161,7 +161,7 @@ function Dashboard() {
         weekNumberCalculation="local"
         eventMouseEnter={handleEventMouseEnter}
         // eventMouseLeave={handleEventMouseLeave}
-      />
+      /> */}
     </div>
   );
 }

@@ -20,26 +20,26 @@ function Header() {
   };
 
   const getProfileImage = () => {
-    console.log(profileDetails?.profilePicture)
-    if (profileDetails.profilePicture && profileDetails.profilePicture.url) {
-      return (
-        <img
-          src={profileDetails.profilePicture.url}
-          alt="Joseph Doe"
-          className="rounded-circle"
-          data-lock-picture="img/!logged-user.jpg"
-        />
-      );
-    }
+    // console.log(profileDetails?.profilePicture)
+    // if (profileDetails.profilePicture && profileDetails.profilePicture.url) {
+    //   return (
+    //     <img
+    //       src={profileDetails.profilePicture.url}
+    //       alt="Joseph Doe"
+    //       className="rounded-circle"
+    //       data-lock-picture="img/!logged-user.jpg"
+    //     />
+    //   );
+    // }
   };
 
-  if (Object.keys(profileDetails).length === 0) return null;
+  // if (Object.keys(profileDetails).length === 0) return null;
 
   return (
     <header className="header">
       <div className="logo-container">
         <Link to="/" className="logo">
-          <img src={logo} alt="Rab & Rab Associates LLP" />
+          <img alt="Rab & Rab Associates LLP" />
         </Link>
         <div
           className="d-md-none toggle-sidebar-left"
@@ -60,10 +60,10 @@ function Header() {
           style={{ cursor: "pointer" }}
         >
           <a className={showDropDown ? "show" : ""}>
-            <figure className="profile-picture">{getProfileImage()}</figure>
+            {/* <figure className="profile-picture">{getProfileImage()}</figure> */}
             <div className="profile-info">
               <span className="name">
-                Welcome, {profileDetails.name.firstName}
+                Welcome, Test
               </span>
             </div>
             <i className="bx bxs-chevron-down" />

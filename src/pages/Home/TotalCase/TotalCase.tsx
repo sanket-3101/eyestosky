@@ -10,7 +10,7 @@ function TotalCase() {
   const navigate = useNavigate();
   const [cases, setCases] = useState<TotalCasesType | null | any>(null);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const columns = [
     {
       id: "1",
@@ -52,25 +52,25 @@ function TotalCase() {
       },
     },
   ];
-  useEffect(() => {
-    getDetails({
-      pageNumber: 1,
-      search: "",
-    });
-  }, []);
+  // useEffect(() => {
+  //   getDetails({
+  //     pageNumber: 1,
+  //     search: "",
+  //   });
+  // }, []);
 
-  const getDetails = async (data: any) => {
-    const details = {
-      search: data.search,
-      startIndex: data.pageNumber,
-    };
-    await axios
-      .get(apiConstants.baseUrl + apiConstants.getCases(details))
-      .then((response) => {
-        setCases(response);
-        setLoading(false);
-      });
-  };
+  // const getDetails = async (data: any) => {
+  //   const details = {
+  //     search: data.search,
+  //     startIndex: data.pageNumber,
+  //   };
+  //   await axios
+  //     .get(apiConstants.baseUrl + apiConstants.getCases(details))
+  //     .then((response) => {
+  //       setCases(response);
+  //       setLoading(false);
+  //     });
+  // };
 
   const onActionClick = (data: any) => {
     navigate(`view-case/${data._id}`);
@@ -82,15 +82,15 @@ function TotalCase() {
     <section className="card">
       <div className="card-body">
         <TableSection
-          data={cases}
+          data={[]}
           columns={columns}
           onActionClick={onActionClick}
-          onPageChange={(pageNumber: number) =>
-            getDetails({ search: "", pageNumber: pageNumber })
-          }
-          onSearchChange={(value: string) =>
-            getDetails({ search: value, pageNumber: cases.startIndex })
-          }
+          // onPageChange={(pageNumber: number) =>
+          //   getDetails({ search: "", pageNumber: pageNumber })
+          // }
+          // onSearchChange={(value: string) =>
+          //   getDetails({ search: value, pageNumber: cases.startIndex })
+          // }
         />
       </div>
     </section>

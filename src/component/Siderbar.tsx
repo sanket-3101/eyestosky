@@ -44,11 +44,17 @@ function Sidebar() {
 
           <li>
             <NavLink to="/total-case" className="nav-link">
-              <i className="bx bx-list-ol" aria-hidden="true" />
-              <span>Total Cases</span>
+              <i className="bx bx-user" aria-hidden="true" />
+              <span>Business Owner Management</span>
             </NavLink>
           </li>
 
+          <li>
+            <NavLink className="nav-link" to="/contact-us">
+              <i className="bx bx-file-blank" aria-hidden="true" />
+              <span>Contact Us</span>
+            </NavLink>
+          </li>
 
           <li>
             <NavLink to="/service-request" className="nav-link">
@@ -63,12 +69,7 @@ function Sidebar() {
               <span>Contact Us Request Status</span>
             </NavLink>
           </li>
-          <li>
-            <NavLink className="nav-link" to="/contact-us">
-              <i className="bx bx-file-blank" aria-hidden="true" />
-              <span>Contact Us</span>
-            </NavLink>
-          </li>
+          
 
 
           <li className="nav-item position-relative">

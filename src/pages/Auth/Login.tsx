@@ -23,50 +23,51 @@ function Login() {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    console.log(currentScreen);
-    if (currentScreen === "otp") {
-      navigate("/otp");
-    }
-  }, [navigate, currentScreen]);
+  // useEffect(() => {
+  //   console.log(currentScreen);
+  //   if (currentScreen === "otp") {
+  //     navigate("/otp");
+  //   }
+  // }, [navigate, currentScreen]);
 
-  useEffect(() => {
-    if (status === apiState.failed) {
-      showToast(error?.message, {
-        type: "error",
-      });
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status === apiState.failed) {
+  //     showToast(error?.message, {
+  //       type: "error",
+  //     });
+  //   }
+  // }, [status]);
 
 
 
   const handleSignIn = async () => {
 
-    if (!showOtp) {
-      // Validate email and password
-      if (!email || !password) {
-        // Handle validation error
-        showToast("All Fields are required", {
-          type: "error",
-        });
-        return;
-      }
+    // if (!showOtp) {
+    //   // Validate email and password
+    //   if (!email || !password) {
+    //     // Handle validation error
+    //     showToast("All Fields are required", {
+    //       type: "error",
+    //     });
+    //     return;
+    //   }
 
-      const response = await dispatch(
-        loginWithEmailPassword({ email, password })
-      );
-      console.log(response);
-    } else {
-      // Validate phone number
-      if (!phoneNumber) {
-        // Handle validation error
-        showToast("Phone number is required", {
-          type: "error",
-        });
-        return;
-      }
-      dispatch(verifyPhoneNumber({ phoneNumber }));
-    }
+    //   const response = await dispatch(
+    //     loginWithEmailPassword({ email, password })
+    //   );
+    //   console.log(response);
+    // } else {
+    //   // Validate phone number
+    //   if (!phoneNumber) {
+    //     // Handle validation error
+    //     showToast("Phone number is required", {
+    //       type: "error",
+    //     });
+    //     return;
+    //   }
+    //   dispatch(verifyPhoneNumber({ phoneNumber }));
+    // }
+    navigate('/')
   };
 
   return (
@@ -76,12 +77,12 @@ function Login() {
           <div className="panel card-sign">
             <div className="card-body pt-3 pb-3 forget-password-content">
               <a href="/" className="logo text-center w-100 d-inline-block">
-                <img
+                {/* <img
                   src={logo}
                   width={270}
                   height={135}
                   alt="Rab & Rab Associates LLP"
-                />
+                /> */}
               </a>
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
