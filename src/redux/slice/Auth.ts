@@ -94,22 +94,22 @@ export const verifyOTP = createAsyncThunk(
   }
 );
 
-export const sendFirebaseToken = createAsyncThunk(
-  'firebaseNotification/send-firebase-notification',
-  async (token: any, thunkAPI) => {
-    const response = await axios.post(apiConstants.baseUrl + apiConstants.sendFirebaseNotification, {
-      fcmToken: token
-    }).then((response) => {
-      console.log('firebase response ===>', response)
-      return thunkAPI.fulfillWithValue(token);
-    }).catch((error: AxiosError) => {
-      console.log(error)
-      return thunkAPI.rejectWithValue(error.response?.data);
-    });
+// export const sendFirebaseToken = createAsyncThunk(
+//   'firebaseNotification/send-firebase-notification',
+//   async (token: any, thunkAPI) => {
+//     const response = await axios.post(apiConstants.baseUrl + apiConstants.sendFirebaseNotification, {
+//       fcmToken: token
+//     }).then((response) => {
+//       console.log('firebase response ===>', response)
+//       return thunkAPI.fulfillWithValue(token);
+//     }).catch((error: AxiosError) => {
+//       console.log(error)
+//       return thunkAPI.rejectWithValue(error.response?.data);
+//     });
 
-    return response
-  }
-);
+//     return response
+//   }
+// );
 
 export const getProfileDetails = createAsyncThunk(
   'profile/get-profile',
@@ -205,15 +205,15 @@ export const authSlice = createSlice({
         state.error = action.payload;
         state.status = 'failed';
       })
-      .addCase(sendFirebaseToken.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.firebaseToken =  action.payload;
-      })
-      .addCase(sendFirebaseToken.rejected, (state, action) => {
-        state.error = action.payload;
-        state.status = 'failed';
-        state.firebaseToken =  '';
-      })
+      // .addCase(sendFirebaseToken.fulfilled, (state, action) => {
+      //   state.status = 'succeeded';
+      //   state.firebaseToken =  action.payload;
+      // })
+      // .addCase(sendFirebaseToken.rejected, (state, action) => {
+      //   state.error = action.payload;
+      //   state.status = 'failed';
+      //   state.firebaseToken =  '';
+      // })
 
   },
 });

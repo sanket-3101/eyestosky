@@ -8,7 +8,7 @@ import { useAppSelector, useAppDispatch } from "../../redux/reduxHook";
 import { verifyOTP, verifyPhoneNumber } from "../../redux/slice/Auth";
 import { apiState } from "../../constant/constant";
 import { navigateToScreen } from "../../redux/slice/Navigation";
-import { getFirebaseToken, showToast } from "../../constant/util";
+import { showToast } from "../../constant/util";
 
 function Otp() {
   const [otp, setOTP] = useState<number>();
