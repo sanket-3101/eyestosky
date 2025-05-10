@@ -118,6 +118,8 @@ const TableSection = ({
   onActionClick,
   onPageChange,
   onSearchChange,
+  isHashPage,
+  onCreateHashClick
 }: any) => {
   const [search, setSearch] = useState("");
 
@@ -132,6 +134,17 @@ const TableSection = ({
           <div className="col-md-6">
             <SearchInput search={search} setSearch={handleSearchChange} />
           </div>
+          {
+            isHashPage &&
+            <div className="col-md-6 d-flex justify-content-end">
+              <input
+                defaultValue="Create Hash"
+                className="btn btn-primary w-5"
+                onClick={onCreateHashClick}
+              />
+            </div>
+          }
+
         </div>
 
         <Table

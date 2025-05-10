@@ -6,11 +6,12 @@ import { TotalCasesType, apiConstants } from "../../../constant/constant";
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
 import { busnessOwenerMock, HASH_TAG_MOCK } from "../../../constant/mock";
+import CreateHashPopup from "../../../component/CreateHashPopup";
 
 function HashtagList() {
   const navigate = useNavigate();
   // const [cases, setCases] = useState<TotalCasesType | null | any>(null);
-
+  const [showPopup, setShowpopup] = useState(false)
   const [loading, setLoading] = useState(false);
   const columns = [
     {
@@ -77,24 +78,40 @@ function HashtagList() {
     navigate(`${data.id}`);
   };
 
+  const onCreateHashClick = () => {
+    setShowpopup(true)
+  }
+
+  const setPopupDetails = () =>{
+    
+  }
   return loading ? (
     <Loader />
   ) : (
-    <section className="card">
-      <div className="card-body">
-        <TableSection
-          data={HASH_TAG_MOCK}
-          columns={columns}
-          onActionClick={onActionClick}
+    <>
+      <section className="card">
+        <div className="card-body">
+          <TableSection
+            data={HASH_TAG_MOCK}
+            columns={columns}
+            onActionClick={onActionClick}
+            isHashPage={true}
+            onCreateHashClick={onCreateHashClick}
           // onPageChange={(pageNumber: number) =>
           //   getDetails({ search: "", pageNumber: pageNumber })
           // }
           // onSearchChange={(value: string) =>
           //   getDetails({ search: value, pageNumber: cases.startIndex })
           // }
+          />
+        </div>
+      </section>
+      {showPopup && (
+        <CreateHashPopup
+          closeModal={() => setShowpopup(false)}
         />
-      </div>
-    </section>
+      )}
+    </>
   );
 }
 
