@@ -19,6 +19,7 @@ import Notification from "./pages/Home/Notification/Notification";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import RequestService from "./pages/Home/Service/RequestService";
 import { Loader } from "./component/Loader";
+import UserList from "./pages/Home/User/UserList";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 
@@ -65,6 +66,7 @@ const Routes: React.FC = () => {
             element={<Main />}
           >
             <Route index={true} element={<Dashboard />} />
+            <Route path="user-list" element={<UserList />} />
             <Route path="total-case">
               <Route index={true} element={<TotalCase />} />
               <Route path="view-case/:id" element={<ViewCase />} />

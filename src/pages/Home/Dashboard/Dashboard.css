@@ -1,11 +1,10 @@
-.kpi-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 150px;
-    cursor: pointer;
-  }
-  
-  .kpi-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  }
-  
+.custom-card {
+  background-color: #04105a;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.custom-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}

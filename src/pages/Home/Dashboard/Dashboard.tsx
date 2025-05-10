@@ -1,34 +1,28 @@
 import React from 'react';
-import './Dashboard.css'; // We'll add custom CSS here
+import './Dashboard.css';
 
-const kpis = [
-  { title: 'Total Users', value: '12,340', icon: 'bi-people', bg: 'primary' },
-  { title: 'Active Users', value: '9,876', icon: 'bi-person-check', bg: 'success' },
-  { title: 'Total Revenue', value: '$58,400', icon: 'bi-cash-stack', bg: 'warning' },
-  { title: 'New Signups', value: '1,230', icon: 'bi-person-plus', bg: 'info' },
+const cards = [
+  { title: 'Users', count: 1200 },
+  { title: 'Approved Posts', count: 875 },
+  { title: 'Pending Posts', count: 132 },
+  { title: 'Active Hashtags', count: 58 },
+  { title: 'Inactive Hashtags', count: 17 }
 ];
 
-const Dashboard = () => {
+export default function Dashboard() {
   return (
-    <div className="container my-4">
-      <h2 className="mb-4">Dashboard</h2>
+    <div className="container my-5">
+      <h2 className="mb-4" style={{color: '#04105a'}}>Dashboard Overview</h2>
       <div className="row">
-        {kpis.map((kpi, index) => (
-          <div className="col-md-6 col-lg-3 mb-4" key={index}>
-            <div className={`card text-white bg-${kpi.bg} kpi-card`}>
-              <div className="card-body d-flex align-items-center">
-                <i className={`bi ${kpi.icon} fs-1 me-3`}></i>
-                <div>
-                  <h6 className="card-subtitle mb-1">{kpi.title}</h6>
-                  <h4 className="card-title mb-0">{kpi.value}</h4>
-                </div>
-              </div>
+        {cards.map((card, index) => (
+          <div key={index} className="col-md-6 col-lg-4 mb-4">
+            <div className="custom-card text-white p-4 rounded shadow-sm">
+              <h5>{card.title}</h5>
+              <h2 className="fw-bold">{card.count}</h2>
             </div>
           </div>
         ))}
       </div>
     </div>
   );
-};
-
-export default Dashboard;
+}

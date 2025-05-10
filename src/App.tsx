@@ -9,7 +9,7 @@ function App() {
   // useEffect(() => {
   //   handleFirebaseToken()
   // }, [])
-const CustomToast = ({ title, message }: { title: string, message: string }) => (
+  const CustomToast = ({ title, message }: { title: string, message: string }) => (
     <div>
       <strong style={{ fontSize: '16px', color: '#007bff' }}>{title}</strong> {/* Styled Title */}
       <div style={{ marginTop: '5px', fontSize: '14px', color: '#333' }}>{message}</div> {/* Styled Message */}
