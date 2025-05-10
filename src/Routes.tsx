@@ -20,6 +20,7 @@ import { Loader } from "./component/Loader";
 import UserList from "./pages/Home/User/UserList";
 import ViewUser from "./pages/Home/User/ViewUser";
 import PostList from "./pages/Home/Posts/PostList";
+import PostView from "./pages/Home/Posts/PostView";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 
@@ -72,7 +73,7 @@ const Routes: React.FC = () => {
             </Route>
             <Route path="post-list" >
               <Route index={true} element={<PostList />} />
-              {/* <Route path=":id" element={<ViewUser />} /> */}
+              <Route path=":id" element={<PostView />} />
             </Route>
             <Route path="dispute-request" element={<DisputeRequest />} />
             <Route path="contact-us" element={<ContactUs />} />

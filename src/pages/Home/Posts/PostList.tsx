@@ -66,7 +66,7 @@ function PostList() {
   // };
 
   const onActionClick = (data: any) => {
-    // navigate(`${data.id}`);
+    navigate(`${data.id}`);
   };
 
   return loading ? (

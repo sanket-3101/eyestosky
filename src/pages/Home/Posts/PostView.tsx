@@ -128,14 +128,14 @@ function PostView() {
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      Name
+                      Post Date
                     </label>
                   </div>
                   <div className="col-md-8">
                     <input
                       type="text"
                       className="form-control"
-                      value={'Test'}
+                      value={'22-01-2025'}
                       disabled={true}
                     />
                   </div>
@@ -145,14 +145,14 @@ function PostView() {
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      Gender
+                      Post Type
                     </label>
                   </div>
                   <div className="col-md-8">
                     <input
                       type="text"
                       className="form-control"
-                      value={'male'}
+                      value={'Image'}
                       disabled={true}
                     />
                   </div>
@@ -164,14 +164,14 @@ function PostView() {
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      Email Address
+                      Post Link
                     </label>
                   </div>
                   <div className="col-md-8">
                     <input
                       type="text"
                       className="form-control"
-                      value={'Test@gmail.com'}
+                      value={'https://test.com'}
                       disabled={true}
                     />
                   </div>
@@ -181,60 +181,31 @@ function PostView() {
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      Country
+                      Status
                     </label>
                   </div>
                   <div className="col-md-8">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={'India'}
-                      disabled={true}
-                    />
+                    <select
+                      className="d-block form-control"
+                      // style={{ width: "4.5rem" }}
+                      value={'1'}
+                    // onChange={(e) => {
+                    //   handleChange({
+                    //     name: {
+                    //       ...userDetails.name,
+                    //       salutation: e.target.value,
+                    //     },
+                    //   });
+                    // }}
+                    >
+                      <option value="1">Active</option>
+                      <option value="0">Deactivate</option>
+                    </select>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="row mb-3">
-              <div className="form-group col-sm-6">
-                <div className="row align-items-center">
-                  <div className="col-md-4">
-                    <label htmlFor="" className="mb-0">
-                      UFO Witinessed
-                    </label>
-                  </div>
-                  <div className="col-md-8">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={'Yes'}
-                      disabled={true}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="form-group col-sm-6 pt-0">
-                <div className="row">
-                  <div className="col-md-4">
-                    <label htmlFor="" className="mb-0">
-                      Description
-                    </label>
-                  </div>
-                  <div className="col-md-8">
-                    <input
-                      defaultValue="Show Description"
-                      className="btn btn-primary w-50"
-                      onClick={(e) =>
-                        setPopupDetails({
-                          show: true,
-                          text: 'Description',
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            \
             <div className="row mb-3">
               {/* {
                 profileDetails.userType === 'team_member' ? (
@@ -329,47 +300,7 @@ function PostView() {
               </div>
             </div> */}
           </form>
-          <div className="sub-title mb-1" id="order-section">
-            <h5 className="font-weight-bold">Post History</h5>
-          </div>
-          <div className="table-responsive">
-            <table className="table table-responsive-md table-bordered common-table mb-0">
-              <thead>
-                <tr>
-                  <th style={{ width: "10%" }}>Date</th>
-                  <th style={{ width: "8%" }}>Post Type</th>
-                  <th style={{ width: "15%" }}>Post Link</th>
-                  <th style={{ width: "10%" }}>Status</th>
-                  <th style={{ width: "15%" }}>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  {
-                    date: new Date(),
-                    post_type: 'Imange',
-                    post_link: "abc.com",
-                    status: "Active"
-                  }
-                ].map((item: any, index: number) => (
-                  <tr>
-                    <td>{formatDate(item.date)}</td>
-                    <td>{item.post_type}</td>
-                    <td>{item.post_link}</td>
-                    <td>{item.status}</td>
-                    {/* <td>{getFormattedText(item.summary, 30, false)}</td> */}
-                    {/* <td>{getFormattedText(item.actionRequired, 50, true)}</td> */}
-                    <td>
-                      <a>
-                        <i className="bx bxs-trash-alt text-6 text-primary cur-pointer mr-5" />
-                        <i className='bx bxs-edit-alt text-6 text-primary cur-pointer' />
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+
 
         </div>
       </section>
