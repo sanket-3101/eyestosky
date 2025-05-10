@@ -11,18 +11,20 @@ const cards = [
 
 export default function Dashboard() {
   return (
-    <div className="container my-5">
-      <h2 className="mb-4" style={{color: '#04105a'}}>Dashboard Overview</h2>
-      <div className="row">
-        {cards.map((card, index) => (
-          <div key={index} className="col-md-6 col-lg-4 mb-4">
-            <div className="custom-card text-white p-4 rounded shadow-sm">
-              <h5>{card.title}</h5>
-              <h2 className="fw-bold">{card.count}</h2>
+    <section className="card">
+      <div className="card-body">
+        <h2 className="mb-4" style={{ color: '#04105a' }}>Dashboard Overview</h2>
+        <div className="row">
+          {cards.map((card, index) => (
+            <div key={index} className="col-md-6 col-lg-4 mb-4">
+              <div className="custom-card text-white p-4 rounded shadow-sm">
+                <h5>{card.title}</h5>
+                <h2 className="fw-bold">{card.count}</h2>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

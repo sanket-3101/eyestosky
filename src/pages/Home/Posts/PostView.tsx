@@ -54,62 +54,7 @@ function PostView() {
     //     });
     //   });
   };
-  const handleServiceChange = (
-    item: any,
-    itemSelectedId: HTMLCollectionOf<HTMLOptionElement>
-  ) => {
-    // const orders = details.orders.map((items: any) => {
-    //   if (items._id === item._id) {
-    //     return {
-    //       ...items,
-    //       serviceRequest: Array.from(itemSelectedId, (option) => option.value),
-    //     };
-    //   }
-    //   return items;
-    // });
-    // setDetails({
-    //   ...details,
-    //   orders,
-    // });
-  };
 
-  const submitServiceChange = async (orderDetails: any) => {
-    // if (!orderDetails.serviceRequest) {
-    //   showToast("Select Service Request is Request", {
-    //     type: "error",
-    //   });
-
-    //   return;
-    // }
-    // const payload = {
-    //   _case: id,
-    //   _service: orderDetails.serviceRequest,
-    //   description: details.description,
-    //   _order: orderDetails._id,
-    // };
-
-    // await axios
-    //   .post(apiConstants.submitServiceRequest, payload)
-    //   .then((response) => {
-    //     if (response) {
-    //       showToast("Service request submitted successfully.", {
-    //         type: "success",
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     showToast("Failed to Submit Request", {
-    //       type: "error",
-    //     });
-    //   });
-  };
-
-  const getFormattedText = (text: string, maxLength: number, reverse: boolean) => {
-    // if (!text) return
-    // if (text.length < 1) return
-    // if (text.length < maxLength) return text
-    // return <TextWithViewMore text={text} maxLength={maxLength} reverse={reverse} />;
-  };
 
   return false ? (
     <Loader />
@@ -118,7 +63,7 @@ function PostView() {
       {/* start: page */}
       <section className="card">
         <div className="card-body">
-          <form action="" method="post">
+          <form method="post">
             <div className="row mb-3">
               <div className="form-group col-sm-6">
                 <div className="row align-items-center">
@@ -295,7 +240,7 @@ function PostView() {
           <input
             defaultValue="Update"
             className="btn btn-primary w-30 mt-5"
-            style={{marginRight: '5px'}}
+            style={{ marginRight: '5px' }}
           />
           <input
             defaultValue="Delete"

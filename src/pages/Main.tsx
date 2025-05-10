@@ -27,7 +27,7 @@ function Main({ children }: { children?: React.ReactElement }) {
       <Header />
       <div className="inner-wrapper">
         <Siderbar />
-        <section role="main" className="content-body">
+        <section role="main" className="content-body" >
           <Outlet />
           {children}
         </section>

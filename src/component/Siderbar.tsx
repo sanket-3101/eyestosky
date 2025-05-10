@@ -79,12 +79,18 @@ function Sidebar() {
           </li> */}
 
           <li>
-            <NavLink to="/notification" className="nav-link">
+            <NavLink to="/cms-page" className="nav-link">
               <i className="bx bxs-contact" aria-hidden="true" />
               <span>CMS Page</span>
             </NavLink>
           </li>
 
+          <li>
+            <NavLink to="/notification" className="nav-link">
+              <i className="bx bx-bell" aria-hidden="true" />
+              <span>Notification</span>
+            </NavLink>
+          </li>
 
 
           {/* <li className="nav-item position-relative">
@@ -95,12 +101,12 @@ function Sidebar() {
             </NavLink>
 
           </li> */}
-          <li>
+          {/* <li>
             <NavLink to="/profile" className="nav-link">
               <i className="bx bx-user" aria-hidden="true" />
               <span>Profile</span>
             </NavLink>
-          </li>
+          </li> */}
           {/* Add more NavLink to other routes */}
         </ul>
       </nav>

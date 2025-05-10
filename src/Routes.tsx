@@ -23,6 +23,7 @@ import PostView from "./pages/Home/Posts/PostView";
 import HashtagList from "./pages/Home/Hashtag/HashtagList";
 import HashtagView from "./pages/Home/Hashtag/HashtagView";
 import UserList from "./pages/Home/User/UserList";
+import Cmspage from "./pages/Home/Cmspage/Cmspage";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 
@@ -77,13 +78,14 @@ const Routes: React.FC = () => {
               <Route index={true} element={<PostList />} />
               <Route path=":id" element={<PostView />} />
             </Route>
-            <Route path="hashtag-list" >
+          <Route path="hashtag-list" >
               <Route index={true} element={<HashtagList />} />
               <Route path=":id" element={<HashtagView />} />
             </Route>
             <Route path="dispute-request" element={<DisputeRequest />} />
             <Route path="contact-us" element={<ContactUs />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="cms-page" element={<Cmspage />} />
             <Route path="notification" element={<Notification />} />
             {/* <Route path="service-request" element={<RequestService />} /> */}
           </Route>

@@ -59,18 +59,63 @@ function Notification() {
   ) : (
     <section className="card">
       <div className="card-body">
-        <TableSection
-          data={CMS_PAGES_MOCK}
-          columns={columns}
-          onPageChange={(pageNumber: number) =>
-            // getDetails({ search: "", pageNumber: pageNumber })
-             {}
-          }
-          onSearchChange={(value: string) =>
-            // getDetails({ search: value, pageNumber: details.startIndex })
-            {}
-          }
-          onActionClick={(rowData : any) => {}}
+        <form method="post">
+
+          <div className="row mb-3">
+            <div className="form-group col-sm-6 pt-0">
+              <div className="row align-items-center">
+                <div className="col-md-4">
+                  <label htmlFor="" className="mb-0">
+                    Status
+                  </label>
+                </div>
+                <div className="col-md-8">
+                  <select
+                    className="d-block form-control"
+                    // style={{ width: "4.5rem" }}
+                    value={'1'}
+                  // onChange={(e) => {
+                  //   handleChange({
+                  //     name: {
+                  //       ...userDetails.name,
+                  //       salutation: e.target.value,
+                  //     },
+                  //   });
+                  // }}
+                  >
+                    <option value="1">Android</option>
+                    <option value="0">IOS</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div className="form-group col-sm-6">
+              <div className="row align-items-center">
+                <div className="col-md-4">
+                  <label htmlFor="" className="mb-0">
+                    Message
+                  </label>
+                </div>
+                <div className="col-md-8">
+                  <textarea
+                    name="Message"
+                    className="form-control"
+                    value={''}
+                    rows={4}
+                    cols={50}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+        <input
+          defaultValue="Submit"
+          className="btn btn-primary w-30 mt-5"
+          style={{ marginRight: '5px' }}
         />
       </div>
     </section>
