@@ -15,6 +15,23 @@ export const busnessOwenerMock = {
     totalPage: 1,
 }
 
+export const PostListMock = {
+    data : [
+        {
+            id: '1',
+            date :  new Date(),
+            post_type: 'Image',
+            post_link: 'test@gmail.com',
+            status: "Active",
+        }
+    ],
+    Success: true,
+    statusCode: 200,
+    totalItems: 1,
+    itemsPerPage: 10,
+    totalPage: 1,
+}
+
 
 export const CMS_PAGES_MOCK = {
     data : [

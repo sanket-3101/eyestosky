@@ -7,10 +7,8 @@ import {
 } from "react-router-dom";
 import Dashboard from "./pages/Home/Dashboard/Dashboard";
 import Main from "./pages/Main";
-import TotalCase from "./pages/Home/TotalCase/TotalCase";
 import ContactUs from "./pages/Home/ContactUs/ContactUs";
 import DisputeRequest from "./pages/Home/DisputeRequest/DisputeRequest";
-import ViewCase from "./pages/Home/TotalCase/ViewCase";
 import Profile from "./pages/Home/Profile/Profile";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Otp from "./pages/Auth/Otp";
@@ -21,6 +19,7 @@ import RequestService from "./pages/Home/Service/RequestService";
 import { Loader } from "./component/Loader";
 import UserList from "./pages/Home/User/UserList";
 import ViewUser from "./pages/Home/User/ViewUser";
+import PostList from "./pages/Home/Posts/PostList";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 
@@ -71,10 +70,9 @@ const Routes: React.FC = () => {
               <Route index={true} element={<UserList />} />
               <Route path=":id" element={<ViewUser />} />
             </Route>
-
-            <Route path="owner-list">
-              <Route index={true} element={<TotalCase />} />
-              <Route path="view-case/:id" element={<ViewCase />} />
+            <Route path="post-list" >
+              <Route index={true} element={<PostList />} />
+              {/* <Route path=":id" element={<ViewUser />} /> */}
             </Route>
             <Route path="dispute-request" element={<DisputeRequest />} />
             <Route path="contact-us" element={<ContactUs />} />

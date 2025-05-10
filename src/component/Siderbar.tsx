@@ -42,6 +42,14 @@ function Sidebar() {
             </NavLink>
           </li>
 
+
+          <li>
+            <NavLink to="/user-list" className="nav-link">
+              <i className="bx bx-file-blank" aria-hidden="true" />
+              <span>Posts</span>
+            </NavLink>
+          </li>
+
           {/* <li>
             <NavLink to="/owner-list" className="nav-link">
               <i className="bx bx-user" aria-hidden="true" />
@@ -69,7 +77,7 @@ function Sidebar() {
               <span>CMS Page</span>
             </NavLink>
           </li>
-          
+
 
 
           {/* <li className="nav-item position-relative">
