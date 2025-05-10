@@ -35,19 +35,19 @@ function Sidebar() {
               <span>Dashboard</span>
             </NavLink>
           </li>
-          {/* <li>
-            <NavLink to="/orders" className="nav-link">
-              <i className="bx bx-user" aria-hidden="true" />
-              <span>Orders</span>
-            </NavLink>
-          </li> */}
-
           <li>
-            <NavLink to="/total-case" className="nav-link">
+            <NavLink to="/user-list" className="nav-link">
+              <i className="bx bx-user" aria-hidden="true" />
+              <span>Users</span>
+            </NavLink>
+          </li>
+
+          {/* <li>
+            <NavLink to="/owner-list" className="nav-link">
               <i className="bx bx-user" aria-hidden="true" />
               <span>Business Owner Management</span>
             </NavLink>
-          </li>
+          </li> */}
 
           <li>
             <NavLink className="nav-link" to="/contact-us">

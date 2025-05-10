@@ -74,7 +74,7 @@ function UserList() {
   // };
 
   const onActionClick = (data: any) => {
-    // navigate(`view-case/${data._id}`);
+    navigate(`${data.id}`);
   };
 
   return loading ? (
