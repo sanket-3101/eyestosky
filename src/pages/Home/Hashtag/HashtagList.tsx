@@ -5,9 +5,9 @@ import { TotalCasesType, apiConstants } from "../../../constant/constant";
 
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
-import { PostListMock, busnessOwenerMock } from "../../../constant/mock";
+import { busnessOwenerMock, HASH_TAG_MOCK } from "../../../constant/mock";
 
-function PostList() {
+function HashtagList() {
   const navigate = useNavigate();
   // const [cases, setCases] = useState<TotalCasesType | null | any>(null);
 
@@ -15,26 +15,26 @@ function PostList() {
   const columns = [
     {
       id: "1",
-      name: "Date",
-      fieldName: "date",
+      name: "Id",
+      fieldName: "id",
       style: {
-        width: "20%",
+        width: "15%",
       },
     },
     {
       id: "2",
-      name: "Post-Type",
-      fieldName: "post_type",
+      name: "Name",
+      fieldName: "name",
       style: {
-        width: "20%",
+        width: "25%",
       },
     },
     {
       id: "3",
-      name: "Post-Link",
-      fieldName: "post_link",
+      name: "Total Post",
+      fieldName: "total_post",
       style: {
-        width: "30%",
+        width: "25%",
       },
     },
     {
@@ -42,14 +42,14 @@ function PostList() {
       name: "Status",
       fieldName: "status",
       style: {
-        width: "20%",
+        width: "40%",
       },
     },
     {
       id: "5",
       name: "Action",
       style: {
-        width: "10%",
+        width: "20%",
       },
     },
   ];
@@ -83,7 +83,7 @@ function PostList() {
     <section className="card">
       <div className="card-body">
         <TableSection
-          data={PostListMock}
+          data={HASH_TAG_MOCK}
           columns={columns}
           onActionClick={onActionClick}
           // onPageChange={(pageNumber: number) =>
@@ -98,4 +98,4 @@ function PostList() {
   );
 }
 
-export default PostList;
+export default HashtagList;

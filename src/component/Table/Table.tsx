@@ -48,7 +48,7 @@ const TableRow = ({ rowData, columns, onActionClick }: any) => {
           </td>
         ) : value.name === "Status" ? (
           <td>
-            <span className="badge badge-info" style={{fontSize: '12px'}}>{rowData[value.fieldName] }</span>
+            <span className="badge badge-info" style={{ fontSize: '12px' }}>{rowData[value.fieldName]}</span>
           </td>
         ) : value.name === "Action Required" ? (
           <td key={index} style={{ ...value.style }}>
@@ -56,13 +56,15 @@ const TableRow = ({ rowData, columns, onActionClick }: any) => {
           </td>
         ) : (
           <td>
-            <a onClick={() => onActionClick(rowData)}>
-              <i className="bx bx-show text-6 text-primary cur-pointer" />
-            </a>
-          </td>
+            <span>
+              <a onClick={() => onActionClick(rowData)}>
+                <i className="bx bx-show text-6 text-primary cur-pointer" />
+              </a>
+            </span>
+          </td >
         )
       )}
-    </tr>
+    </tr >
   );
 };
 

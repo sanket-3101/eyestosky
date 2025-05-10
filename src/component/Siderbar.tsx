@@ -44,9 +44,16 @@ function Sidebar() {
 
 
           <li>
-            <NavLink to="/user-list" className="nav-link">
+            <NavLink to="/post-list" className="nav-link">
               <i className="bx bx-file-blank" aria-hidden="true" />
               <span>Posts</span>
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/hashtag-list" className="nav-link">
+              <i className="bx bx-file-blank" aria-hidden="true" />
+              <span>Hashtag</span>
             </NavLink>
           </li>
 

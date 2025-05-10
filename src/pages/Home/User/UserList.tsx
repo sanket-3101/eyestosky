@@ -18,7 +18,7 @@ function UserList() {
       name: "Name",
       fieldName: "name",
       style: {
-        width: "10%",
+        width: "15%",
       },
     },
     {
@@ -26,7 +26,7 @@ function UserList() {
       name: "Address",
       fieldName: "address",
       style: {
-        width: "10%",
+        width: "25%",
       },
     },
     {
@@ -34,7 +34,7 @@ function UserList() {
       name: "Email",
       fieldName: "email",
       style: {
-        width: "40%",
+        width: "25%",
       },
     },
     {
@@ -49,7 +49,7 @@ function UserList() {
       id: "5",
       name: "Action",
       style: {
-        width: "10%",
+        width: "20%",
       },
     },
   ];

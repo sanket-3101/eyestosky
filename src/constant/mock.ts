@@ -19,7 +19,7 @@ export const PostListMock = {
     data : [
         {
             id: '1',
-            date :  new Date(),
+            date : '22-01-2025',
             post_type: 'Image',
             post_link: 'test@gmail.com',
             status: "Active",
@@ -46,6 +46,22 @@ export const CMS_PAGES_MOCK = {
         {
             title: 'Terms & Condition',
             id: 3
+        }
+    ],
+    Success: true,
+    statusCode: 200,
+    totalItems: 1,
+    itemsPerPage: 10,
+    totalPage: 1,
+}
+
+export const HASH_TAG_MOCK = {
+    data : [
+        {
+            id: '1',
+            name : '#ufo',
+            total_post: '150',
+            status: "Active",
         }
     ],
     Success: true,

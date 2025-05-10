@@ -17,10 +17,12 @@ import Notification from "./pages/Home/Notification/Notification";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import RequestService from "./pages/Home/Service/RequestService";
 import { Loader } from "./component/Loader";
-import UserList from "./pages/Home/User/UserList";
 import ViewUser from "./pages/Home/User/ViewUser";
 import PostList from "./pages/Home/Posts/PostList";
 import PostView from "./pages/Home/Posts/PostView";
+import HashtagList from "./pages/Home/Hashtag/HashtagList";
+import HashtagView from "./pages/Home/Hashtag/HashtagView";
+import UserList from "./pages/Home/User/UserList";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 
@@ -74,6 +76,10 @@ const Routes: React.FC = () => {
             <Route path="post-list" >
               <Route index={true} element={<PostList />} />
               <Route path=":id" element={<PostView />} />
+            </Route>
+            <Route path="hashtag-list" >
+              <Route index={true} element={<HashtagList />} />
+              <Route path=":id" element={<HashtagView />} />
             </Route>
             <Route path="dispute-request" element={<DisputeRequest />} />
             <Route path="contact-us" element={<ContactUs />} />

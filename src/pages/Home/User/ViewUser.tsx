@@ -136,7 +136,6 @@ function ViewUser() {
                       type="text"
                       className="form-control"
                       value={'Test'}
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -153,7 +152,6 @@ function ViewUser() {
                       type="text"
                       className="form-control"
                       value={'male'}
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -172,7 +170,6 @@ function ViewUser() {
                       type="text"
                       className="form-control"
                       value={'Test@gmail.com'}
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -189,7 +186,6 @@ function ViewUser() {
                       type="text"
                       className="form-control"
                       value={'India'}
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -208,7 +204,6 @@ function ViewUser() {
                       type="text"
                       className="form-control"
                       value={'Yes'}
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -370,7 +365,15 @@ function ViewUser() {
               </tbody>
             </table>
           </div>
-
+          <input
+            defaultValue="Update"
+            className="btn btn-primary w-30 mt-5"
+            style={{ marginRight: '5px' }}
+          />
+          <input
+            defaultValue="Delete"
+            className="btn btn-primary w-30 mt-5"
+          />
         </div>
       </section>
 

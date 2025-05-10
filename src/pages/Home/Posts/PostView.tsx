@@ -104,10 +104,6 @@ function PostView() {
     //   });
   };
 
-  const handlePdfClick = (files: any) => {
-    window.open(files.url, "_blank");
-  };
-
   const getFormattedText = (text: string, maxLength: number, reverse: boolean) => {
     // if (!text) return
     // if (text.length < 1) return
@@ -136,7 +132,6 @@ function PostView() {
                       type="text"
                       className="form-control"
                       value={'22-01-2025'}
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -153,7 +148,6 @@ function PostView() {
                       type="text"
                       className="form-control"
                       value={'Image'}
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -172,7 +166,6 @@ function PostView() {
                       type="text"
                       className="form-control"
                       value={'https://test.com'}
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -205,7 +198,6 @@ function PostView() {
                 </div>
               </div>
             </div>
-            \
             <div className="row mb-3">
               {/* {
                 profileDetails.userType === 'team_member' ? (
@@ -300,8 +292,15 @@ function PostView() {
               </div>
             </div> */}
           </form>
-
-
+          <input
+            defaultValue="Update"
+            className="btn btn-primary w-30 mt-5"
+            style={{marginRight: '5px'}}
+          />
+          <input
+            defaultValue="Delete"
+            className="btn btn-primary w-30 mt-5"
+          />
         </div>
       </section>
 
