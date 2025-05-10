@@ -64,12 +64,12 @@ function Sidebar() {
             </NavLink>
           </li> */}
 
-          <li>
+          {/* <li>
             <NavLink className="nav-link" to="/contact-us">
               <i className="bx bx-file-blank" aria-hidden="true" />
               <span>Contact Us</span>
             </NavLink>
-          </li>
+          </li> */}
 
           {/* <li>
             <NavLink to="/service-request" className="nav-link">
