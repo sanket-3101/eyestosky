@@ -3,19 +3,15 @@ import {
   BrowserRouter as Router,
   Route,
   Routes as RouteConfig,
-  Navigate,
 } from "react-router-dom";
 import Dashboard from "./pages/Home/Dashboard/Dashboard";
 import Main from "./pages/Main";
-import ContactUs from "./pages/Home/ContactUs/ContactUs";
 import DisputeRequest from "./pages/Home/DisputeRequest/DisputeRequest";
 import Profile from "./pages/Home/Profile/Profile";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Otp from "./pages/Auth/Otp";
-import { useAppSelector } from "./redux/reduxHook";
 import Notification from "./pages/Home/Notification/Notification";
 import ResetPassword from "./pages/Auth/ResetPassword";
-import RequestService from "./pages/Home/Service/RequestService";
 import { Loader } from "./component/Loader";
 import ViewUser from "./pages/Home/User/ViewUser";
 import PostList from "./pages/Home/Posts/PostList";
@@ -83,7 +79,6 @@ const Routes: React.FC = () => {
               <Route path=":id" element={<HashtagView />} />
             </Route>
             <Route path="dispute-request" element={<DisputeRequest />} />
-            <Route path="contact-us" element={<ContactUs />} />
             <Route path="profile" element={<Profile />} />
             <Route path="cms-page" element={<Cmspage />} />
             <Route path="notification" element={<Notification />} />

@@ -66,7 +66,7 @@ function Notification() {
               <div className="row align-items-center">
                 <div className="col-md-4">
                   <label htmlFor="" className="mb-0">
-                    Status
+                    Device
                   </label>
                 </div>
                 <div className="col-md-8">

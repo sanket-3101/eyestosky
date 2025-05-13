@@ -21,29 +21,29 @@ function Profile() {
   };
 
   useEffect(() => {
-      setUserDetails({
-        name: {
-          salutation: 'Mr',
-          firstName: 'Test',
-          fullName: "Mr Test User",
-          lastName: 'User'
-        },
-        designation: 'Test',
-        email: 'Testing@gmail.com',
-        mobile: "+917359756473",
-        moblieCode: "+91",
-        origanization: "Test",
-        userType: "ceo",
-        profilePicture: {
-            key: "1",
-            url: "https://avatar.iran.liara.run/public/boy?username=Ash"
-        },
-        whatsappMobile: "+917359756473"
-      })
-    
+    setUserDetails({
+      name: {
+        salutation: 'Mr',
+        firstName: 'Test',
+        fullName: "Mr Test User",
+        lastName: 'User'
+      },
+      designation: 'Test',
+      email: 'Testing@gmail.com',
+      mobile: "+917359756473",
+      moblieCode: "+91",
+      origanization: "Test",
+      userType: "ceo",
+      profilePicture: {
+        key: "1",
+        url: "https://avatar.iran.liara.run/public/boy?username=Ash"
+      },
+      whatsappMobile: "+917359756473"
+    })
+
   }, [])
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    
+
     // if (e.target.files && e.target.files.length > 0) {
     //   try {
     //     const formData = new FormData();
@@ -160,7 +160,7 @@ function Profile() {
                   <button
                     type="button"
                     className="btn btn-primary mt-3"
-                    onClick={(e) =>  document.getElementById("fileInput")?.click()}
+                    onClick={(e) => document.getElementById("fileInput")?.click()}
                   >
                     Edit Image
                   </button>
@@ -187,7 +187,7 @@ function Profile() {
             <div className="tab-content">
               <div id="edit" className="tab-pane active show" role="tabpanel">
                 <div className="row mb-4">
-                <div className="form-group col col-md-6 pt-3">
+                  <div className="form-group col col-md-6 pt-3">
                     <label htmlFor="">Salutation</label>
                     <select
                       className="d-block form-control"
@@ -226,11 +226,11 @@ function Profile() {
                       }}
                     />
                   </div>
-           
+
                 </div>
-                
+
                 <div className="row mb-4">
-                  <div className="form-group col col-md-6">
+                  {/* <div className="form-group col col-md-6">
                     <label htmlFor="">Designation</label>
                     <input
                       type="text"
@@ -243,8 +243,9 @@ function Profile() {
                         });
                       }}
                     />
-                  </div>
-               <div className="form-group col col-md-6 pt-0">
+                    
+                  </div> */}
+                  <div className="form-group col col-md-6 pt-0">
                     <label htmlFor="">Last Name</label>
                     <input
                       type="text"
@@ -261,8 +262,6 @@ function Profile() {
                       }}
                     />
                   </div>
-                </div>
-                <div className="row mb-4">
                   <div className="form-group col col-md-6">
                     <label htmlFor="">Email</label>
                     <input
@@ -273,34 +272,24 @@ function Profile() {
                       disabled={true}
                     />
                   </div>
-                  <div className="form-group col col-md-6 pt-0">
-                    <label htmlFor="">Primary Mobile</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="+9191234567890"
-                      value={userDetails.mobile}
-                      disabled={true}
-                    />
-                  </div>
+
                 </div>
+
                 <div className="row mb-4">
                   <div className="form-group col col-md-6 pt-0">
-                    <label htmlFor="">WhatsApp Mobile Number</label>
+                    <label htmlFor="">Password</label>
                     <input
-                      type="text"
+                      type="password"
                       className="form-control"
-                      placeholder="+9191234567890"
-                      value={userDetails.whatsappMobile}
-                      maxLength={10}
-                      onChange={(e) => {
-                        handleChange({
-                          whatsappMobile: e.target.value,
-                        });
-                      }}
+                      value={'admin@123'}
+                      // onChange={(e) => {
+                      //   handleChange({
+                      //     whatsappMobile: e.target.value,
+                      //   });
+                      // }}
                     />
                   </div>
-                  <div className="form-group col col-md-6 pt-0">
+                  {/* <div className="form-group col col-md-6 pt-0">
                     <label htmlFor="">User Type</label>
                     <select
                       name=""
@@ -315,7 +304,7 @@ function Profile() {
                       <option value="ceo">CEO</option>
                       <option value="team_member">Team Member</option>
                     </select>
-                  </div>
+                  </div> */}
                   {/* <div className="form-group col col-md-6 pt-0">
                     <label htmlFor="">Profile Image</label>
                     <div className="upload-file">

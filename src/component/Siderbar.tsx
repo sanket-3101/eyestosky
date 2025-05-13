@@ -101,12 +101,12 @@ function Sidebar() {
             </NavLink>
 
           </li> */}
-          {/* <li>
+          <li>
             <NavLink to="/profile" className="nav-link">
               <i className="bx bx-user" aria-hidden="true" />
               <span>Profile</span>
             </NavLink>
-          </li> */}
+          </li>
           {/* Add more NavLink to other routes */}
         </ul>
       </nav>

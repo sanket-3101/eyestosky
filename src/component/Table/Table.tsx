@@ -138,7 +138,7 @@ const TableSection = ({
             isHashPage &&
             <div className="col-md-6 d-flex justify-content-end">
               <input
-                defaultValue="Create Hash"
+                defaultValue="Create Hashtag"
                 className="btn btn-primary w-5"
                 onClick={onCreateHashClick}
               />
