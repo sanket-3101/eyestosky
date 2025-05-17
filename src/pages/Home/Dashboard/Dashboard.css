@@ -10,7 +10,7 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 } */
 .custom-card {
-  background-color: #04105a;
+  background-color: #A000EB;
   transition: transform 0.2s;
 }
 .custom-card:hover {

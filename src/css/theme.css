@@ -9,7 +9,7 @@ html {
 }
 
 body {
-	color: #030844;
+	color: #A000EB;
 	font-family: poppins, Arial, sans-serif;
 	line-height: 22px;
 	margin: 0;
@@ -17,7 +17,7 @@ body {
 }
 
 a {
-	color: #030844;
+	color: #A000EB;
 	text-decoration: none
 }
 
@@ -53,6 +53,7 @@ a:active {
 }
 
 .content-body {
+
 	display: table-cell;
 	padding: 40px;
 	position: relative;
@@ -103,7 +104,7 @@ a:active {
 }
 
 .page-header {
-	background: #434670;
+	background: #A000EB;
 	border-bottom: none;
 	border-left: 1px solid #3a3a3a;
 	box-shadow: 1px 3px 0 1px #ccc;
@@ -118,7 +119,8 @@ a:active {
 	position: relative;
 	vertical-align: top;
 	width: 300px;
-	z-index: 1010
+	z-index: 1010;
+	background:#230a28;
 }
 
 @media only screen and (min-width:768px) {
@@ -128,7 +130,7 @@ a:active {
 }
 
 .sidebar-right {
-	background: #171717;
+	background: #120019;
 	bottom: 0;
 	margin-right: -300px;
 	min-height: 100vh;
@@ -1226,7 +1228,7 @@ a:active {
 }
 
 .sidebar-left {
-	background: #030844;
+	background: #230a28;
 	z-index: 1010
 }
 
@@ -1237,7 +1239,7 @@ a:active {
 }
 
 .sidebar-left .sidebar-header .sidebar-title {
-	background: #1d2127;
+	background: #A000EB;
 	color: #465162;
 	padding: 15px;
 	font-size: 12.8px;
@@ -1250,14 +1252,14 @@ a:active {
 	right: 0;
 	width: 73px;
 	height: 50px;
-	background-color: #434670;
+	background-color: #A000EB;
 	border-radius: 0 0 0 5px;
 	text-align: center;
 	cursor: pointer
 }
 
 .sidebar-left .sidebar-header .sidebar-toggle i {
-	color: #c3c3c3;
+	color: white;
 	font-size: 14.4px;
 	font-size: .9rem;
 	line-height: 50px;
@@ -1265,7 +1267,7 @@ a:active {
 }
 
 .sidebar-left .sidebar-header .sidebar-toggle:hover i {
-	color: #ccc
+	color: white
 }
 
 .sidebar-left hr.separator {
@@ -1275,12 +1277,12 @@ a:active {
 
 @media only screen and (max-width:767px) {
 	.sidebar-left {
-		background: #1d2127
+		background: #120019
 	}
 }
 
 html.mobile-device .sidebar-left {
-	background: #1d2127
+	background: #120019
 }
 
 @media only screen and (min-width:768px) {
@@ -1338,7 +1340,7 @@ html.mobile-device .sidebar-left {
 
 @media only screen and (min-width:768px) {
 	html.sidebar-left-collapsed .sidebar-left .nano {
-		background: #1d2127;
+		background: 120019;
 		box-shadow: -5px 0 0 #2f3139 inset
 	}
 
@@ -1491,23 +1493,23 @@ html.mobile-device.sidebar-light .sidebar-left {
 	}
 
 	html.sidebar-left-big-icons .sidebar-left .nano .nav-main>li:hover>a {
-		background: #21262d
+		background: #A000EB
 	}
 
 	html.sidebar-left-big-icons .sidebar-left .nano .nav-main>li:last-child>a {
-		border-top: 1px solid #21262d;
-		border-bottom: 1px solid #21262d
+		border-top: 1px solid #A000EB;
+		border-bottom: 1px solid #A000EB
 	}
 
 	html.sidebar-left-big-icons .sidebar-left .nano .nav-main>li.nav-active>a {
-		background: #21262d
+		background: #A000EB
 	}
 
 	html.sidebar-left-big-icons .sidebar-left .nano .nav-main>li>a {
 		position: relative;
 		text-align: center;
 		padding: 12px 10px;
-		border-top: 1px solid #21262d
+		border-top: 1px solid #A000EB
 	}
 
 	html.sidebar-left-big-icons .sidebar-left .nano .nav-main>li>a:after {
@@ -1540,7 +1542,7 @@ html.mobile-device.sidebar-light .sidebar-left {
 		left: 100%;
 		min-width: 210px;
 		border-left: 3px solid #2f3139;
-		background: #21262d
+		background: #A000EB
 	}
 
 	html.sidebar-left-big-icons .sidebar-left .nano .nav-main>li ul.nav-children li:hover>ul.nav-children {
@@ -1581,7 +1583,7 @@ html.mobile-device.sidebar-light .sidebar-left {
 		top: 0;
 		right: -3px;
 		bottom: 0;
-		border-right: 4px solid #21262d;
+		border-right: 4px solid #A000EB;
 		z-index: 1
 	}
 
@@ -1622,20 +1624,20 @@ html.mobile-device.sidebar-light .sidebar-left {
 	}
 
 	html.sidebar-left-big-icons.sidebar-light .sidebar-left .nano .nav-main>li:hover>a {
-		background: #fafafa
+		background: #A000EB
 	}
 
 	html.sidebar-left-big-icons.sidebar-light .sidebar-left .nano .nav-main>li:last-child>a {
-		border-top: 1px solid #fafafa;
-		border-bottom: 1px solid #fafafa
+		border-top: 1px solid #A000EB;
+		border-bottom: 1px solid #A000EB
 	}
 
 	html.sidebar-left-big-icons.sidebar-light .sidebar-left .nano .nav-main>li.nav-active>a {
-		background: #fafafa
+		background: #A000EB
 	}
 
 	html.sidebar-left-big-icons.sidebar-light .sidebar-left .nano .nav-main>li>a {
-		border-top: 1px solid #fafafa
+		border-top: 1px solid #A000EB
 	}
 
 	html.sidebar-left-big-icons.sidebar-light .sidebar-left .nano .nav-main>li ul.nav-children {
@@ -3837,9 +3839,9 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 }
 
 .header {
-	background: #fff;
-	border-bottom: 1px solid #e9e9e6;
-	border-top: 3px solid #ededed;
+	background: #120019;
+	border-bottom: 1px solid #120019;
+	border-top: 3px solid #120019;
 	z-index: 1000
 }
 
@@ -6143,7 +6145,7 @@ ul.nav-main>li>a {
 
 ul.nav-main>li>a:hover {
 	background-color: #fff;
-    color: #030844;
+    color: #A000EB;
 }
 
 ul.nav-main>li.nav-active>a {
@@ -6160,7 +6162,7 @@ ul.nav-main>li.nav-active>i {
 
 ul.nav-main>li.nav-expanded>a {
 	background: #fff;
-	color: #030844!important;
+	color: #A000EB!important;
 }
 
 ul.nav-main li {
@@ -6211,7 +6213,7 @@ ul.nav-main li.nav-parent>a {
 }
 
 ul.nav-main li.nav-parent>a:hover{
-	color: #030844;
+	color: #A000EB;
 }
 
 ul.nav-main li.nav-parent>a:after {
@@ -6226,20 +6228,20 @@ ul.nav-main li.nav-parent>a:after {
 }
 
 ul.nav-main li.nav-parent.nav-active>a:after{
-	color: #030844;
+	color: #A000EB;
 }
 
 ul.nav-main>li>a:hover:after{
-	color: #030844;
+	color: #A000EB;
 }
 
 ul.nav-main>li.nav-expanded>a:hover{
-	color: #030844;
+	color: #A000EB;
 }
 
 ul.nav-main li.nav-parent.nav-expanded>a:after {
 	content: '\f106';
-	color: #030844;
+	color: #A000EB;
 }
 
 ul.nav-main li.nav-parent.nav-expanded>ul.nav-children {
@@ -6267,7 +6269,7 @@ ul.nav-main li.nav-parent.nav-active.nav-expanded .nav-children li a:hover{
 }
 
 ul.nav-main li.nav-parent.nav-active.nav-expanded .nav-children li a.active:hover{
-	color: #030844;
+	color: #A000EB;
 }
 
 ul.nav-main li .nav-children li a:after {
@@ -7477,7 +7479,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 }
 
 .card-title {
-	color: #434670;
+	color: #A000EB;
 	font-size: 18px;
 	line-height: 18px;
 	padding: 0;
@@ -7496,7 +7498,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 }
 
 .card-body {
-	background: #fdfdfd;
+	background: #230a28;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 	border-radius: 5px
 }
@@ -10876,6 +10878,7 @@ html.dark .dropzone:hover .dz-default span {
 
 form label {
 	font-weight: 500;
+	color: #A000EB
 }
 
 textarea {
@@ -14688,7 +14691,7 @@ body .ui-pnotify.icon-nb .notification .ui-pnotify-icon>span {
 }
 .pagination>li a:focus {
 	color: #fff;
-	background: #434670;
+	background: #A000EB;
 }
 
 .pagination>li.active a,
@@ -14697,12 +14700,12 @@ body .ui-pnotify.icon-nb .notification .ui-pnotify-icon>span {
 .pagination>li.active span,
 .pagination>li.active span:hover,
 .pagination>li.active span:focus {
-	background-color: #434670;
+	background-color: #A000EB;
 	border-color: #ccc
 }
 
 .pagination>li.active a {
-	background-color: #434670
+	background-color: #A000EB
 }
 
 .pagination.pagination-modern>li a {
@@ -16107,7 +16110,7 @@ html.dark .note-editor .caret {
 }
 
 .table.mb-0 {
-	margin-bottom: 0 !important
+	margin-bottom: 0 !important;
 }
 
 .table .b-top-0 td {
@@ -16438,10 +16441,10 @@ html.dark .table .actions-hover a {
 .nav-tabs li.active .nav-link:hover,
 .nav-tabs li.active .nav-link:focus {
 	background: #fff;
-	border-left-color: #030844;
-    border-right-color: #030844;
-    border-top: 3px solid #030844;
-    color: #030844;
+	border-left-color: #A000EB;
+    border-right-color: #A000EB;
+    border-top: 3px solid #A000EB;
+    color: #A000EB;
 }
 
 .tab-content {
@@ -17515,7 +17518,7 @@ p .alternative-font {
 a,
 a:hover,
 a:focus {
-	color: #030844;
+	color: #A000EB;
 }
 
 p.drop-caps:first-letter {
@@ -17665,7 +17668,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 }
 
 .userbox .dropdown-menu a:hover {
-	background: #434670;
+	background: #A000EB;
 	color: #fff;
 }
 
@@ -18171,7 +18174,7 @@ ul.simple-bullet-list li.orange:before {
 	text-align: center;
 	color: #fff;
 	border-radius: 55px;
-	background-color: #434670;
+	background-color: #A000EB;
 }
 
 .widget-summary .summary {

@@ -46,7 +46,7 @@ function Header() {
     <header className="header">
       <div className="logo-container">
         <Link to="/" className="logo">
-          <img alt="Rab & Rab Associates LLP" />
+          <img src={logo} alt="Rab & Rab Associates LLP" />
         </Link>
         <div
           className="d-md-none toggle-sidebar-left"

@@ -1,32 +1,32 @@
 /* Common Css*/
 .form-control:focus {
-  border-color: #030844;
+  border-color: #A000EB;
   box-shadow: 0 1px 1px rgba(3, 8, 68, 0.075) inset, 0 0 8px rgba(3, 8, 68, 0.3);
 }
 .btn-primary,
 .btn-primary:focus {
-  background-color: #030844;
-  border-color: #030844 #030844 #030844;
+  background-color: #A000EB;
+  border-color: #A000EB #A000EB #A000EB;
   color: #fff;
 }
 .btn-primary:hover {
   background-color: #4d4f6a;
-  border-color: #4d4f6a #4d4f6a #030844;
+  border-color: #4d4f6a #4d4f6a #A000EB;
   color: #fff;
 }
 
 .btn-outline-primary {
-  border-color: #030844 #030844 #030844;
-  color: #030844;
+  border-color: #A000EB #A000EB #A000EB;
+  color: #A000EB;
 }
 
 .btn-outline-primary:hover {
-  border-color: #030844 #030844 #030844;
-  background-color: #030844;
+  border-color: #A000EB #A000EB #A000EB;
+  background-color: #A000EB;
   color: #fff;
 }
 .innercontent {
-  background: #ecedf0;
+  background:  #120019;
 }
 .dashboard-table tr:nth-of-type(even) td {
   background: #fff;
@@ -36,7 +36,7 @@
 }
 .dashboard-table th,
 .dashboard-table td {
-  color: #434670;
+  color: #A000EB;
 }
 .text-primary {
   color: #434670 !important;
@@ -46,28 +46,29 @@ td {
   padding: 10px !important;
 }
 .common-table th {
-  background: #f0f0f0;
+  background:#230a28;
+  color: white
 }
-.common-table th,
 .common-table td {
-  color: #434670;
+  background-color: #A000EB;
+  color: white
 }
 .common-table td {
   height: 50px;
 }
 
-.common-table tr:nth-of-type(even) td {
+/* .common-table tr:nth-of-type(even) td {
   background: #f0f0f0;
 }
 .common-table tr:nth-of-type(odd) td {
   background: #fff;
-}
+} */
 .page-link {
   border: 1px solid #dddddd;
 }
 .page-link:hover {
-  background-color: #434670;
-  border-color: #434670;
+  background-color: #A000EB;
+  border-color: #A000EB;
   color: #fff;
 }
 .search {
@@ -170,13 +171,13 @@ td {
   left: 0;
   height: 20px;
   width: 20px;
-  border: 1px solid #030844;
+  border: 1px solid #A000EB;
   border-radius: 50%;
 }
 
 /* When the radio button is checked, add a blue background */
 .courtcheckbox input:checked ~ .checkmark {
-  background-color: #030844;
+  background-color: #A000EB;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -261,7 +262,7 @@ td {
 }
 
 .thumb-info-type {
-  background: #030844 !important;
+  background: #A000EB !important;
 }
 
 @media (max-width: 1260px) {
@@ -287,7 +288,7 @@ td {
     margin: 0;
   }
   .page-header h2 {
-    color: #434670;
+    color: #A000EB;
     border: 0;
     padding: 0;
   }
@@ -310,8 +311,8 @@ td {
   line-height: 18px;
 }
 .modal .success-true {
-  /* border: 2px solid #030844; */
-  background: #030844;
+  /* border: 2px solid #A000EB; */
+  background: #A000EB;
   border-radius: 50%;
   padding: 7px 7px;
   display: block;
@@ -338,7 +339,7 @@ td {
 
 /* Sign Up Css */
 .body-sign .card-sign .card-body {
-  border-top-color: #030844;
+  border-top-color: #A000EB;
 }
 
 /*Header Css*/
@@ -358,6 +359,7 @@ td {
   height: calc(100vh - 50px);
   overflow: hidden;
   overflow-y: scroll;
+  background-color: #230a28;
 }
 
 .nav-main.navbarcontent::-webkit-scrollbar {
@@ -369,13 +371,13 @@ td {
   border-radius: 10px;
 }
 ul.nav-main li a.active {
-  color: #434670;
-  background: #fff;
+  color: #fff;
+  background: #A000EB;
 }
 
 /* Header Css*/
 .userbox .dropdown-menu a.active {
-  background: #030844;
+  background: #A000EB;
   color: #fff;
 }
 
@@ -397,17 +399,17 @@ ul.nav-main li a.active {
 /* Forget Pasword*/
 .forget-password-content ul li button {
   background: transparent !important;
-  color: #030844 !important;
-  border-left: 1px solid #030844 !important;
-  border-right: 1px solid #030844 !important;
-  border-top: 3px solid #030844 !important;
+  color: #A000EB !important;
+  border-left: 1px solid #A000EB !important;
+  border-right: 1px solid #A000EB !important;
+  border-top: 3px solid #A000EB !important;
 }
 .forget-password-content ul li button.active {
-  background: #030844 !important;
+  background: #A000EB !important;
   color: #fff !important;
 }
 .forget-password-content .tab-content {
-  border: 1px solid #030844;
+  border: 1px solid #A000EB;
 }
 
 /*Footer Css*/
@@ -427,7 +429,7 @@ ul.nav-main li a.active {
   list-style-type: none;
 }
 .footer ul.menu li a {
-  border-right: 1px solid #030844;
+  border-right: 1px solid #A000EB;
   padding: 0 10px;
 }
 .footer ul.menu li:first-child a {
@@ -453,7 +455,7 @@ ul.nav-main li a.active {
 
 .loader {
   border: 8px solid #f3f3f3; /* Light grey */
-  border-top: 8px solid #030844; /* Blue */
+  border-top: 8px solid #A000EB; /* Blue */
   border-radius: 50%;
   width: 50px;
   height: 50px;

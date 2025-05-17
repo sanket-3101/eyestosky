@@ -48,7 +48,7 @@ export default function Dashboard() {
   return (
     <section className="card">
       <div className="card-body">
-        <h2 className="mb-4" style={{ color: '#04105a' }}>Dashboard Overview</h2>
+        <h2 className="mb-4" style={{ color: '#A000EB' }}>Dashboard Overview</h2>
         
         <div className="row">
           {cards.map((card, index) => (
