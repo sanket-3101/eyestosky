@@ -28,7 +28,7 @@ const barData = {
     {
       label: 'New Users',
       data: [150, 200, 180, 220, 300],
-      backgroundColor: '#04105a',
+      backgroundColor: '#230a28',
     },
   ],
 };
@@ -39,7 +39,7 @@ const pieData = {
   datasets: [
     {
       data: [875, 132, 50],
-      backgroundColor: ['#04105a', '#ffc107', '#dc3545'],
+      backgroundColor: ['#230a28', '#ffc107', '#dc3545'],
     },
   ],
 };
@@ -63,15 +63,15 @@ export default function Dashboard() {
 
         <div className="row mt-5">
           <div className="col-md-6 mb-4">
-            <div className="p-3 bg-white rounded shadow-sm">
-              <h5 className="mb-3">User Growth</h5>
+            <div className="p-3 rounded shadow-sm" style={{background: ' #A000EB'}}>
+              <h5 className="mb-3" style={{color: 'white'}}>User Growth</h5>
               <Bar data={barData} />
             </div>
           </div>
 
           <div className="col-md-6 mb-4">
-            <div className="p-3 bg-white rounded shadow-sm">
-              <h5 className="mb-3">Post Status Distribution</h5>
+            <div className="p-3 rounded shadow-sm" style={{background: ' #A000EB'}}>
+              <h5 className="mb-3" style={{color: 'white'}}>Post Status Distribution</h5>
               <Pie data={pieData} />
             </div>
           </div>
