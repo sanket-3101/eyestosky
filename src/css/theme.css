@@ -16440,18 +16440,18 @@ html.dark .table .actions-hover a {
 .nav-tabs li.active .nav-link,
 .nav-tabs li.active .nav-link:hover,
 .nav-tabs li.active .nav-link:focus {
-	background: #fff;
-	border-left-color: #A000EB;
-    border-right-color: #A000EB;
-    border-top: 3px solid #A000EB;
+	background: #230a28;
+	border-left-color: #230a28;
+    border-right-color: #230a28;
+    border-top: 3px solid #230a28;
     color: #A000EB;
 }
 
 .tab-content {
 	border-radius: 0 0 4px 4px;
 	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .04);
-	background-color: #fff;
-	border: 1px solid #eee;
+	background-color: #230a28;
+	border: 1px solid #230a28;
 	border-top: 0;
 	padding: 15px
 }
@@ -20409,7 +20409,7 @@ html.dark .search-content .search-results-list a:hover {
 }
 
 .body-sign .card-sign .card-title-sign .title {
-	background-color: #ccc;
+	background-color: #230a28;
 	border-radius: 5px 5px 0 0;
 	color: #fff;
 	display: inline-block;
@@ -20420,7 +20420,7 @@ html.dark .search-content .search-results-list a:hover {
 }
 
 .body-sign .card-sign .card-body {
-	background: #fff;
+	background: #230a28;
 	border-top: 5px solid #ccc;
 	border-radius: 5px 0 5px 5px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
