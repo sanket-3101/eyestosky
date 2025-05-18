@@ -260,7 +260,7 @@ function ViewUser() {
             </div> */}
           </form>
           <div className="sub-title mb-1" id="order-section">
-            <h5 className="font-weight-bold" style={{color: '#A000EB'}}>Post History</h5>
+            <h5 className="font-weight-bold">Post History</h5>
           </div>
           <div className="table-responsive">
             <table className="table table-responsive-md table-bordered common-table mb-0">

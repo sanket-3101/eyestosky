@@ -196,7 +196,7 @@ function Login() {
               <p
                 onClick={() => navigate("/forgot-password")}
                 className="font-weight-bold text-center pt-3 d-block signup-link"
-                style={{ color: "#A000EB", cursor: "pointer" }}
+                style={{ color: "#030844", cursor: "pointer" }}
               >
                 Forgot Password?
               </p>

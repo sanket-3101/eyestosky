@@ -58,7 +58,7 @@ const TableRow = ({ rowData, columns, onActionClick }: any) => {
           <td>
             <span>
               <a onClick={() => onActionClick(rowData)}>
-                <i style={{color: '#230a28'}} className="bx bx-show text-6 cur-pointer" />
+                <i className="bx bx-show text-6 text-primary cur-pointer" />
               </a>
             </span>
           </td >
