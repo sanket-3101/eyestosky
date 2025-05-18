@@ -34,7 +34,7 @@ const getDescriptionText = (text: string) => {
   return text.substring(0, 320) + "...";
 };
 // Functional component for a table row
-const TableRow = ({ rowData, columns, onActionClick }: any) => {
+const TableRow = ({ rowData, columns, onActionClick, onEditAction }: any) => {
 
 
   return (
@@ -56,12 +56,20 @@ const TableRow = ({ rowData, columns, onActionClick }: any) => {
           </td>
         ) : (
           <td>
-            <span>
-              <a onClick={() => onActionClick(rowData)}>
-                <i className="bx bx-show text-6 text-primary cur-pointer" />
+            <span className="flex items-center">
+              <a onClick={() => onActionClick(rowData)} className="cur-pointer text-primary mr-6" title="View">
+                <i className="bx bx-show text-6" />
               </a>
+              {
+                onEditAction && (
+                  <a onClick={() => onEditAction(rowData)} className="cur-pointer text-primary" title="Edit">
+                    <i className="bx bx-edit text-6" />
+                  </a>
+                )
+              }
+
             </span>
-          </td >
+          </td>
         )
       )}
     </tr >
@@ -69,7 +77,7 @@ const TableRow = ({ rowData, columns, onActionClick }: any) => {
 };
 
 // Functional component for the table
-const Table = ({ data, columns, onActionClick, onPageChange }: any) => {
+const Table = ({ data, columns, onActionClick, onPageChange, onEditAction }: any) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = data.totalPage;
@@ -97,6 +105,7 @@ const Table = ({ data, columns, onActionClick, onPageChange }: any) => {
                 rowData={item}
                 columns={columns}
                 onActionClick={onActionClick}
+                onEditAction={onEditAction}
               />
             ))}
           </tbody>
@@ -118,8 +127,10 @@ const TableSection = ({
   onActionClick,
   onPageChange,
   onSearchChange,
-  isHashPage,
-  onCreateHashClick
+  showCustomButton,
+  onCustomButtonClick,
+  onEditAction,
+  customButtonName
 }: any) => {
   const [search, setSearch] = useState("");
 
@@ -135,12 +146,12 @@ const TableSection = ({
             <SearchInput search={search} setSearch={handleSearchChange} />
           </div>
           {
-            isHashPage &&
+            showCustomButton &&
             <div className="col-md-6 d-flex justify-content-end">
               <input
-                defaultValue="Create Hashtag"
+                defaultValue={customButtonName}
                 className="btn btn-primary w-5"
-                onClick={onCreateHashClick}
+                onClick={onCustomButtonClick}
               />
             </div>
           }
@@ -152,7 +163,9 @@ const TableSection = ({
           columns={columns}
           onActionClick={onActionClick}
           onPageChange={onPageChange}
+          onEditAction={onEditAction}
           onRowClick
+
         />
       </div>
     </section>

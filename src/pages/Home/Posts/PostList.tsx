@@ -6,12 +6,14 @@ import { TotalCasesType, apiConstants } from "../../../constant/constant";
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
 import { PostListMock, busnessOwenerMock } from "../../../constant/mock";
+import FilterPopup from "../../../component/FilterPopup";
 
 function PostList() {
   const navigate = useNavigate();
   // const [cases, setCases] = useState<TotalCasesType | null | any>(null);
 
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowpopup] = useState(false)
   const columns = [
     {
       id: "1",
@@ -74,8 +76,16 @@ function PostList() {
   // };
 
   const onActionClick = (data: any) => {
-    navigate(`${data.id}`);
+    navigate(`view/${data.id}`);
   };
+
+  const onEditAction = (data: any) => {
+    navigate(`edit/${data.id}`);
+  }
+
+  const onCustomButtonClick = () => {
+    setShowpopup(true)
+  }
 
   return loading ? (
     <Loader />
@@ -86,14 +96,23 @@ function PostList() {
           data={PostListMock}
           columns={columns}
           onActionClick={onActionClick}
-          // onPageChange={(pageNumber: number) =>
-          //   getDetails({ search: "", pageNumber: pageNumber })
-          // }
-          // onSearchChange={(value: string) =>
-          //   getDetails({ search: value, pageNumber: cases.startIndex })
-          // }
+          onEditAction={onEditAction}
+          onCustomButtonClick={onCustomButtonClick}
+          customButtonName={'Add Filter'}
+          showCustomButton={true}
+        // onPageChange={(pageNumber: number) =>
+        //   getDetails({ search: "", pageNumber: pageNumber })
+        // }
+        // onSearchChange={(value: string) =>
+        //   getDetails({ search: value, pageNumber: cases.startIndex })
+        // }
         />
       </div>
+      {showPopup && (
+        <FilterPopup
+          closeModal={() => setShowpopup(false)}
+        />
+      )}
     </section>
   );
 }

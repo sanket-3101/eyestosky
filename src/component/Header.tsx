@@ -45,9 +45,10 @@ function Header() {
   return (
     <header className="header">
       <div className="logo-container">
-        <Link to="/" className="logo">
-          <img alt="Rab & Rab Associates LLP" />
+        <Link className="logo" to="/" >
+          <h3 style={{ marginLeft: '5px' }}>Eyes On the Sky</h3>
         </Link>
+
         <div
           className="d-md-none toggle-sidebar-left"
           data-toggle-class="sidebar-left-opened"

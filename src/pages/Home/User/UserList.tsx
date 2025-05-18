@@ -34,7 +34,7 @@ function UserList() {
       name: "Email",
       fieldName: "email",
       style: {
-        width: "25%",
+        width: "20%",
       },
     },
     {
@@ -42,14 +42,14 @@ function UserList() {
       name: "Description",
       fieldName: "description",
       style: {
-        width: "40%",
+        width: "30%",
       },
     },
     {
       id: "5",
       name: "Action",
       style: {
-        width: "20%",
+        width: "30%",
       },
     },
   ];
@@ -74,9 +74,12 @@ function UserList() {
   // };
 
   const onActionClick = (data: any) => {
-    navigate(`${data.id}`);
+    navigate(`view/${data.id}`);
   };
 
+  const onEditAction = (data:any) => {
+     navigate(`edit/${data.id}`);
+  }
   return loading ? (
     <Loader />
   ) : (
@@ -86,6 +89,7 @@ function UserList() {
           data={busnessOwenerMock}
           columns={columns}
           onActionClick={onActionClick}
+          onEditAction={onEditAction}
           // onPageChange={(pageNumber: number) =>
           //   getDetails({ search: "", pageNumber: pageNumber })
           // }

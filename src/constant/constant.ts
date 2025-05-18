@@ -82,3 +82,7 @@ export interface DisputeRequestType {
 }
 
 
+export enum TableAction {
+    view = 'view',
+    edit = 'edit'
+}

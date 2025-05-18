@@ -63,14 +63,16 @@ function Cmspage() {
           data={CMS_PAGES_MOCK}
           columns={columns}
           onPageChange={(pageNumber: number) =>
-            // getDetails({ search: "", pageNumber: pageNumber })
-             {}
+          // getDetails({ search: "", pageNumber: pageNumber })
+          { }
           }
           onSearchChange={(value: string) =>
-            // getDetails({ search: value, pageNumber: details.startIndex })
-            {}
+          // getDetails({ search: value, pageNumber: details.startIndex })
+          { }
           }
-          onActionClick={(rowData : any) => {}}
+          onActionClick={() => {
+            navigate('cms-editor');
+          }}
         />
       </div>
     </section>

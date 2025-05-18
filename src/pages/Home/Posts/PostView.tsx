@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { formatDate, showToast } from "../../../constant/util";
 import axios from "../../../constant/axios";
 import { Loader } from "../../../component/Loader";
-import { apiConstants } from "../../../constant/constant";
+import { apiConstants, TableAction } from "../../../constant/constant";
 import TextWithViewMore from "../../../component/TextWithViewMore";
 import Popup from "../../../component/Popup";
 import { useAppSelector } from "../../../redux/reduxHook";
@@ -11,7 +11,7 @@ import moment from "moment";
 function PostView() {
   const navigate = useNavigate();
   const profileDetails = useAppSelector((state) => state.auth.profileDetails);
-  const { id } = useParams();
+  const { id, action } = useParams();
   const [details, setDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [service, setService] = useState<any>([]);
@@ -77,6 +77,7 @@ function PostView() {
                       type="text"
                       className="form-control"
                       value={'22-01-2025'}
+                      disabled={action === TableAction.view}
                     />
                   </div>
                 </div>
@@ -93,6 +94,7 @@ function PostView() {
                       type="text"
                       className="form-control"
                       value={'Image'}
+                      disabled={action === TableAction.view}
                     />
                   </div>
                 </div>
@@ -111,6 +113,7 @@ function PostView() {
                       type="text"
                       className="form-control"
                       value={'https://test.com'}
+                      disabled={action === TableAction.view}
                     />
                   </div>
                 </div>
@@ -125,6 +128,7 @@ function PostView() {
                   <div className="col-md-8">
                     <select
                       className="d-block form-control"
+                      disabled={action === TableAction.view}
                       // style={{ width: "4.5rem" }}
                       value={'1'}
                     // onChange={(e) => {
@@ -136,8 +140,9 @@ function PostView() {
                     //   });
                     // }}
                     >
-                      <option value="1">Active</option>
-                      <option value="0">Deactivate</option>
+                      <option value="1">Approved</option>
+                      <option value="2">Rejected</option>
+                      <option value="3">Pending</option>
                     </select>
                   </div>
                 </div>
@@ -237,15 +242,21 @@ function PostView() {
               </div>
             </div> */}
           </form>
-          <input
-            defaultValue="Update"
-            className="btn btn-primary w-30 mt-5"
-            style={{ marginRight: '5px' }}
-          />
-          <input
-            defaultValue="Delete"
-            className="btn btn-primary w-30 mt-5"
-          />
+          {
+            action != TableAction.view && (
+              <>
+                <input
+                  defaultValue="Update"
+                  className="btn btn-primary w-30 mt-5"
+                  style={{ marginRight: '5px' }}
+                />
+                <input
+                  defaultValue="Delete"
+                  className="btn btn-primary w-30 mt-5"
+                />
+              </>
+            )
+          }
         </div>
       </section>
 

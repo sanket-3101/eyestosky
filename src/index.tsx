@@ -8,6 +8,7 @@ import "./css/custom.css";
 import 'react-toastify/dist/ReactToastify.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-tooltip/dist/react-tooltip.css'
+import 'react-quill/dist/quill.snow.css';
 import { Provider } from 'react-redux';
 import { store } from "./redux/store";
 const root = ReactDOM.createRoot(

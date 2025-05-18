@@ -357,8 +357,7 @@ td {
 .nav-main.navbarcontent {
   height: calc(100vh - 50px);
   overflow: hidden;
-  overflow-y: scroll;
-  background-color: #230a28;
+  /* overflow-y: scroll; */
 }
 
 .nav-main.navbarcontent::-webkit-scrollbar {
@@ -537,4 +536,7 @@ ul.nav-main li a.active {
 }
 .fc-event {
   z-index: 1000; /* Set the desired z-index value */
+}
+.mr-6 {
+  margin-right: 6px;
 }

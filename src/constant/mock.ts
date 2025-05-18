@@ -22,7 +22,7 @@ export const PostListMock = {
             date : '22-01-2025',
             post_type: 'Image',
             post_link: 'test@gmail.com',
-            status: "Active",
+            status: "Approved",
         }
     ],
     Success: true,

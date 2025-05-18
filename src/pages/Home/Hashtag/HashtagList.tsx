@@ -82,9 +82,6 @@ function HashtagList() {
     setShowpopup(true)
   }
 
-  const setPopupDetails = () =>{
-    
-  }
   return loading ? (
     <Loader />
   ) : (
@@ -95,8 +92,9 @@ function HashtagList() {
             data={HASH_TAG_MOCK}
             columns={columns}
             onActionClick={onActionClick}
-            isHashPage={true}
-            onCreateHashClick={onCreateHashClick}
+            showCustomButton={true}
+            onCustomButtonClick={onCreateHashClick}
+            customButtonName={'Create Hashtag'}
           // onPageChange={(pageNumber: number) =>
           //   getDetails({ search: "", pageNumber: pageNumber })
           // }
