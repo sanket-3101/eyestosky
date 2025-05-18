@@ -357,7 +357,7 @@ td {
 .nav-main.navbarcontent {
   height: calc(100vh - 50px);
   overflow: hidden;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   background-color: #230a28;
 }
 
