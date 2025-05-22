@@ -211,6 +211,37 @@ function ViewUser() {
               </div>
 
             </div>
+            <div className="row mb-3">
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Block
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <select
+                      className="d-block form-control"
+                      disabled={action === TableAction.view}
+                      // style={{ width: "4.5rem" }}
+                      value={'1'}
+                    // onChange={(e) => {
+                    //   handleChange({
+                    //     name: {
+                    //       ...userDetails.name,
+                    //       salutation: e.target.value,
+                    //     },
+                    //   });
+                    // }}
+                    >
+                      <option value="1">Yes</option>
+                      <option value="2">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </form>
           <div className="sub-title mb-1" id="order-section">
             <h5 className="font-weight-bold">Post History</h5>
@@ -260,10 +291,6 @@ function ViewUser() {
                   defaultValue="Update"
                   className="btn btn-primary w-30 mt-5"
                   style={{ marginRight: '5px' }}
-                />
-                <input
-                  defaultValue="Delete"
-                  className="btn btn-primary w-30 mt-5"
                 />
               </>
             )

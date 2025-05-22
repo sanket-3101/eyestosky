@@ -149,71 +149,59 @@ function PostView() {
               </div>
             </div>
             <div className="row mb-3">
-              {/* {
-                profileDetails.userType === 'team_member' ? (
-                  <div className="form-group col-sm-6 pt-0">
-                    <div className="row">
-                      <div className="col-md-4">
-                        <label htmlFor="" className="mb-0">
-                          Assigned Client
-                        </label>
-                      </div>
-                      <div className="col-md-8">
-                        <textarea
-                          name=" Assigned Client"
-                          className="form-control "
-                          disabled
-                          value={details._clients
-                            .map((teams: any) => teams.name.fullName)
-                            .join(",")}
-                          rows={4}
-                          cols={50}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-
-                  <div className="form-group col-sm-6">
-                    <div className="row">
-                      <div className="col-md-4">
-                        <label htmlFor="" className="mb-0">
-                          Assigned Team Member
-                        </label>
-                      </div>
-                      <div className="col-md-8">
-                        <textarea
-                          name="Team Member"
-                          className="form-control"
-                          disabled
-                          value={details._teamMembers
-                            .map((teams: any) => teams.name.fullName)
-                            .join(",")}
-                          rows={4}
-                          cols={50}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )
-              } */}
-              {/* <div className="form-group col-sm-6 pt-0">
+              <div className="form-group col-sm-6">
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                        Upcoming Hearning
+                      Latitude
                     </label>
                   </div>
                   <div className="col-md-8">
                     <input
                       type="text"
                       className="form-control"
-                      value={moment(details.upcomingHearing).format("YYYY-MM-DD")}
-                      disabled={true}
+                      value={'542342'}
+                      disabled={action === TableAction.view}
                     />
                   </div>
                 </div>
-              </div> */}
+              </div>
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Longitude
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={'242234'}
+                      disabled={action === TableAction.view}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="form-group col-sm-6">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Caption
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={'https://test.com'}
+                      disabled={action === TableAction.view}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             {/* <div className="row mb-3">
               <div className="form-group col-sm-12 pt-0">
@@ -247,7 +235,7 @@ function PostView() {
               <>
                 <input
                   defaultValue="Update"
-                  className="btn btn-primary w-30 mt-5"
+                  className="btn btn-primary w-30"
                   style={{ marginRight: '5px' }}
                 />
                 {/* <input

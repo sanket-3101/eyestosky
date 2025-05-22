@@ -67,7 +67,12 @@ function FilterPopup({ closeModal }: any) {
                     </div>
                     <div>
                         <input
-                            defaultValue="Submit"
+                            defaultValue="Apply"
+                            className="btn btn-primary w-30 mt-5"
+                            style={{marginRight: '5px'}}
+                        />
+                        <input
+                            defaultValue="Reset"
                             className="btn btn-primary w-30 mt-5"
                         />
                     </div>
