@@ -16438,10 +16438,10 @@ html.dark .table .actions-hover a {
 .nav-tabs li.active .nav-link:hover,
 .nav-tabs li.active .nav-link:focus {
 	background: #fff;
-	border-left-color: #A000EB;
-    border-right-color: #A000EB;
-    border-top: 3px solid #A000EB;
-    color: #A000EB;
+	border-left-color: #030844;
+    border-right-color: #030844;
+    border-top: 3px solid #030844;
+    color: #030844;
 }
 
 .tab-content {

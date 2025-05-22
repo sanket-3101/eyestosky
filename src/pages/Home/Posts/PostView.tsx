@@ -250,10 +250,10 @@ function PostView() {
                   className="btn btn-primary w-30 mt-5"
                   style={{ marginRight: '5px' }}
                 />
-                <input
+                {/* <input
                   defaultValue="Delete"
                   className="btn btn-primary w-30 mt-5"
-                />
+                /> */}
               </>
             )
           }

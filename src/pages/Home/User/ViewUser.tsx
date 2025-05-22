@@ -59,6 +59,31 @@ function ViewUser() {
         <div className="card-body">
           <form action="" method="post">
             <div className="row mb-3">
+              <div className="form-group col-sm-12 pt-0">
+                <div className="row">
+                  <div className="col-md-2">
+                    <label htmlFor="" className="mb-0">
+                      Profile Picture
+                    </label>
+                  </div>
+                  <div className="col-md-10">
+                    <div
+                      // className="thumb-info"
+                      style={{ display: "flex", justifyContent: "center", height: '150px', width: '150px' }}
+                      // onClick={() => document.getElementById("fileInput")?.click()}
+                      id="uploadButton"
+                    >
+                      <img
+                        src={"https://avatar.iran.liara.run/public/boy?username=Ash"}
+                        className="rounded img-fluid"
+                        alt="Select Image"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row mb-3">
               <div className="form-group col-sm-6">
                 <div className="row align-items-center">
                   <div className="col-md-4">
@@ -131,25 +156,8 @@ function ViewUser() {
               </div>
             </div>
             <div className="row mb-3">
-              <div className="form-group col-sm-6">
-                <div className="row align-items-center">
-                  <div className="col-md-4">
-                    <label htmlFor="" className="mb-0">
-                      UFO Witinessed
-                    </label>
-                  </div>
-                  <div className="col-md-8">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={'Yes'}
-                      disabled={action === TableAction.view}
-                    />
-                  </div>
-                </div>
-              </div>
               <div className="form-group col-sm-6 pt-0">
-                <div className="row">
+                <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
                       Description
@@ -170,7 +178,7 @@ function ViewUser() {
                       <div className="col-md-6">
                         <input
                           defaultValue="Description"
-                          className="btn btn-primary w-50"
+                          className="btn btn-primary w-60"
                           onClick={(e) =>
                             setPopupDetails({
                               show: true,
@@ -184,31 +192,24 @@ function ViewUser() {
 
                 </div>
               </div>
-            </div>
-            <div className="row mb-3">
-              <div className="form-group col-sm-12 pt-0">
-                <div className="row">
-                  <div className="col-md-2">
+              <div className="form-group col-sm-6">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      Profile Picture
+                      UFO Witinessed
                     </label>
                   </div>
-                  <div className="col-md-10">
-                    <div
-                      // className="thumb-info"
-                      style={{ display: "flex", justifyContent: "center", height: '150px', width: '150px' }}
-                      // onClick={() => document.getElementById("fileInput")?.click()}
-                      id="uploadButton"
-                    >
-                      <img
-                        src={"https://avatar.iran.liara.run/public/boy?username=Ash"}
-                        className="rounded img-fluid"
-                        alt="Select Image"
-                      />
-                    </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={'Yes'}
+                      disabled={action === TableAction.view}
+                    />
                   </div>
                 </div>
               </div>
+
             </div>
           </form>
           <div className="sub-title mb-1" id="order-section">
@@ -229,9 +230,9 @@ function ViewUser() {
                 {[
                   {
                     date: new Date(),
-                    post_type: 'Imange',
+                    post_type: 'Image',
                     post_link: "abc.com",
-                    status: "Active"
+                    status: "Approved"
                   }
                 ].map((item: any, index: number) => (
                   <tr>
@@ -242,7 +243,7 @@ function ViewUser() {
                     {/* <td>{getFormattedText(item.summary, 30, false)}</td> */}
                     {/* <td>{getFormattedText(item.actionRequired, 50, true)}</td> */}
                     <td>
-                      <a>
+                      <a onClick={() => navigate(`/post-list/edit/1`)}>
                         {/* <i className="bx bxs-trash-alt text-6 text-primary cur-pointer mr-5" /> */}
                         <i className='bx bxs-edit-alt text-6 text-primary cur-pointer' />
                       </a>

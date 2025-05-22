@@ -28,7 +28,7 @@ const barData = {
     {
       label: 'New Users',
       data: [150, 200, 180, 220, 300],
-      backgroundColor: '#04105a',
+      backgroundColor: '#06c',
     },
   ],
 };
@@ -39,7 +39,7 @@ const pieData = {
   datasets: [
     {
       data: [875, 132, 50],
-      backgroundColor: ['#04105a', '#ffc107', '#dc3545'],
+      backgroundColor: ['#06c', '#ffc107', '#dc3545'],
     },
   ],
 };

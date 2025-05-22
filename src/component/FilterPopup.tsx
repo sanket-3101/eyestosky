@@ -38,6 +38,33 @@ function FilterPopup({ closeModal }: any) {
                             </div>
                         </div>
                     </div>
+                    <div className="form-group col-sm-12">
+                        <div className="row align-items-center">
+                            <div className="col-md-4">
+                                <label htmlFor="" className="mb-0">
+                                    Post-Type
+                                </label>
+                            </div>
+                            <div className="col-md-8">
+                                <select
+                                    className="d-block form-control"
+                                    // style={{ width: "4.5rem" }}
+                                    value={'1'}
+                                // onChange={(e) => {
+                                //   handleChange({
+                                //     name: {
+                                //       ...userDetails.name,
+                                //       salutation: e.target.value,
+                                //     },
+                                //   });
+                                // }}
+                                >
+                                    <option value="1">Image</option>
+                                    <option value="2">Video</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div>
                         <input
                             defaultValue="Submit"

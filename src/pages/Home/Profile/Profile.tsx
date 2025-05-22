@@ -262,7 +262,7 @@ function Profile() {
                       }}
                     />
                   </div>
-                  <div className="form-group col col-md-6">
+                  <div className="form-group col col-md-6 pt-0">
                     <label htmlFor="">Email</label>
                     <input
                       type="text"

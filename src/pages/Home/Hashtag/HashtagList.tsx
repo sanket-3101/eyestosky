@@ -82,6 +82,10 @@ function HashtagList() {
     setShowpopup(true)
   }
 
+  const onEditAction = (data: any) => {
+    navigate(`${data.id}`);
+  }
+
   return loading ? (
     <Loader />
   ) : (
@@ -95,6 +99,7 @@ function HashtagList() {
             showCustomButton={true}
             onCustomButtonClick={onCreateHashClick}
             customButtonName={'Create Hashtag'}
+            onEditAction={onEditAction}
           // onPageChange={(pageNumber: number) =>
           //   getDetails({ search: "", pageNumber: pageNumber })
           // }

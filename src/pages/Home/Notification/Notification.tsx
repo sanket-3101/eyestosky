@@ -12,20 +12,20 @@ function Notification() {
 
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const columns = [
     {
       id: "1",
       name: "Title",
-      fieldName: "title",
+      fieldName: "title"
     },
     {
       id: "3",
       name: "Action",
       style: {
-        width: "10%",
-      },
-    },
+        width: "10%"
+      }
+    }
   ];
 
   // useEffect(() => {
@@ -54,13 +54,11 @@ function Notification() {
   //     alert('Action will only work for case notification')
   //   }
   // }
-  return false ? (
-    <Loader />
-  ) : (
-    <section className="card">
+  return false
+    ? <Loader />
+    : <section className="card">
       <div className="card-body">
         <form method="post">
-
           <div className="row mb-3">
             <div className="form-group col-sm-6 pt-0">
               <div className="row align-items-center">
@@ -73,7 +71,7 @@ function Notification() {
                   <select
                     className="d-block form-control"
                     // style={{ width: "4.5rem" }}
-                    value={'1'}
+                    value={"1"}
                   // onChange={(e) => {
                   //   handleChange({
                   //     name: {
@@ -91,6 +89,25 @@ function Notification() {
             </div>
           </div>
           <div className="row mb-3">
+            <div className="form-group col col-md-6 pt-0">
+              <div className="row align-items-center">
+                <div className="col-md-4">
+                  <label htmlFor="" className="mb-0">
+                    Title
+                  </label>
+                </div>
+                <div className="col-md-8">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter title"
+                    value={''}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row mb-3">
             <div className="form-group col-sm-6">
               <div className="row align-items-center">
                 <div className="col-md-4">
@@ -102,24 +119,23 @@ function Notification() {
                   <textarea
                     name="Message"
                     className="form-control"
-                    value={''}
+                    value={""}
                     rows={4}
                     cols={50}
+                    placeholder="Enter Message"
                   />
                 </div>
               </div>
             </div>
           </div>
-
         </form>
         <input
           defaultValue="Submit"
           className="btn btn-primary w-30 mt-5"
-          style={{ marginRight: '5px' }}
+          style={{ marginRight: "5px" }}
         />
       </div>
-    </section>
-  );
+    </section>;
 }
 
 export default Notification;
