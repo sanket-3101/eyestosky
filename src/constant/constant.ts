@@ -4,8 +4,8 @@ export const apiConstants = {
     verifyPhoneNumber: 'auth/login-with-mobile',
     verifyOtp: 'auth/verify-otp',
     forgotPassword: 'auth/forgot_password',
-    resetPassword:  `auth/reset_password`,
-    getProfile: 'profile/get-profile',
+    resetPassword: `auth/reset_password`,
+    getProfile: 'profile',
     updateProfileImage: 'profile/update-profile-image',
     updateProfile: 'profile/update-profile',
     addContact: 'contact/add-contact',
@@ -19,7 +19,10 @@ export const apiConstants = {
     sendFirebaseNotification: `profile/update-fcm`,
     getCasesByDate: (details: any) => `dashboard/get-all-cases?startDate=${details.startDate}&endDate=${details.endDate}`,
     getUserList: (details: any) => `user?page=${details.page}&search=${details.search}&limit=10`,
-    postList: (details: any) => `post?page=${details.page}&search=${details.search}&limit=10`
+    postList: (details: any) => `post?page=${details.page}&search=${details.search}&limit=10`,
+    getHashtagList: (details: any) => `hashtag?page=${details.page}&search=${details.search}&limit=10`,
+    sendNotification: () => `notification/send`
+
 }
 export enum apiState {
     loading = 'loading',

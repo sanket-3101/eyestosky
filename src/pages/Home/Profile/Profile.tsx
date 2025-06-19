@@ -1,47 +1,48 @@
-import React, { useEffect } from "react";
+
+
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/reduxHook";
-import { UserDetailsType, apiConstants } from "../../../constant/constant";
+import { apiConstants } from "../../../constant/constant";
 import axios from "../../../constant/axios";
 import { showToast } from "../../../constant/util";
 import {
   getProfileDetails,
   setUserProfileDetails,
 } from "../../../redux/slice/Auth";
+import { Loader } from "../../../component/Loader";
+
+interface UserDetailsType {
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+}
+
+
 function Profile() {
-  const profileDetails = useAppSelector((state) => state.auth.profileDetails);
-  const [userDetails, setUserDetails] = React.useState<UserDetailsType>({
-    ...profileDetails,
-  });
+  const [loading, setLoading] = useState(true);
+  const [userDetails, setUserDetails] = React.useState<UserDetailsType | null>(null);
   const dispatch = useAppDispatch();
-  const handleChange = (data: any) => {
-    // setUserDetails({
-    //   ...userDetails,
-    //   ...data,
-    // });
-  };
 
   useEffect(() => {
-    setUserDetails({
-      name: {
-        salutation: 'Mr',
-        firstName: 'Test',
-        fullName: "Mr Test User",
-        lastName: 'User'
-      },
-      designation: 'Test',
-      email: 'Testing@gmail.com',
-      mobile: "+917359756473",
-      moblieCode: "+91",
-      origanization: "Test",
-      userType: "ceo",
-      profilePicture: {
-        key: "1",
-        url: "https://avatar.iran.liara.run/public/boy?username=Ash"
-      },
-      whatsappMobile: "+917359756473"
-    })
+    axios.get(apiConstants.baseUrl + apiConstants.getProfile).then((response) => {
+      console.log(response);
+      const { data } = response
+      if (data) {
+        setUserDetails(data)
+      }
+      setLoading(false);
+    });
 
   }, [])
+  const handleChange = (data: any) => {
+    setUserDetails({
+      ...userDetails,
+      ...data,
+    });
+  };
+
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
     // if (e.target.files && e.target.files.length > 0) {
@@ -89,43 +90,14 @@ function Profile() {
   };
 
   const handleSubmit = async () => {
-    return
-    const requestObject = {
-      name: {
-        firstName: userDetails.name.firstName,
-        lastName: userDetails.name.lastName,
-        salutation: userDetails.name.salutation,
-      },
-      designation: userDetails.designation,
-      // userType: userDetails.userType,
-      // email: userDetails.email,
-      // mobile: userDetails.mobile,
-      whatsappMobile: userDetails.whatsappMobile,
-    };
-    console.log(requestObject);
-    await axios
-      .post(apiConstants.baseUrl + apiConstants.updateProfile, requestObject)
-      .then((response) => {
-        showToast("Profile updated Succesfully", {
-          type: "success",
-        });
-        setUserProfileDetails({
-          ...userDetails,
-        });
-        dispatch(getProfileDetails({}));
-      })
-      .catch((error) => {
-        showToast("Error while updating profile", {
-          type: "error",
-        });
-      });
+
   };
 
   const getProfileImage = () => {
-    if (userDetails?.profilePicture?.url) {
+    if (userDetails?.avatar) {
       return (
         <img
-          src={userDetails?.profilePicture?.url}
+          src={userDetails?.avatar}
           className="rounded img-fluid"
           alt="Select Image"
         />
@@ -133,11 +105,11 @@ function Profile() {
     }
     return <button className="btn btn-primary">Select Image</button>;
   };
-  if (Object.keys(userDetails).length === 0) return null;
+  if (loading || !userDetails) return <Loader />;
   return (
     <>
       <div className="row">
-        <div className="col-lg-4 col-xl-4 col-xxl-3 mb-4">
+        {/* <div className="col-lg-4 col-xl-4 col-xxl-3 mb-4">
           <section className="card">
             <div className="card-body">
               <input
@@ -168,7 +140,7 @@ function Profile() {
               </div>
             </div>
           </section>
-        </div>
+        </div> */}
         <div className="col-lg-8 col-xl-8 col-xxl-9">
           <div className="tabs">
             <ul className="nav nav-tabs tabs-primary" role="tablist">
@@ -192,11 +164,11 @@ function Profile() {
                     <select
                       className="d-block form-control"
                       // style={{ width: "4.5rem" }}
-                      value={userDetails.name.salutation}
+                      // value={userDetails.name.salutation}
                       onChange={(e) => {
                         handleChange({
                           name: {
-                            ...userDetails.name,
+                            ...userDetails,
                             salutation: e.target.value,
                           },
                         });
@@ -215,11 +187,12 @@ function Profile() {
                       type="text"
                       className="form-control"
                       placeholder="Vastal"
-                      value={userDetails.name.firstName}
+                      value={userDetails.first_name}
+                      disabled={true}
                       onChange={(e) => {
                         handleChange({
                           name: {
-                            ...userDetails.name,
+                            ...userDetails,
                             firstName: e.target.value,
                           },
                         });
@@ -251,11 +224,12 @@ function Profile() {
                       type="text"
                       className="form-control"
                       placeholder="Shah"
-                      value={userDetails.name.lastName}
+                      value={userDetails.last_name || ''}
+                      disabled={true}
                       onChange={(e) => {
                         handleChange({
                           name: {
-                            ...userDetails.name,
+                            ...userDetails,
                             lastName: e.target.value,
                           },
                         });
@@ -268,28 +242,13 @@ function Profile() {
                       type="text"
                       className="form-control"
                       placeholder="vastal@gmail.com"
-                      value={userDetails.email}
+                      value={userDetails.email || ''}
                       disabled={true}
                     />
                   </div>
 
                 </div>
-
-                <div className="row mb-4">
-                  <div className="form-group col col-md-6 pt-0">
-                    <label htmlFor="">Password</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      value={'admin@123'}
-                      // onChange={(e) => {
-                      //   handleChange({
-                      //     whatsappMobile: e.target.value,
-                      //   });
-                      // }}
-                    />
-                  </div>
-                  {/* <div className="form-group col col-md-6 pt-0">
+                {/* <div className="form-group col col-md-6 pt-0">
                     <label htmlFor="">User Type</label>
                     <select
                       name=""
@@ -305,7 +264,7 @@ function Profile() {
                       <option value="team_member">Team Member</option>
                     </select>
                   </div> */}
-                  {/* <div className="form-group col col-md-6 pt-0">
+                {/* <div className="form-group col col-md-6 pt-0">
                     <label htmlFor="">Profile Image</label>
                     <div className="upload-file">
                       <input
@@ -316,23 +275,22 @@ function Profile() {
                       />
                     </div>
                   </div> */}
-                </div>
-                <div className="row">
-                  <div className="form-group col">
-                    <button
-                      type="submit"
-                      className="btn btn-primary mt-2"
-                      onClick={handleSubmit}
-                    >
-                      Update Profile
-                    </button>
-                  </div>
+              </div>
+              <div className="row">
+                <div className="form-group col">
+                  <button
+                    type="submit"
+                    className="btn btn-primary mt-2"
+                    onClick={handleSubmit}
+                  >
+                    Update Profile
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>        
     </>
   );
 }

@@ -8,16 +8,38 @@ import TableSection from "../../../component/Table/Table";
 import { busnessOwenerMock, HASH_TAG_MOCK } from "../../../constant/mock";
 import CreateHashPopup from "../../../component/CreateHashPopup";
 
+interface HashtagListType {
+  data: {
+    id: string;
+    created_at: string;
+    name: string;
+    post_count: number;
+    status: string;
+  }[];
+  totalItems: number;
+  itemsPerPage: number;
+  totalPage: number;
+  pageNumber: number
+}
+
 function HashtagList() {
   const navigate = useNavigate();
-  // const [cases, setCases] = useState<TotalCasesType | null | any>(null);
+  const [hashtagList, setHashtagList] = useState<HashtagListType | null | any>(null);
   const [showPopup, setShowpopup] = useState(false)
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const columns = [
     {
       id: "1",
       name: "Id",
       fieldName: "id",
+      style: {
+        width: "15%",
+      },
+    },
+    {
+      id: "6",
+      name: "Date",
+      fieldName: "created_at",
       style: {
         width: "15%",
       },
@@ -33,9 +55,9 @@ function HashtagList() {
     {
       id: "3",
       name: "Total Post",
-      fieldName: "total_post",
+      fieldName: "post_count",
       style: {
-        width: "25%",
+        width: "15%",
       },
     },
     {
@@ -43,7 +65,7 @@ function HashtagList() {
       name: "Status",
       fieldName: "status",
       style: {
-        width: "40%",
+        width: "35%",
       },
     },
     {
@@ -54,25 +76,36 @@ function HashtagList() {
       },
     },
   ];
-  // useEffect(() => {
-  //   getDetails({
-  //     pageNumber: 1,
-  //     search: "",
-  //   });
-  // }, []);
+  useEffect(() => {
+    getDetails({
+      pageNumber: 1,
+      search: "",
+    });
+  }, []);
 
-  // const getDetails = async (data: any) => {
-  //   const details = {
-  //     search: data.search,
-  //     startIndex: data.pageNumber,
-  //   };
-  //   await axios
-  //     .get(apiConstants.baseUrl + apiConstants.getCases(details))
-  //     .then((response) => {
-  //       setCases(response);
-  //       setLoading(false);
-  //     });
-  // };
+  const getDetails = async (data: any) => {
+    const details = {
+      search: data.search,
+      startIndex: data.pageNumber,
+    };
+    await axios
+      .get(apiConstants.baseUrl + apiConstants.getHashtagList(details))
+      .then((response) => {
+        console.log(response.data)
+        const { data } = response
+        if (data) {
+          const details = {
+            pageNumber: data.page,
+            totalItems: data.total,
+            itemsPerPage: data.limit,
+            totalPage: 1,
+            data: data.data,
+          }
+          setHashtagList(details);
+        }
+        setLoading(false);
+      });
+  };
 
   const onActionClick = (data: any) => {
     navigate(`${data.id}`);
@@ -93,19 +126,19 @@ function HashtagList() {
       <section className="card">
         <div className="card-body">
           <TableSection
-            data={HASH_TAG_MOCK}
+            data={hashtagList}
             columns={columns}
             onActionClick={onActionClick}
             showCustomButton={true}
             onCustomButtonClick={onCreateHashClick}
             customButtonName={'Create Hashtag'}
             onEditAction={onEditAction}
-          // onPageChange={(pageNumber: number) =>
-          //   getDetails({ search: "", pageNumber: pageNumber })
-          // }
-          // onSearchChange={(value: string) =>
-          //   getDetails({ search: value, pageNumber: cases.startIndex })
-          // }
+            onPageChange={(pageNumber: number) =>
+              getDetails({ search: "", pageNumber: pageNumber })
+            }
+            onSearchChange={(value: string) =>
+              getDetails({ search: value, pageNumber: hashtagList.startIndex })
+            }
           />
         </div>
       </section>

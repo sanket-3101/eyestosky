@@ -1,62 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "../../../constant/axios";
-import { DisputeRequestType, apiConstants } from "../../../constant/constant";
-import { Loader } from "../../../component/Loader";
-import TableSection from "../../../component/Table/Table";
-import { useNavigate } from "react-router-dom";
-import { showNotificationMark } from "../../../redux/slice/Auth";
-import { useDispatch } from "react-redux";
-import { CMS_PAGES_MOCK } from "../../../constant/mock";
+import { apiConstants } from "../../../constant/constant";
+
 function Notification() {
-  const [details, setDetails] = useState<DisputeRequestType | null | any>(null);
+  const [loading, setLoading] = useState(false);
+  const [notificationDetails, setNotificationDetails] = useState<any>({
+    device: "android",
+    title: "",
+    message: "",
+  });
 
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const columns = [
-    {
-      id: "1",
-      name: "Title",
-      fieldName: "title"
-    },
-    {
-      id: "3",
-      name: "Action",
-      style: {
-        width: "10%"
-      }
-    }
-  ];
+  const handleSubmit = () => {
+    console.log(notificationDetails);
+    setLoading(true);
+    axios.post(apiConstants.baseUrl + apiConstants. sendNotification(), notificationDetails).then((response) => {
+      console.log(response);
+      setLoading(false);
+    });
+  }
 
-  // useEffect(() => {
-  //   getDetails({
-  //     pageNumber: 1,
-  //     search: "",
-  //   });
-  //   dispatch(showNotificationMark(false))
-  // }, []);
-
-  // const getDetails = async (data: any) => {
-  //   const details = {
-  //     search: data.search,
-  //     startIndex: data.pageNumber,
-  //   };
-  //   await axios.get(apiConstants.getNotification(details)).then((response) => {
-  //     setDetails(response);
-  //     setLoading(false);
-  //   });
-  // };
-
-  // const onActionClick = (data : any) => {
-  //   if(data._case) {
-  //     navigate(`/total-case/view-case/${data._case}`);
-  //   }else {
-  //     alert('Action will only work for case notification')
-  //   }
-  // }
-  return false
-    ? <Loader />
-    : <section className="card">
+  return <section className="card">
       <div className="card-body">
         <form method="post">
           <div className="row mb-3">
@@ -70,19 +33,11 @@ function Notification() {
                 <div className="col-md-8">
                   <select
                     className="d-block form-control"
-                    // style={{ width: "4.5rem" }}
-                    value={"1"}
-                  // onChange={(e) => {
-                  //   handleChange({
-                  //     name: {
-                  //       ...userDetails.name,
-                  //       salutation: e.target.value,
-                  //     },
-                  //   });
-                  // }}
+                    value={notificationDetails.device}
+                    onChange={(e) => setNotificationDetails({ ...notificationDetails, device: e.target.value })}
                   >
-                    <option value="1">Android</option>
-                    <option value="0">IOS</option>
+                    <option value="android">Android</option>
+                    <option value="ios">IOS</option>
                   </select>
                 </div>
               </div>
@@ -101,7 +56,8 @@ function Notification() {
                     type="text"
                     className="form-control"
                     placeholder="Enter title"
-                    value={''}
+                    value={notificationDetails.title}
+                    onChange={(e) => setNotificationDetails({ ...notificationDetails, title: e.target.value })}
                   />
                 </div>
               </div>
@@ -119,7 +75,8 @@ function Notification() {
                   <textarea
                     name="Message"
                     className="form-control"
-                    value={""}
+                    value={notificationDetails.message}
+                    onChange={(e) => setNotificationDetails({ ...notificationDetails, message: e.target.value })}
                     rows={4}
                     cols={50}
                     placeholder="Enter Message"
@@ -133,9 +90,11 @@ function Notification() {
           defaultValue="Submit"
           className="btn btn-primary w-30 mt-5"
           style={{ marginRight: "5px" }}
-        />
+          onClick={handleSubmit}
+          disabled={loading}
+          />
       </div>
-    </section>;
+    </section>
 }
 
 export default Notification;
