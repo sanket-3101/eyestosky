@@ -36,8 +36,8 @@ export const loginWithEmailPassword = createAsyncThunk(
       email,
       password,
     }).then((response) => {
-      if (response.data.authToken) {
-        localStorage.setItem('auth_token', response.data.authToken)
+    if (response.data.access_token) {
+        localStorage.setItem('auth_token', response.data.access_token)
       }
 
       return thunkAPI.fulfillWithValue(response.data);
@@ -167,6 +167,7 @@ export const authSlice = createSlice({
       .addCase(loginWithEmailPassword.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.isLoggedIn = true
+        state.profileDetails = action.payload.user
       })
       .addCase(loginWithEmailPassword.rejected, (state, action) => {
         state.error = action.payload

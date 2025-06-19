@@ -5,26 +5,40 @@ import { TotalCasesType, apiConstants } from "../../../constant/constant";
 
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
-import { busnessOwenerMock } from "../../../constant/mock";
+
+interface UserListType {
+  data: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    description: string;
+    status: string
+  }[];
+  totalItems: number;
+  itemsPerPage: number;
+  totalPage: number;
+  pageNumber: number
+}
 
 function UserList() {
   const navigate = useNavigate();
-  // const [cases, setCases] = useState<TotalCasesType | null | any>(null);
+  const [userList, setUserList] = useState<UserListType | null>(null);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const columns = [
     {
       id: "1",
       name: "Name",
-      fieldName: "name",
+      fieldName: "first_name",
       style: {
         width: "15%",
       },
     },
     {
       id: "2",
-      name: "Address",
-      fieldName: "address",
+      name: "Last-Name",
+      fieldName: "last_name",
       style: {
         width: "25%",
       },
@@ -53,32 +67,43 @@ function UserList() {
       },
     },
   ];
-  // useEffect(() => {
-  //   getDetails({
-  //     pageNumber: 1,
-  //     search: "",
-  //   });
-  // }, []);
+  useEffect(() => {
+    getDetails({
+      pageNumber: 1,
+      search: "",
+    });
+  }, []);
 
-  // const getDetails = async (data: any) => {
-  //   const details = {
-  //     search: data.search,
-  //     startIndex: data.pageNumber,
-  //   };
-  //   await axios
-  //     .get(apiConstants.baseUrl + apiConstants.getCases(details))
-  //     .then((response) => {
-  //       setCases(response);
-  //       setLoading(false);
-  //     });
-  // };
+  const getDetails = async (data: any) => {
+    const details = {
+      search: data.search,
+      page: data.pageNumber,
+    };
+    await axios
+      .get(apiConstants.baseUrl + apiConstants.getUserList(details))
+      .then((response) => {
+        console.log(response.data)
+        const { data } = response
+        if (data) {
+          const details = {
+            pageNumber: data.page,
+            totalItems: data.total,
+            itemsPerPage: data.limit,
+            totalPage: 1,
+            data: data.users,
+          }
+          setUserList(details);
+        }
+        setLoading(false);
+      });
+  };
 
   const onActionClick = (data: any) => {
     navigate(`view/${data.id}`);
   };
 
-  const onEditAction = (data:any) => {
-     navigate(`edit/${data.id}`);
+  const onEditAction = (data: any) => {
+    navigate(`edit/${data.id}`);
   }
   return loading ? (
     <Loader />
@@ -86,16 +111,16 @@ function UserList() {
     <section className="card">
       <div className="card-body">
         <TableSection
-          data={busnessOwenerMock}
+          data={userList}
           columns={columns}
           onActionClick={onActionClick}
           onEditAction={onEditAction}
-          // onPageChange={(pageNumber: number) =>
-          //   getDetails({ search: "", pageNumber: pageNumber })
-          // }
-          // onSearchChange={(value: string) =>
-          //   getDetails({ search: value, pageNumber: cases.startIndex })
-          // }
+        // onPageChange={(pageNumber: number) =>
+        //   getDetails({ search: "", pageNumber: pageNumber })
+        // }
+        // onSearchChange={(value: string) =>
+        //   getDetails({ search: value, pageNumber: cases.startIndex })
+        // }
         />
       </div>
     </section>

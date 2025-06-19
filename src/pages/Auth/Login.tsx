@@ -10,12 +10,12 @@ import {
   verifyPhoneNumber,
 } from "../../redux/slice/Auth";
 import { apiState } from "../../constant/constant";
-import {  showToast } from "../../constant/util";
+import { showToast } from "../../constant/util";
 
 function Login() {
   const [showOtp, setShowOtp] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@example.com");
+  const [password, setPassword] = useState("Admin@123");
   const [phoneNumber, setPhoneNumber] = useState("");
   const navigate = useNavigate();
   const { status, error } = useAppSelector((state) => state.auth);
@@ -30,13 +30,13 @@ function Login() {
   //   }
   // }, [navigate, currentScreen]);
 
-  // useEffect(() => {
-  //   if (status === apiState.failed) {
-  //     showToast(error?.message, {
-  //       type: "error",
-  //     });
-  //   }
-  // }, [status]);
+  useEffect(() => {
+    if (status === apiState.failed) {
+      showToast(error?.message, {
+        type: "error",
+      });
+    }
+  }, [status]);
 
 
 
@@ -67,7 +67,19 @@ function Login() {
     //   }
     //   dispatch(verifyPhoneNumber({ phoneNumber }));
     // }
-    navigate('/')
+    if (!email || !password) {
+      // Handle validation error
+      showToast("All Fields are required", {
+        type: "error",
+      });
+      return;
+    }
+
+    const response = await dispatch(
+      loginWithEmailPassword({ email, password })
+    );
+
+    console.log(response)
   };
 
   return (
@@ -98,7 +110,7 @@ function Login() {
                     Login using email
                   </button>
                 </li>
-                <li className="nav-item" role="presentation">
+                {/* <li className="nav-item" role="presentation">
                   <button
                     className={`nav-link ${showOtp ? "active" : ""} `}
                     id="otp-tab"
@@ -110,7 +122,7 @@ function Login() {
                   >
                     Login with phone number
                   </button>
-                </li>
+                </li> */}
               </ul>
               <div className="tab-content" id="myTabContent">
                 {!showOtp ? (

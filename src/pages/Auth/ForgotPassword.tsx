@@ -57,12 +57,12 @@ function ForgotPassword() {
           <div className="panel card-sign w-100">
             <div className="card-body pt-3 pb-3 forget-password-content">
               <a href="/" className="logo text-center w-100 d-inline-block">
-                <img
+                {/* <img
                   src={logo}
                   width={270}
                   height={135}
                   alt="Rab & Rab Associates LLP"
-                />
+                /> */}
               </a>
 
               <div className="form-group mb-3">

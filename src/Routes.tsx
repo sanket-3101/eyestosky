@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes as RouteConfig,
+  Navigate,
 } from "react-router-dom";
 import Dashboard from "./pages/Home/Dashboard/Dashboard";
 import Main from "./pages/Main";
@@ -21,12 +22,13 @@ import HashtagView from "./pages/Home/Hashtag/HashtagView";
 import UserList from "./pages/Home/User/UserList";
 import Cmspage from "./pages/Home/Cmspage/Cmspage";
 import CmsEditor from "./pages/Home/Cmspage/CmsEditor";
+import { useAppSelector } from "./redux/reduxHook";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 
 const Routes: React.FC = () => {
-  // const { isLoggedIn } = useAppSelector((state) => state.auth);
-  const isLoggedIn = false
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  // const isLoggedIn = false
 
   // Add a loading state to ensure isLoggedIn is fully determined
   const [loading, setLoading] = React.useState(true);
@@ -34,10 +36,9 @@ const Routes: React.FC = () => {
   useEffect(() => {
     // Simulate an async check for auth state (e.g., fetching from localStorage or an API)
     // In real code, you should check and set isLoggedIn properly here
-    // if (isLoggedIn !== undefined) {
-    //   setLoading(false);
-    // }
-    setLoading(false);
+    if (isLoggedIn !== undefined) {
+      setLoading(false);
+    }
   }, [isLoggedIn]);
 
   if (loading) {
@@ -51,20 +52,18 @@ const Routes: React.FC = () => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route
             path="/otp"
-            // element={isLoggedIn ? <Navigate to="/" /> : <Otp />}
             element={<Otp />}
           />
           <Route
             path="/login"
-            // element={isLoggedIn ? <Navigate to="/" /> : <Login />}
-            element={<Login />}
+            element={isLoggedIn ? <Navigate to="/" /> : <Login />}
           />
           <Route path="/reset-password" element={<ResetPassword />} />
 
           <Route
             path="/"
-            // element={isLoggedIn ? <Main /> : <Navigate to="/login" />}
-            element={<Main />}
+            element={isLoggedIn ? <Main /> : <Navigate to="/login" />}
+          // element={<Main />}
           >
             <Route index={true} element={<Dashboard />} />
             <Route path="user-list" >

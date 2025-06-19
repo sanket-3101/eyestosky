@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "./Pagination";
+import { formatDate } from "../../constant/util";
 
 // Functional component for the search input
 const SearchInput = ({
@@ -40,7 +41,7 @@ const TableRow = ({ rowData, columns, onActionClick, onEditAction }: any) => {
   return (
     <tr>
       {columns.map((value: any, index: any) =>
-        value.name !== "Action" && value.name !== "Status" && value.name !== "Action Required" ? (
+        value.name !== "Action" && value.name !== "Status" && value.name !== "Action Required" && value.name !== 'Date' ? (
           <td key={index} style={{ ...value.style }}>
             {value.name === "Description"
               ? getDescriptionText(rowData[value.fieldName])
@@ -53,6 +54,10 @@ const TableRow = ({ rowData, columns, onActionClick, onEditAction }: any) => {
         ) : value.name === "Action Required" ? (
           <td key={index} style={{ ...value.style }}>
             {rowData[value.fieldName][0]?.actionRequired}
+          </td>
+        ) : value.name === 'Date' ? (
+          <td key={index} style={{ ...value.style }}>
+            {formatDate(rowData[value.fieldName])}
           </td>
         ) : (
           <td>

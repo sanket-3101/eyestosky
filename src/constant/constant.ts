@@ -1,10 +1,10 @@
 export const apiConstants = {
-    baseUrl: process.env.NODE_ENV === 'production' ? 'https://api.rabsapp.in/api/v1/' : 'https://api.rabsapp.in/api/v1/',
+    baseUrl: process.env.NODE_ENV === 'production' ? 'http://3.95.198.60:3000/api/v1/admin/' : 'http://3.95.198.60:3000/api/v1/admin/',
     loginEmailPassword: 'auth/login',
     verifyPhoneNumber: 'auth/login-with-mobile',
     verifyOtp: 'auth/verify-otp',
-    forgotPassword: 'auth/forgot-password',
-    resetPassword: (token: string) => `auth/reset-password/${token}`,
+    forgotPassword: 'auth/forgot_password',
+    resetPassword:  `auth/reset_password`,
     getProfile: 'profile/get-profile',
     updateProfileImage: 'profile/update-profile-image',
     updateProfile: 'profile/update-profile',
@@ -17,7 +17,9 @@ export const apiConstants = {
     getDisputeRequest: (details: any) => `contact/get-dispute-requests?startIndex=${details.startIndex}&itemsPerPage=10&sortValue=1&search=${details.search}&sortBy=createdAt`,
     getNotification: (details: any) => `notification/get-notifications?startIndex=${details.startIndex}&itemsPerPage=10`,
     sendFirebaseNotification: `profile/update-fcm`,
-    getCasesByDate: (details: any) => `dashboard/get-all-cases?startDate=${details.startDate}&endDate=${details.endDate}`
+    getCasesByDate: (details: any) => `dashboard/get-all-cases?startDate=${details.startDate}&endDate=${details.endDate}`,
+    getUserList: (details: any) => `user?page=${details.page}&search=${details.search}&limit=10`,
+    postList: (details: any) => `post?page=${details.page}&search=${details.search}&limit=10`
 }
 export enum apiState {
     loading = 'loading',
@@ -60,7 +62,7 @@ export interface TotalCasesType {
     message: string,
     statusCode: number,
     totalItems: number,
-    tartIndex: number,
+    startIndex: number,
     itemsPerPage: number,
     totalPage: number,
 }

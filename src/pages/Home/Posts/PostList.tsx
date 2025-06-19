@@ -5,20 +5,35 @@ import { TotalCasesType, apiConstants } from "../../../constant/constant";
 
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
-import { PostListMock, busnessOwenerMock } from "../../../constant/mock";
+import { PostListMock } from "../../../constant/mock";
 import FilterPopup from "../../../component/FilterPopup";
+
+
+interface PosListType {
+  data: {
+    id: string;
+    created_at: string;
+    media_type: string;
+    status: string;
+    media_url: string;
+  }[];
+  totalItems: number;
+  itemsPerPage: number;
+  totalPage: number;
+  pageNumber: number
+}
 
 function PostList() {
   const navigate = useNavigate();
-  // const [cases, setCases] = useState<TotalCasesType | null | any>(null);
+  const [postlist, setPostList] = useState<PosListType | null | any>(null);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [showPopup, setShowpopup] = useState(false)
   const columns = [
     {
       id: "1",
       name: "Date",
-      fieldName: "date",
+      fieldName: "created_at",
       style: {
         width: "20%",
       },
@@ -26,7 +41,7 @@ function PostList() {
     {
       id: "2",
       name: "Post-Type",
-      fieldName: "post_type",
+      fieldName: "media_type",
       style: {
         width: "20%",
       },
@@ -34,7 +49,7 @@ function PostList() {
     {
       id: "3",
       name: "Post-Link",
-      fieldName: "post_link",
+      fieldName: "media_url",
       style: {
         width: "30%",
       },
@@ -55,25 +70,37 @@ function PostList() {
       },
     },
   ];
-  // useEffect(() => {
-  //   getDetails({
-  //     pageNumber: 1,
-  //     search: "",
-  //   });
-  // }, []);
+  useEffect(() => {
+    getDetails({
+      pageNumber: 1,
+      search: "",
+    });
+  }, []);
 
-  // const getDetails = async (data: any) => {
-  //   const details = {
-  //     search: data.search,
-  //     startIndex: data.pageNumber,
-  //   };
-  //   await axios
-  //     .get(apiConstants.baseUrl + apiConstants.getCases(details))
-  //     .then((response) => {
-  //       setCases(response);
-  //       setLoading(false);
-  //     });
-  // };
+   const getDetails = async (data: any) => {
+    const details = {
+      search: data.search,
+      page: data.pageNumber,
+    };
+    await axios
+      .get(apiConstants.baseUrl + apiConstants.postList(details))
+      .then((response) => {
+        console.log(response.data)
+        const { data } = response
+        if (data) {
+          const details = {
+            pageNumber: data.page,
+            totalItems: data.total,
+            itemsPerPage: data.limit,
+            totalPage: 1,
+            data: data.posts,
+          }
+          setPostList(details);
+        }
+        setLoading(false);
+      });
+  };
+
 
   const onActionClick = (data: any) => {
     navigate(`view/${data.id}`);
@@ -93,7 +120,7 @@ function PostList() {
     <section className="card">
       <div className="card-body">
         <TableSection
-          data={PostListMock}
+          data={postlist}
           columns={columns}
           onActionClick={onActionClick}
           onEditAction={onEditAction}

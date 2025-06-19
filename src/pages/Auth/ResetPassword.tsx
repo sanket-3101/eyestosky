@@ -35,9 +35,10 @@ function ResetPassword() {
       return;
     }
     const response = await axios
-      .post(apiConstants.baseUrl + apiConstants.resetPassword(token), {
+      .post(apiConstants.baseUrl + apiConstants.resetPassword, {
         password: password,
         confirmPassword: confirm_password,
+        token: token
       })
       .then((response) => {
         if (response) {
@@ -64,12 +65,12 @@ function ResetPassword() {
           <div className="panel card-sign">
             <div className="card-body pt-3 pb-3 forget-password-content">
               <a href="/" className="logo text-center w-100 d-inline-block">
-                <img
+                {/* <img
                   src={logo}
                   width={270}
                   height={135}
                   alt="Rab & Rab Associates LLP"
-                />
+                /> */}
               </a>
 
               <div className="tab-content" id="myTabContent">
