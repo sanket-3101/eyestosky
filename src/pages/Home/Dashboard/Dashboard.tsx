@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Bar, Pie } from 'react-chartjs-2';
 import {
@@ -10,16 +10,12 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import axios from 'axios';
+import { apiConstants } from '../../../constant/constant';
+import { useNavigate } from 'react-router-dom';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
 
-const cards = [
-  { title: 'Users', count: 1200 },
-  { title: 'Approved Posts', count: 875 },
-  { title: 'Pending Posts', count: 132 },
-  { title: 'Active Hashtags', count: 58 },
-  { title: 'Inactive Hashtags', count: 17 },
-];
 
 // Dummy Bar Chart Data
 const barData = {
@@ -44,15 +40,44 @@ const pieData = {
   ],
 };
 
+
+
+
 export default function Dashboard() {
+  const [cards, setCards] = useState<{ title: string; count: number; onClick: string }[]>([]);
+  const navigate = useNavigate(); 
+  useEffect(() => {
+    getDetails();
+  }, []);
+
+  const getDetails = async () => {
+    await axios
+      .get(apiConstants.baseUrl + apiConstants.dashboard())
+      .then((response) => {
+        console.log(response.data)
+        const { data } = response
+        if (data) {
+          const cards = [
+            { title: 'Users', count: data.total_users, onClick: '/user-list' },
+            { title: 'Approved Posts', count: data.total_approved_post, onClick: '/post-list' },
+            { title: 'Pending Posts', count: data.total_pending_post, onClick: '/post-list' },
+            { title: 'Rejected Posts', count: data.total_rejected_post, onClick: '/post-list' },
+            { title: 'Active Hashtags', count: data.total_active_hashtag, onClick: '/hashtag-list' },
+            { title: 'Inactive Hashtags', count: data.total_inactive_hashtag, onClick: '/hashtag-list' },
+          ];
+          setCards(cards);
+        }
+      });
+  };
+
   return (
     <section className="card">
       <div className="card-body">
         <h2 className="mb-4" style={{ color: '#04105a' }}>Dashboard Overview</h2>
-        
+
         <div className="row">
           {cards.map((card, index) => (
-            <div key={index} className="col-md-6 col-lg-4 mb-4">
+            <div key={index} className="col-md-6 col-lg-4 mb-4" onClick={() => navigate(card.onClick)}>
               <div className="custom-card text-white p-4 rounded shadow-sm">
                 <h5>{card.title}</h5>
                 <h2 className="fw-bold">{card.count}</h2>

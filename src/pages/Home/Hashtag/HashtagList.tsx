@@ -98,7 +98,7 @@ function HashtagList() {
             pageNumber: data.page,
             totalItems: data.total,
             itemsPerPage: data.limit,
-            totalPage: 1,
+            totalPage: data.total_pages,
             data: data.data,
           }
           setHashtagList(details);
@@ -137,7 +137,7 @@ function HashtagList() {
               getDetails({ search: "", pageNumber: pageNumber })
             }
             onSearchChange={(value: string) =>
-              getDetails({ search: value, pageNumber: hashtagList.startIndex })
+              getDetails({ search: value, pageNumber: hashtagList.pageNumber })
             }
           />
         </div>

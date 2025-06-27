@@ -40,7 +40,7 @@ function UserList() {
       name: "Last-Name",
       fieldName: "last_name",
       style: {
-        width: "25%",
+        width: "15%",
       },
     },
     {
@@ -57,6 +57,14 @@ function UserList() {
       fieldName: "description",
       style: {
         width: "30%",
+      },
+    },
+    {
+      id: "6",
+      name: "Status",
+      fieldName: "status",
+      style: {
+        width: "10%",
       },
     },
     {
@@ -89,8 +97,8 @@ function UserList() {
             pageNumber: data.page,
             totalItems: data.total,
             itemsPerPage: data.limit,
-            totalPage: 1,
-            data: data.users,
+            totalPage: data.total_pages,
+            data: data.data,
           }
           setUserList(details);
         }
@@ -115,12 +123,12 @@ function UserList() {
           columns={columns}
           onActionClick={onActionClick}
           onEditAction={onEditAction}
-        // onPageChange={(pageNumber: number) =>
-        //   getDetails({ search: "", pageNumber: pageNumber })
-        // }
-        // onSearchChange={(value: string) =>
-        //   getDetails({ search: value, pageNumber: cases.startIndex })
-        // }
+          onPageChange={(pageNumber: number) =>
+            getDetails({ search: "", pageNumber: pageNumber })
+          }
+          onSearchChange={(value: string) =>
+            getDetails({ search: value, pageNumber: userList?.pageNumber })
+          }
         />
       </div>
     </section>

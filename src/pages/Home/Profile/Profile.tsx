@@ -6,9 +6,9 @@ import { apiConstants } from "../../../constant/constant";
 import axios from "../../../constant/axios";
 import { showToast } from "../../../constant/util";
 import {
-  getProfileDetails,
-  setUserProfileDetails,
-} from "../../../redux/slice/Auth";
+    getProfileDetails,
+    setUserProfileDetails,
+  } from "../../../redux/slice/Auth";
 import { Loader } from "../../../component/Loader";
 
 interface UserDetailsType {

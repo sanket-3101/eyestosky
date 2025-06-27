@@ -77,7 +77,7 @@ function PostList() {
     });
   }, []);
 
-   const getDetails = async (data: any) => {
+  const getDetails = async (data: any) => {
     const details = {
       search: data.search,
       page: data.pageNumber,
@@ -92,8 +92,8 @@ function PostList() {
             pageNumber: data.page,
             totalItems: data.total,
             itemsPerPage: data.limit,
-            totalPage: 1,
-            data: data.posts,
+            totalPage: data.total_pages,
+            data: data.data,
           }
           setPostList(details);
         }
@@ -127,12 +127,12 @@ function PostList() {
           onCustomButtonClick={onCustomButtonClick}
           customButtonName={'Add Filter'}
           showCustomButton={true}
-        // onPageChange={(pageNumber: number) =>
-        //   getDetails({ search: "", pageNumber: pageNumber })
-        // }
-        // onSearchChange={(value: string) =>
-        //   getDetails({ search: value, pageNumber: cases.startIndex })
-        // }
+      onPageChange={(pageNumber: number) =>
+            getDetails({ search: "", pageNumber: pageNumber })
+          }
+          onSearchChange={(value: string) =>
+            getDetails({ search: value, pageNumber: postlist?.pageNumber })
+          }
         />
       </div>
       {showPopup && (

@@ -6,22 +6,29 @@ export const apiConstants = {
     forgotPassword: 'auth/forgot_password',
     resetPassword: `auth/reset_password`,
     getProfile: 'profile',
+    getProfileById: (id: string) => `user/${id}/details`,
+    updateProfileById: (id: string) => `user/${id}`,                     
     updateProfileImage: 'profile/update-profile-image',
     updateProfile: 'profile/update-profile',
     addContact: 'contact/add-contact',
+    postList: (details: any) => `post?page=${details.page}&search=${details.search}&limit=10`,
+    postDetailsById: (id: string) => `post/${id}`,
     cms: 'cms/get-cms',
-    getCases: (details: any) => `dashboard/get-cases?startIndex=${details.startIndex}&itemsPerPage=10&sortValue=1&search=${details.search}`,
-    getCaseDetails: 'dashboard/get-case/',
-    getService: 'service/get-services',
-    submitServiceRequest: 'service/add-service-request',
+    // getCases: (details: any) => `dashboard/get-cases?startIndex=${details.startIndex}&itemsPerPage=10&sortValue=1&search=${details.search}`,
+    // getCaseDetails: 'dashboard/get-case/',
+    // getService: 'service/get-services',
+    // submitServiceRequest: 'service/add-service-request',
     getDisputeRequest: (details: any) => `contact/get-dispute-requests?startIndex=${details.startIndex}&itemsPerPage=10&sortValue=1&search=${details.search}&sortBy=createdAt`,
     getNotification: (details: any) => `notification/get-notifications?startIndex=${details.startIndex}&itemsPerPage=10`,
     sendFirebaseNotification: `profile/update-fcm`,
     getCasesByDate: (details: any) => `dashboard/get-all-cases?startDate=${details.startDate}&endDate=${details.endDate}`,
     getUserList: (details: any) => `user?page=${details.page}&search=${details.search}&limit=10`,
-    postList: (details: any) => `post?page=${details.page}&search=${details.search}&limit=10`,
-    getHashtagList: (details: any) => `hashtag?page=${details.page}&search=${details.search}&limit=10`,
-    sendNotification: () => `notification/send`
+
+    getHashtagList: (details: any) => `hashtag?page=${details.page}&search=${details.search}&limit=3`,
+    getHashtagDetailsById: (id: string) => `hashtag/${id}/details`,
+    updateHashtagById: (id: string) => `hashtag/${id}`,
+    sendNotification: () => `notification/send`,
+    dashboard: () => `dashboard`
 
 }
 export enum apiState {

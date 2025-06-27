@@ -12,6 +12,7 @@
 .custom-card {
   background-color: #06c;
   transition: transform 0.2s;
+  cursor: pointer;
 }
 .custom-card:hover {
   transform: scale(1.03);

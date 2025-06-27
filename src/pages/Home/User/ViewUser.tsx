@@ -8,11 +8,35 @@ import TextWithViewMore from "../../../component/TextWithViewMore";
 import Popup from "../../../component/Popup";
 import { useAppSelector } from "../../../redux/reduxHook";
 import moment from "moment";
+
+interface UserDetailsApiType {
+  id: string,
+  first_name: string,
+  last_name: string,
+  user_name: string,
+  email: string,
+  avatar: string,
+  description: string,
+  country_name: string,
+  gender: string,
+  ufo_witnessed: string,
+  status: string,
+  created_at: string,
+  posts: [
+    {
+      created_at: string,
+      id: string,
+      media_type: string,
+      media_url: string,
+      status: string,
+    }[]
+  ]
+}
+
 function ViewUser() {
   const navigate = useNavigate();
-  const profileDetails = useAppSelector((state) => state.auth.profileDetails);
   const { id, action } = useParams();
-  const [details, setDetails] = useState<any>(null);
+  const [details, setDetails] = useState<UserDetailsApiType | null>(null);
   const [loading, setLoading] = useState(true);
   const [service, setService] = useState<any>([]);
   const [popup_details, setPopupDetails] = useState<{
@@ -23,36 +47,80 @@ function ViewUser() {
     text: "",
   });
   useEffect(() => {
-    // if (!id) {
-    //   showToast("Invalid id", {
-    //     type: "error",
-    //   });
-    //   navigate("total-case");
-    //   return;
-    // } else {
-    //   getDetails(id);
-    //   getService();
-    // }
+    if (!id) {
+      showToast("Invalid id", {
+        type: "error",
+      });
+      navigate("/user-list");
+      return;
+    } else {
+      getDetails(id);
+    }
   }, [id]);
 
   const getDetails = async (id: string) => {
-    // await axios.get(apiConstants.getCaseDetails + id).then((response) => {
-    //   setDetails(response.data);
-    //   setLoading(false);
-    // });
+    await axios.get(apiConstants.baseUrl + apiConstants.getProfileById(id)).then((response) => {
+      console.log(response.data);
+      setDetails(response.data);
+      setLoading(false);
+    });
   };
 
 
-  const getFormattedText = (text: string, maxLength: number, reverse: boolean) => {
-    // if (!text) return
-    // if (text.length < 1) return
-    // if (text.length < maxLength) return text
-    // return <TextWithViewMore text={text} maxLength={maxLength} reverse={reverse} />;
-  };
+  const onChange = (field: keyof UserDetailsApiType, value: string) => {
+    setDetails({ ...details, [field]: value } as UserDetailsApiType);
+  }
 
-  return false ? (
+  const onSubmit = async () => {
+    if (!id) {
+      showToast("Invalid id", {
+        type: "error",
+      });
+      return;
+    }
+
+    if (!details) {
+      showToast("Invalid details", {
+        type: "error",
+      });
+      return;
+    }
+
+    const data = {
+      first_name: details.first_name,
+      last_name: details.last_name, 
+      country_name: details.country_name,
+      description: details.description,
+      gender: details.gender,
+      ufo_witnessed: details.ufo_witnessed,
+      status: details.status,
+      avatar: details.avatar,
+    }
+    await axios.put(apiConstants.baseUrl + apiConstants.updateProfileById(details.id), data).then((response) => {
+      console.log(response);
+      if(response.data) {
+        showToast("Profile Updated Sucessfully", {
+          type: "success",
+        });
+      }else {
+        showToast("Profile Updated Failed", {
+          type: "error",
+        });
+      }
+    });
+
+  }
+
+  // const getFormattedText = (text: string, maxLength: number, reverse: boolean) => {
+  //   // if (!text) return
+  //   // if (text.length < 1) return
+  //   // if (text.length < maxLength) return text
+  //   // return <TextWithViewMore text={text} maxLength={maxLength} reverse={reverse} />;
+  // };
+
+  return loading ? (
     <Loader />
-  ) : true ? (
+  ) : (
     <>
       {/* start: page */}
       <section className="card">
@@ -74,7 +142,7 @@ function ViewUser() {
                       id="uploadButton"
                     >
                       <img
-                        src={"https://avatar.iran.liara.run/public/boy?username=Ash"}
+                        src={details?.avatar}
                         className="rounded img-fluid"
                         alt="Select Image"
                       />
@@ -95,29 +163,32 @@ function ViewUser() {
                     <input
                       type="text"
                       className="form-control"
-                      value={'Test'}
+                      value={details?.first_name}
                       disabled={action === TableAction.view}
+                      onChange={(e) => onChange('first_name', e.target.value)}
                     />
                   </div>
                 </div>
               </div>
-              <div className="form-group col-sm-6 pt-0">
+              <div className="form-group col-sm-6">
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      Gender
+                      Last Name
                     </label>
                   </div>
                   <div className="col-md-8">
                     <input
                       type="text"
                       className="form-control"
-                      value={'male'}
+                      value={details?.last_name}
                       disabled={action === TableAction.view}
+                      onChange={(e) => onChange('last_name', e.target.value)}
                     />
                   </div>
                 </div>
               </div>
+
             </div>
             <div className="row mb-3">
               <div className="form-group col-sm-6">
@@ -131,8 +202,8 @@ function ViewUser() {
                     <input
                       type="text"
                       className="form-control"
-                      value={'Test@gmail.com'}
-                      disabled={action === TableAction.view}
+                      value={details?.email}
+                      disabled={true}
                     />
                   </div>
                 </div>
@@ -148,8 +219,9 @@ function ViewUser() {
                     <input
                       type="text"
                       className="form-control"
-                      value={'India'}
+                      value={details?.country_name}
                       disabled={action === TableAction.view}
+                      onChange={(e) => onChange('country_name', e.target.value)}
                     />
                   </div>
                 </div>
@@ -169,9 +241,10 @@ function ViewUser() {
                         <textarea
                           name=" Assigned Client"
                           className="form-control"
-                          value={'Description'}
+                          value={details?.description}
                           rows={4}
                           cols={50}
+                          onChange={(e) => onChange('description', e.target.value)}
                         />
                       </div>
                     ) : (
@@ -182,7 +255,7 @@ function ViewUser() {
                           onClick={(e) =>
                             setPopupDetails({
                               show: true,
-                              text: 'Description',
+                              text: details?.description || '',
                             })
                           }
                         />
@@ -203,8 +276,9 @@ function ViewUser() {
                     <input
                       type="text"
                       className="form-control"
-                      value={'Yes'}
+                      value={details?.ufo_witnessed}
                       disabled={action === TableAction.view}
+                      onChange={(e) => onChange('ufo_witnessed', e.target.value)}
                     />
                   </div>
                 </div>
@@ -224,18 +298,36 @@ function ViewUser() {
                       className="d-block form-control"
                       disabled={action === TableAction.view}
                       // style={{ width: "4.5rem" }}
-                      value={'1'}
-                    // onChange={(e) => {
-                    //   handleChange({
-                    //     name: {
-                    //       ...userDetails.name,
-                    //       salutation: e.target.value,
-                    //     },
-                    //   });
-                    // }}
+                      value={details?.status}
+                      onChange={(e) => {
+                        onChange('status', e.target.value);
+                      }}
                     >
-                      <option value="1">Yes</option>
-                      <option value="2">No</option>
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Gender
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <select
+                      className="d-block form-control"
+                      disabled={action === TableAction.view}
+                      // style={{ width: "4.5rem" }}
+                      value={details?.gender}
+                      onChange={(e) => {
+                        onChange('gender', e.target.value);
+                      }}
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
                     </select>
                   </div>
                 </div>
@@ -258,23 +350,16 @@ function ViewUser() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  {
-                    date: new Date(),
-                    post_type: 'Image',
-                    post_link: "abc.com",
-                    status: "Approved"
-                  }
-                ].map((item: any, index: number) => (
+                {details?.posts.map((item: any, index: number) => (
                   <tr>
-                    <td>{formatDate(item.date)}</td>
-                    <td>{item.post_type}</td>
-                    <td>{item.post_link}</td>
+                    <td>{formatDate(item.created_at)}</td>
+                    <td>{item.media_type}</td>
+                    <td>{item.media_url}</td>
                     <td>{item.status}</td>
                     {/* <td>{getFormattedText(item.summary, 30, false)}</td> */}
                     {/* <td>{getFormattedText(item.actionRequired, 50, true)}</td> */}
                     <td>
-                      <a onClick={() => navigate(`/post-list/edit/1`)}>
+                      <a onClick={() => navigate(`/post-list/edit/${item.id}`)}>
                         {/* <i className="bx bxs-trash-alt text-6 text-primary cur-pointer mr-5" /> */}
                         <i className='bx bxs-edit-alt text-6 text-primary cur-pointer' />
                       </a>
@@ -291,13 +376,14 @@ function ViewUser() {
                   defaultValue="Update"
                   className="btn btn-primary w-30 mt-5"
                   style={{ marginRight: '5px' }}
+                  onClick={onSubmit}
                 />
               </>
             )
           }
         </div>
       </section>
-
+s
 
       {/* end: page */}
       {popup_details.show && (
@@ -307,7 +393,7 @@ function ViewUser() {
         />
       )}
     </>
-  ) : null;
+  );
 }
 
 export default ViewUser;
