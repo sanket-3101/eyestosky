@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import axios from "../../../constant/axios";
-import { DisputeRequestType, apiConstants } from "../../../constant/constant";
+import {  useState } from "react";
+
+import { DisputeRequestType } from "../../../constant/constant";
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
 import { useNavigate } from "react-router-dom";
-import { showNotificationMark } from "../../../redux/slice/Auth";
 import { useDispatch } from "react-redux";
 import { CMS_PAGES_MOCK } from "../../../constant/mock";
 function Cmspage() {
   const [details, setDetails] = useState<DisputeRequestType | null | any>(null);
 
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const columns = [
@@ -62,14 +60,6 @@ function Cmspage() {
         <TableSection
           data={CMS_PAGES_MOCK}
           columns={columns}
-          onPageChange={(pageNumber: number) =>
-          // getDetails({ search: "", pageNumber: pageNumber })
-          { }
-          }
-          onSearchChange={(value: string) =>
-          // getDetails({ search: value, pageNumber: details.startIndex })
-          { }
-          }
           onActionClick={() => {
             navigate('cms-editor');
           }}

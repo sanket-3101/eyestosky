@@ -147,9 +147,12 @@ const TableSection = ({
     <section className="card">
       <div className="card-body">
         <div className="row mb-3 align-items-center">
-          <div className="col-md-6">
-            <SearchInput search={search} setSearch={handleSearchChange} />
-          </div>
+          {
+            onSearchChange && <div className="col-md-6">
+              <SearchInput search={search} setSearch={handleSearchChange} />
+            </div>
+          }
+
           {
             showCustomButton &&
             <div className="col-md-6 d-flex justify-content-end">
