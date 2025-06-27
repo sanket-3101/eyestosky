@@ -77,7 +77,7 @@ function UserList() {
   ];
   useEffect(() => {
     getDetails({
-      pageNumber: 1,
+      page: 1,
       search: "",
     });
   }, []);
@@ -85,7 +85,7 @@ function UserList() {
   const getDetails = async (data: any) => {
     const details = {
       search: data.search,
-      page: data.pageNumber,
+      page: data.page,
     };
     await axios
       .get(apiConstants.baseUrl + apiConstants.getUserList(details))
@@ -124,10 +124,10 @@ function UserList() {
           onActionClick={onActionClick}
           onEditAction={onEditAction}
           onPageChange={(pageNumber: number) =>
-            getDetails({ search: "", pageNumber: pageNumber })
+            getDetails({ search: "", page: pageNumber })
           }
           onSearchChange={(value: string) =>
-            getDetails({ search: value, pageNumber: userList?.pageNumber })
+            getDetails({ search: value, page: userList?.pageNumber })
           }
         />
       </div>

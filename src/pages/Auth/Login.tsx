@@ -205,13 +205,13 @@ function Login() {
                   </button>
                 </div>
               </div>
-              <p
+              {/* <p
                 onClick={() => navigate("/forgot-password")}
                 className="font-weight-bold text-center pt-3 d-block signup-link"
                 style={{ color: "#030844", cursor: "pointer" }}
               >
                 Forgot Password?
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

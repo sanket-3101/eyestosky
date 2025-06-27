@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../../constant/axios";
-import { TotalCasesType, apiConstants } from "../../../constant/constant";
-
+import { apiConstants } from "../../../constant/constant";
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
-import { busnessOwenerMock, HASH_TAG_MOCK } from "../../../constant/mock";
 import CreateHashPopup from "../../../component/CreateHashPopup";
 
 interface HashtagListType {
@@ -78,7 +76,7 @@ function HashtagList() {
   ];
   useEffect(() => {
     getDetails({
-      pageNumber: 1,
+      page: 1,
       search: "",
     });
   }, []);
@@ -86,7 +84,7 @@ function HashtagList() {
   const getDetails = async (data: any) => {
     const details = {
       search: data.search,
-      startIndex: data.pageNumber,
+      page: data.page,
     };
     await axios
       .get(apiConstants.baseUrl + apiConstants.getHashtagList(details))
@@ -134,10 +132,10 @@ function HashtagList() {
             customButtonName={'Create Hashtag'}
             onEditAction={onEditAction}
             onPageChange={(pageNumber: number) =>
-              getDetails({ search: "", pageNumber: pageNumber })
+              getDetails({ search: "", page: pageNumber })
             }
             onSearchChange={(value: string) =>
-              getDetails({ search: value, pageNumber: hashtagList.pageNumber })
+              getDetails({ search: value, page: hashtagList.pageNumber })
             }
           />
         </div>
@@ -145,6 +143,7 @@ function HashtagList() {
       {showPopup && (
         <CreateHashPopup
           closeModal={() => setShowpopup(false)}
+          onCreated={() => getDetails({ search: '', pageNumber: 1 })}
         />
       )}
     </>

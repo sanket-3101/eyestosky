@@ -72,7 +72,7 @@ function PostList() {
   ];
   useEffect(() => {
     getDetails({
-      pageNumber: 1,
+      page: 1,
       search: "",
     });
   }, []);
@@ -80,7 +80,7 @@ function PostList() {
   const getDetails = async (data: any) => {
     const details = {
       search: data.search,
-      page: data.pageNumber,
+      page: data.page,
     };
     await axios
       .get(apiConstants.baseUrl + apiConstants.postList(details))
@@ -128,10 +128,10 @@ function PostList() {
           customButtonName={'Add Filter'}
           showCustomButton={true}
       onPageChange={(pageNumber: number) =>
-            getDetails({ search: "", pageNumber: pageNumber })
+            getDetails({ search: "", page: pageNumber })
           }
           onSearchChange={(value: string) =>
-            getDetails({ search: value, pageNumber: postlist?.pageNumber })
+            getDetails({ search: value, page: postlist?.pageNumber })
           }
         />
       </div>
