@@ -41,32 +41,6 @@ function Login() {
 
 
   const handleSignIn = async () => {
-
-    // if (!showOtp) {
-    //   // Validate email and password
-    //   if (!email || !password) {
-    //     // Handle validation error
-    //     showToast("All Fields are required", {
-    //       type: "error",
-    //     });
-    //     return;
-    //   }
-
-    //   const response = await dispatch(
-    //     loginWithEmailPassword({ email, password })
-    //   );
-    //   console.log(response);
-    // } else {
-    //   // Validate phone number
-    //   if (!phoneNumber) {
-    //     // Handle validation error
-    //     showToast("Phone number is required", {
-    //       type: "error",
-    //     });
-    //     return;
-    //   }
-    //   dispatch(verifyPhoneNumber({ phoneNumber }));
-    // }
     if (!email || !password) {
       // Handle validation error
       showToast("All Fields are required", {
@@ -75,11 +49,9 @@ function Login() {
       return;
     }
 
-    const response = await dispatch(
+    await dispatch(
       loginWithEmailPassword({ email, password })
     );
-
-    console.log(response)
   };
 
   return (

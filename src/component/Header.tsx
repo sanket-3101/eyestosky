@@ -1,7 +1,5 @@
 // Login.tsx
-
-import logo from "../images/logo.png";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/reduxHook";
@@ -13,6 +11,7 @@ function Header() {
   const profileDetails = useAppSelector((state) => state.auth.profileDetails);
   const [showDropDown, setShowDropDown] = React.useState(false);
 
+
   const handleLogout = () => {
     localStorage.clear();
     dispatch(setLoggedIn(false));
@@ -20,19 +19,8 @@ function Header() {
   };
 
   const getProfileImage = () => {
-    // console.log(profileDetails?.profilePicture)
-    // if (profileDetails.profilePicture && profileDetails.profilePicture.url) {
-    //   return (
-    //     <img
-    //       src={profileDetails.profilePicture.url}
-    //       alt="Joseph Doe"
-    //       className="rounded-circle"
-    //       data-lock-picture="img/!logged-user.jpg"
-    //     />
-    //   );
-    //
     return <img
-      src={
+      src={profileDetails.avatar ||
         'https://avatar.iran.liara.run/public/boy?username=Ash'}
       alt="Testing"
       className="rounded-circle"
@@ -40,7 +28,7 @@ function Header() {
     />
   };
 
-  // if (Object.keys(profileDetails).length === 0) return null;
+  if (Object.keys(profileDetails).length === 0) return null;
 
   return (
     <header className="header">
@@ -71,7 +59,7 @@ function Header() {
             <figure className="profile-picture">{getProfileImage()}</figure>
             <div className="profile-info">
               <span className="name">
-                Welcome, Test
+                Welcome, {profileDetails?.first_name}
               </span>
             </div>
             <i className="bx bxs-chevron-down" />

@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/reduxHook";
 import { apiConstants } from "../../../constant/constant";
@@ -19,279 +17,259 @@ interface UserDetailsType {
   avatar: string;
 }
 
-
 function Profile() {
-  const [loading, setLoading] = useState(true);
-  const [userDetails, setUserDetails] = React.useState<UserDetailsType | null>(null);
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(true);
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [userDetails, setUserDetails] = useState<UserDetailsType | null>(null);
+  const [imageLoading, setImageLoading] = useState(false);
+  const profileDetails = useAppSelector((state) => state.auth.profileDetails);
 
   useEffect(() => {
-    axios.get(apiConstants.baseUrl + apiConstants.getProfile).then((response) => {
-      console.log(response);
-      const { data } = response
-      if (data) {
-        setUserDetails(data)
-      }
+    if (Object.keys(profileDetails).length === 0) {
+      dispatch(getProfileDetails({}));
+    } else {
+      setUserDetails(profileDetails);
       setLoading(false);
-    });
+    }
+  }, [profileDetails, dispatch]);
 
-  }, [])
-  const handleChange = (data: any) => {
+  useEffect(() => {
+    if (userDetails) {
+      setLoading(false);
+    }
+  }, [userDetails]);
+
+  const handleChange = (field: keyof UserDetailsType, value: string) => {
+    if (!userDetails) return;
     setUserDetails({
       ...userDetails,
-      ...data,
+      [field]: value,
     });
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImageLoading(true);
+      try {
+        const formData = new FormData();
+        formData.append("avatar", e.target.files[0]);
 
-    // if (e.target.files && e.target.files.length > 0) {
-    //   try {
-    //     const formData = new FormData();
-    //     formData.append("profileImage", e.target.files[0]);
+        const response = await axios.post(
+          apiConstants.baseUrl + apiConstants.updateProfileImage,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
 
-    //     // Make a POST request to your server with the FormData
-    //     const response = await axios.post(
-    //       apiConstants.baseUrl + apiConstants.updateProfileImage,
-    //       formData,
-    //       {
-    //         headers: {
-    //           "Content-Type": "multipart/form-data",
-    //         },
-    //       }
-    //     );
-
-    //     console.log("Image uploaded successfully:", response.data);
-
-    //     if (response.data) {
-    //       const updateProfile = {
-    //         ...userDetails,
-    //         profilePicture: {
-    //           ...response.data.data,
-    //         },
-    //       };
-    //       setUserDetails({
-    //         ...updateProfile,
-    //       });
-    //       setUserProfileDetails({
-    //         ...updateProfile,
-    //       });
-    //       showToast("Profile Pic updated Succesfully", {
-    //         type: "success",
-    //       });
-    //     }
-    //   } catch (error) {
-    //     console.error("Error uploading image:", error);
-    //     showToast("Error while uploading Pic", {
-    //       type: "error",
-    //     });
-    //   }
-    // }
+        if (response.data) {
+          const updatedDetails: UserDetailsType = {
+            ...userDetails!,
+            avatar: response.data.avatar || response.data.url,
+          };
+          setUserDetails(updatedDetails);
+          dispatch(setUserProfileDetails(updatedDetails));
+          showToast("Profile picture updated successfully", {
+            type: "success",
+          });
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        showToast("Error uploading profile picture", {
+          type: "error",
+        });
+      } finally {
+        setImageLoading(false);
+      }
+    }
   };
 
   const handleSubmit = async () => {
+    if (!userDetails) {
+      showToast("No user details available", { type: "error" });
+      return;
+    }
 
+    setSubmitLoading(true);
+    try {
+      const payload = {
+        first_name: userDetails.first_name,
+        last_name: userDetails.last_name,
+      };
+
+      const response = await axios.put(
+        apiConstants.baseUrl + apiConstants.updateProfile,
+        payload
+      );
+
+      if (response.data) {
+        dispatch(setUserProfileDetails(userDetails));
+        showToast("Profile updated successfully", {
+          type: "success",
+        });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      showToast("Error updating profile", {
+        type: "error",
+      });
+    } finally {
+      setSubmitLoading(false);
+    }
   };
 
   const getProfileImage = () => {
     if (userDetails?.avatar) {
       return (
         <img
-          src={userDetails?.avatar}
-          className="rounded img-fluid"
-          alt="Select Image"
+          src={userDetails.avatar}
+          className="rounded-circle img-fluid"
+          alt="Profile"
+          style={{ width: "150px", height: "150px", objectFit: "cover" }}
         />
       );
     }
-    return <button className="btn btn-primary">Select Image</button>;
+    return (
+      <div 
+        className="rounded-circle bg-light d-flex align-items-center justify-content-center"
+        style={{ width: "150px", height: "150px" }}
+      >
+        <i className="bx bx-user text-muted" style={{ fontSize: "3rem" }}></i>
+      </div>
+    );
   };
-  if (loading || !userDetails) return <Loader />;
+
+  if (loading) return <Loader />;
+
   return (
-    <>
-      <div className="row">
-        {/* <div className="col-lg-4 col-xl-4 col-xxl-3 mb-4">
-          <section className="card">
-            <div className="card-body">
-              <input
-                type="file"
-                id="fileInput"
-                style={{ display: "none" }}
-                onChange={handleImageChange}
-              />
-
-              <div
-                className="thumb-info"
-                style={{ display: "flex", justifyContent: "center" }}
-                // onClick={() => document.getElementById("fileInput")?.click()}
-                id="uploadButton"
-              >
+    <section className="card">
+      <div className="card-body">
+        <h2 className="mb-4" style={{ color: '#04105a' }}>Profile Settings</h2>
+        
+        <div className="row">
+          {/* Profile Image Section */}
+          <div className="col-lg-4 col-xl-3 mb-4">
+            <div className="text-center">
+              <div className="position-relative d-inline-block">
                 {getProfileImage()}
-              </div>
-              <div className="row">
-                <div className="form-group col">
-                  <button
-                    type="button"
-                    className="btn btn-primary mt-3"
-                    onClick={(e) => document.getElementById("fileInput")?.click()}
-                  >
-                    Edit Image
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div> */}
-        <div className="col-lg-8 col-xl-8 col-xxl-9">
-          <div className="tabs">
-            <ul className="nav nav-tabs tabs-primary" role="tablist">
-              <li className="nav-item active" role="presentation">
-                <button
-                  className="nav-link active"
-                  data-bs-target="#edit"
-                  data-bs-toggle="tab"
-                  aria-selected="true"
-                  role="tab"
-                >
-                  Personal Information
-                </button>
-              </li>
-            </ul>
-            <div className="tab-content">
-              <div id="edit" className="tab-pane active show" role="tabpanel">
-                <div className="row mb-4">
-                  <div className="form-group col col-md-6 pt-3">
-                    <label htmlFor="">Salutation</label>
-                    <select
-                      className="d-block form-control"
-                      // style={{ width: "4.5rem" }}
-                      // value={userDetails.name.salutation}
-                      onChange={(e) => {
-                        handleChange({
-                          name: {
-                            ...userDetails,
-                            salutation: e.target.value,
-                          },
-                        });
-                      }}
-                    >
-                      <option value="Mr">Mr</option>
-                      <option value="Ms">Ms</option>
-                      <option value="Mrs">Mrs</option>
-                      <option value="Dr">Dr</option>
-                      <option value="Mx">Mx</option>
-                    </select>
-                  </div>
-                  <div className="form-group col col-md-6">
-                    <label htmlFor="">First Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Vastal"
-                      value={userDetails.first_name}
-                      disabled={true}
-                      onChange={(e) => {
-                        handleChange({
-                          name: {
-                            ...userDetails,
-                            firstName: e.target.value,
-                          },
-                        });
-                      }}
-                    />
-                  </div>
-
-                </div>
-
-                <div className="row mb-4">
-                  {/* <div className="form-group col col-md-6">
-                    <label htmlFor="">Designation</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="CEO"
-                      value={userDetails.designation}
-                      onChange={(e) => {
-                        handleChange({
-                          designation: e.target.value,
-                        });
-                      }}
-                    />
-                    
-                  </div> */}
-                  <div className="form-group col col-md-6 pt-0">
-                    <label htmlFor="">Last Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Shah"
-                      value={userDetails.last_name || ''}
-                      disabled={true}
-                      onChange={(e) => {
-                        handleChange({
-                          name: {
-                            ...userDetails,
-                            lastName: e.target.value,
-                          },
-                        });
-                      }}
-                    />
-                  </div>
-                  <div className="form-group col col-md-6 pt-0">
-                    <label htmlFor="">Email</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="vastal@gmail.com"
-                      value={userDetails.email || ''}
-                      disabled={true}
-                    />
-                  </div>
-
-                </div>
-                {/* <div className="form-group col col-md-6 pt-0">
-                    <label htmlFor="">User Type</label>
-                    <select
-                      name=""
-                      className="w-100 d-block form-control"
-                      value={userDetails.userType}
-                      disabled={true}
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                      }}
-                    >
-                      <option value="Select User Type">Select User Type</option>
-                      <option value="ceo">CEO</option>
-                      <option value="team_member">Team Member</option>
-                    </select>
-                  </div> */}
-                {/* <div className="form-group col col-md-6 pt-0">
-                    <label htmlFor="">Profile Image</label>
-                    <div className="upload-file">
-                      <input
-                        type="file"
-                        id="myFile"
-                        name="filename"
-                        onChange={handleImageChange}
-                      />
+                {imageLoading && (
+                  <div className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-white bg-opacity-75 rounded-circle">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
                     </div>
-                  </div> */}
+                  </div>
+                )}
               </div>
-              <div className="row">
-                <div className="form-group col">
-                  <button
-                    type="submit"
-                    className="btn btn-primary mt-2"
-                    onClick={handleSubmit}
-                  >
-                    Update Profile
-                  </button>
-                </div>
+              
+              <div className="mt-3">
+                <input
+                  type="file"
+                  id="fileInput"
+                  style={{ display: "none" }}
+                  onChange={handleImageChange}
+                  accept="image/*"
+                />
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={() => document.getElementById("fileInput")?.click()}
+                  disabled={imageLoading}
+                >
+                  {imageLoading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                      Uploading...
+                    </>
+                  ) : (
+                    <>
+                      <i className="bx bx-camera me-2"></i>
+                      Change Photo
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           </div>
+
+          {/* Profile Details Section */}
+          <div className="col-lg-8 col-xl-9">
+            <form>
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <label htmlFor="firstName" className="form-label">First Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="firstName"
+                    value={userDetails?.first_name || ""}
+                    onChange={(e) => handleChange('first_name', e.target.value)}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="lastName" className="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="lastName"
+                    value={userDetails?.last_name || ""}
+                    onChange={(e) => handleChange('last_name', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <label htmlFor="email" className="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    value={userDetails?.email || ""}
+                    disabled
+                  />
+                  <small className="text-muted">Email cannot be changed</small>
+                </div>
+              </div>
+
+              <div className="d-flex gap-2">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleSubmit}
+                  disabled={submitLoading}
+                >
+                  {submitLoading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <i className="bx bx-save me-2"></i>
+                      Update Profile
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={() => {
+                    setUserDetails(profileDetails);
+                    showToast("Changes discarded", { type: "info" });
+                  }}
+                  disabled={submitLoading}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>        
-    </>
+      </div>
+    </section>
   );
 }
 

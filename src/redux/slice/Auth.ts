@@ -36,8 +36,9 @@ export const loginWithEmailPassword = createAsyncThunk(
       email,
       password,
     }).then((response) => {
-    if (response.data.access_token) {
+      if (response.data.access_token) {
         localStorage.setItem('auth_token', response.data.access_token)
+        localStorage.setItem('user_details', JSON.stringify(response.data.user))
       }
 
       return thunkAPI.fulfillWithValue(response.data);
@@ -114,6 +115,7 @@ export const verifyOTP = createAsyncThunk(
 export const getProfileDetails = createAsyncThunk(
   'profile/get-profile',
   async (data: any, thunkAPI) => {
+    console.log(data)
     const response = await axios.get(apiConstants.baseUrl + apiConstants.getProfile).then((response) => {
       console.log(response)
       return thunkAPI.fulfillWithValue(response.data);
@@ -155,7 +157,7 @@ export const authSlice = createSlice({
     setFirebaseToken: (state, action) => {
       state.firebaseToken = action.payload
     },
-    showNotificationMark : (state, action) => {
+    showNotificationMark: (state, action) => {
       state.showNotificationMark = action.payload
     }
   },
@@ -165,6 +167,7 @@ export const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(loginWithEmailPassword.fulfilled, (state, action) => {
+        console.log('State ==>', action)
         state.status = 'succeeded';
         state.isLoggedIn = true
         state.profileDetails = action.payload.user
@@ -206,15 +209,15 @@ export const authSlice = createSlice({
         state.error = action.payload;
         state.status = 'failed';
       })
-      // .addCase(sendFirebaseToken.fulfilled, (state, action) => {
-      //   state.status = 'succeeded';
-      //   state.firebaseToken =  action.payload;
-      // })
-      // .addCase(sendFirebaseToken.rejected, (state, action) => {
-      //   state.error = action.payload;
-      //   state.status = 'failed';
-      //   state.firebaseToken =  '';
-      // })
+    // .addCase(sendFirebaseToken.fulfilled, (state, action) => {
+    //   state.status = 'succeeded';
+    //   state.firebaseToken =  action.payload;
+    // })
+    // .addCase(sendFirebaseToken.rejected, (state, action) => {
+    //   state.error = action.payload;
+    //   state.status = 'failed';
+    //   state.firebaseToken =  '';
+    // })
 
   },
 });

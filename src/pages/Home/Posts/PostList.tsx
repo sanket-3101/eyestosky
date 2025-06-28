@@ -26,9 +26,13 @@ interface PosListType {
 function PostList() {
   const navigate = useNavigate();
   const [postlist, setPostList] = useState<PosListType | null | any>(null);
-
   const [loading, setLoading] = useState(true);
-  const [showPopup, setShowpopup] = useState(false)
+  const [showPopup, setShowpopup] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState({
+    status: "",
+    postType: ""
+  });
+
   const columns = [
     {
       id: "1",
@@ -81,6 +85,8 @@ function PostList() {
     const details = {
       search: data.search,
       page: data.page,
+      status: data.status || currentFilters.status,
+      postType: data.postType || currentFilters.postType,
     };
     await axios
       .get(apiConstants.baseUrl + apiConstants.postList(details))
@@ -101,6 +107,15 @@ function PostList() {
       });
   };
 
+  const onApplyFilter = async (filters: any) => {
+    setCurrentFilters(filters);
+    await getDetails({
+      search: "",
+      page: 1,
+      status: filters.status,
+      postType: filters.postType,
+    });
+  };
 
   const onActionClick = (data: any) => {
     navigate(`view/${data.id}`);
@@ -138,6 +153,7 @@ function PostList() {
       {showPopup && (
         <FilterPopup
           closeModal={() => setShowpopup(false)}
+          onApplyFilter={onApplyFilter}
         />
       )}
     </section>

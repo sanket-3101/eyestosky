@@ -40,23 +40,12 @@ export enum apiState {
 }
 
 export interface UserDetailsType {
-    name: {
-        firstName: string,
-        lastName: string,
-        fullName: string
-        salutation: string
-    },
-    designation: string,
+    first_name: string,
+    last_name: string,
+    avatar: string,
     email: string,
-    mobile: string,
-    moblieCode: string,
-    origanization: string,
-    userType: string,
-    profilePicture: {
-        key: string,
-        url: string
-    },
-    whatsappMobile: string
+    salutation: string,
+    id: string
 }
 
 export interface TotalCasesType {

@@ -195,6 +195,7 @@ const TableSection = ({
             showCustomButton &&
             <div className="col-md-6 d-flex justify-content-end">
               <input
+                type="button"
                 defaultValue={customButtonName}
                 className="btn btn-primary w-5"
                 onClick={onCustomButtonClick}
