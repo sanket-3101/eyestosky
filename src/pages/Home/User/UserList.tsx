@@ -29,7 +29,7 @@ function UserList() {
   const columns = [
     {
       id: "1",
-      name: "Name",
+      name: "FirstName",
       fieldName: "first_name",
       style: {
         width: "15%",
@@ -37,7 +37,7 @@ function UserList() {
     },
     {
       id: "2",
-      name: "Last-Name",
+      name: "LastName",
       fieldName: "last_name",
       style: {
         width: "15%",
@@ -48,17 +48,17 @@ function UserList() {
       name: "Email",
       fieldName: "email",
       style: {
-        width: "20%",
+        width: "25%",
       },
     },
-    {
-      id: "4",
-      name: "Description",
-      fieldName: "description",
-      style: {
-        width: "30%",
-      },
-    },
+    // {
+    //   id: "4",
+    //   name: "Description",
+    //   fieldName: "description",
+    //   style: {
+    //     width: "30%",
+    //   },
+    // },
     {
       id: "6",
       name: "Status",
@@ -83,10 +83,11 @@ function UserList() {
   }, []);
 
   const getDetails = async (data: any) => {
-    const details = {
+    let details  = {
       search: data.search,
-      page: data.page,
+      page: data.page
     };
+ 
     await axios
       .get(apiConstants.baseUrl + apiConstants.getUserList(details))
       .then((response) => {
@@ -127,7 +128,7 @@ function UserList() {
             getDetails({ search: "", page: pageNumber })
           }
           onSearchChange={(value: string) =>
-            getDetails({ search: value, page: userList?.pageNumber })
+            getDetails({ search: value, page: 1 })
           }
         />
       </div>

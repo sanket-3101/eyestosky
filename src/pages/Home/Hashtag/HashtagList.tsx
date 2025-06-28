@@ -135,7 +135,7 @@ function HashtagList() {
               getDetails({ search: "", page: pageNumber })
             }
             onSearchChange={(value: string) =>
-              getDetails({ search: value, page: hashtagList.pageNumber })
+              getDetails({ search: value, page: 1 })
             }
           />
         </div>

@@ -103,7 +103,7 @@ a:active {
 }
 
 .page-header {
-	background: #434670;
+	background: #06c;
 	border-bottom: none;
 	border-left: 1px solid #3a3a3a;
 	box-shadow: 1px 3px 0 1px #ccc;
@@ -1248,7 +1248,7 @@ a:active {
 	right: 0;
 	width: 73px;
 	height: 50px;
-	background-color: #434670;
+	background-color: #06c;
 	border-radius: 0 0 0 5px;
 	text-align: center;
 	cursor: pointer
@@ -3881,7 +3881,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 }
 
 .header .toggle-sidebar-left {
-	background: #434670;
+	background: #06c;
 	border-radius: 100px;
 	color: #fff;
 	height: 30px;
@@ -7475,7 +7475,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 }
 
 .card-title {
-	color: #434670;
+	color: #06c;
 	font-size: 18px;
 	line-height: 18px;
 	padding: 0;
@@ -14677,7 +14677,7 @@ body .ui-pnotify.icon-nb .notification .ui-pnotify-icon>span {
 }
 
 .pagination>li a {
-	color: #434670;
+	color: #06c;
 	box-shadow: none !important
 }
 
@@ -14686,7 +14686,7 @@ body .ui-pnotify.icon-nb .notification .ui-pnotify-icon>span {
 }
 .pagination>li a:focus {
 	color: #fff;
-	background: #434670;
+	background: #06c;
 }
 
 .pagination>li.active a,
@@ -14695,12 +14695,12 @@ body .ui-pnotify.icon-nb .notification .ui-pnotify-icon>span {
 .pagination>li.active span,
 .pagination>li.active span:hover,
 .pagination>li.active span:focus {
-	background-color: #434670;
+	background-color: #06c;
 	border-color: #ccc
 }
 
 .pagination>li.active a {
-	background-color: #434670
+	background-color: #06c
 }
 
 .pagination.pagination-modern>li a {
@@ -17651,7 +17651,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 
 .userbox .dropdown-menu a {
 	border-radius: 2px;
-	color: #434670;
+	color: #06c;
 	display: block;
 	line-height: 20.8px;
 	padding: 4px 10px;
@@ -17663,7 +17663,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 }
 
 .userbox .dropdown-menu a:hover {
-	background: #434670;
+	background: #06c;
 	color: #fff;
 }
 
@@ -18169,7 +18169,7 @@ ul.simple-bullet-list li.orange:before {
 	text-align: center;
 	color: #fff;
 	border-radius: 55px;
-	background-color: #434670;
+	background-color: #06c;
 }
 
 .widget-summary .summary {

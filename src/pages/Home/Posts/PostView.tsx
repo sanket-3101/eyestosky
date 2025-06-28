@@ -24,6 +24,7 @@ function PostView() {
   const { id, action } = useParams();
   const [details, setDetails] = useState<PostDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [popup_details, setPopupDetails] = useState<{
     show: boolean;
     text: string;
@@ -71,6 +72,8 @@ function PostView() {
       showToast("Invalid details", { type: "error" });
       return;
     }
+    
+    setSubmitLoading(true);
     try {
       // Prepare payload with correct types
       const payload = {
@@ -90,6 +93,8 @@ function PostView() {
       showToast("Post updated successfully", { type: "success" });
     } catch (e) {
       showToast("Failed to update post", { type: "error" });
+    } finally {
+      setSubmitLoading(false);
     }
   };
 
@@ -130,8 +135,8 @@ function PostView() {
                     <select
                       className="form-control"
                       value={details.media_type}
-                      disabled={action === TableAction.view}
-                      onChange={e => onChange('media_type', e.target.value)}
+                      disabled={true}
+                      // onChange={e => onChange('media_type', e.target.value)}
                     >
                       <option value="">Select Type</option>
                       <option value="video">Video</option>
@@ -151,13 +156,14 @@ function PostView() {
                     </label>
                   </div>
                   <div className="col-md-8">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={details.media_url}
-                      disabled={action === TableAction.view}
-                      onChange={e => onChange('media_url', e.target.value)}
-                    />
+                    <a
+                      href={details?.media_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary text-decoration-none"
+                    >
+                      {details?.media_url}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -270,13 +276,22 @@ function PostView() {
           </form>
           {action !== TableAction.view && (
             <>
-              <input
+              <button
                 type="button"
-                value="Update"
-                className="btn btn-primary w-30"
+                className="btn btn-primary"
                 style={{ marginRight: '5px' }}
                 onClick={onSubmit}
-              />
+                disabled={submitLoading}
+              >
+                {submitLoading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Updating...
+                  </>
+                ) : (
+                  "Update"
+                )}
+              </button>
             </>
           )}
         </div>

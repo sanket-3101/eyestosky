@@ -127,11 +127,11 @@ function PostList() {
           onCustomButtonClick={onCustomButtonClick}
           customButtonName={'Add Filter'}
           showCustomButton={true}
-      onPageChange={(pageNumber: number) =>
+          onPageChange={(pageNumber: number) =>
             getDetails({ search: "", page: pageNumber })
           }
           onSearchChange={(value: string) =>
-            getDetails({ search: value, page: postlist?.pageNumber })
+            getDetails({ search: value, page: 1 })
           }
         />
       </div>

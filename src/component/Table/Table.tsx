@@ -36,54 +36,89 @@ const getDescriptionText = (text: string) => {
 };
 // Functional component for a table row
 const TableRow = ({ rowData, columns, onActionClick, onEditAction }: any) => {
-
-
-  return (
-    <tr>
-      {columns.map((value: any, index: any) =>
-        value.name !== "Action" && value.name !== "Status" && value.name !== "Action Required" && value.name !== 'Date' ? (
-          <td key={index} style={{ ...value.style }}>
-            {value.name === "Description"
-              ? getDescriptionText(rowData[value.fieldName])
-              : rowData[value.fieldName]}
-          </td>
-        ) : value.name === "Status" ? (
-          <td>
-            <span className="badge badge-info" style={{ fontSize: '12px' }}>{rowData[value.fieldName]}</span>
-          </td>
-        ) : value.name === "Action Required" ? (
-          <td key={index} style={{ ...value.style }}>
-            {rowData[value.fieldName][0]?.actionRequired}
-          </td>
-        ) : value.name === 'Date' ? (
-          <td key={index} style={{ ...value.style }}>
-            {formatDate(rowData[value.fieldName])}
-          </td>
-        ) : (
-          <td>
+  const renderCell = (column: any, index: number) => {
+    const { name, fieldName, style } = column;
+    
+    // Handle different column types
+    switch (name) {
+      case "Action":
+        return (
+          <td key={index}>
             <span className="flex items-center">
               <a onClick={() => onActionClick(rowData)} className="cur-pointer text-primary mr-6" title="View">
                 <i className="bx bx-show text-6" />
               </a>
-              {
-                onEditAction && (
-                  <a onClick={() => onEditAction(rowData)} className="cur-pointer text-primary" title="Edit">
-                    <i className="bx bx-edit text-6" />
-                  </a>
-                )
-              }
-
+              {onEditAction && (
+                <a onClick={() => onEditAction(rowData)} className="cur-pointer text-primary" title="Edit">
+                  <i className="bx bx-edit text-6" />
+                </a>
+              )}
             </span>
           </td>
-        )
-      )}
-    </tr >
+        );
+        
+      case "Status":
+        return (
+          <td key={index}>
+            <span className="badge badge-info" style={{ fontSize: '12px' }}>
+              {rowData[fieldName]}
+            </span>
+          </td>
+        );
+        
+      case "Action Required":
+        return (
+          <td key={index} style={{ ...style }}>
+            {rowData[fieldName][0]?.actionRequired}
+          </td>
+        );
+        
+      case "Date":
+        return (
+          <td key={index} style={{ ...style }}>
+            {formatDate(rowData[fieldName])}
+          </td>
+        );
+        
+      case "Description":
+        return (
+          <td key={index} style={{ ...style }}>
+            {getDescriptionText(rowData[fieldName])}
+          </td>
+        );
+        
+      case "Post-Link":
+        return (
+          <td key={index} style={{ ...style }}>
+            <a 
+              href={rowData[fieldName]} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary text-decoration-none"
+            >
+              {rowData[fieldName]}
+            </a>
+          </td>
+        );
+        
+      default:
+        return (
+          <td key={index} style={{ ...style }}>
+            {rowData[fieldName]}
+          </td>
+        );
+    }
+  };
+
+  return (
+    <tr>
+      {columns.map((column: any, index: number) => renderCell(column, index))}
+    </tr>
   );
 };
 
 // Functional component for the table
-const Table = ({ data, columns, onActionClick, onPageChange, onEditAction }: any) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const Table = ({ data, columns, onActionClick, onPageChange, onEditAction, setCurrentPage, currentPage }: any) => {
 
   const totalPages = data.totalPage;
   const currentPageData = data.data;
@@ -138,11 +173,14 @@ const TableSection = ({
   customButtonName
 }: any) => {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleSearchChange = (value: string) => {
     setSearch(value);
-    onSearchChange(value);
+    onSearchChange(value)
+    setCurrentPage(1);
   };
+
   return (
     <section className="card">
       <div className="card-body">
@@ -172,8 +210,9 @@ const TableSection = ({
           onActionClick={onActionClick}
           onPageChange={onPageChange}
           onEditAction={onEditAction}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
           onRowClick
-
         />
       </div>
     </section>
