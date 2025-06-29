@@ -10,18 +10,19 @@ function Main({ children }: { children?: React.ReactElement }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const profileDetails = useAppSelector((state) => state.auth);
-  // useEffect(() => {
-  //   dispatch(getProfileDetails({}));
-  // }, []);
 
-  // useEffect(() => {
-  //   if(profileDetails.error && profileDetails.error?.statusCode === 401) {
-  //     localStorage.clear();
-  //     dispatch(setLoggedIn(false));
-  //     navigate("/login", { replace: true });
-  //     resetState({})
-  //   }
-  // }, [profileDetails])
+  useEffect(() => {
+    dispatch(getProfileDetails({}));
+  }, []);
+
+  useEffect(() => {
+    if(profileDetails.error && profileDetails.error?.statusCode === 401) {
+      localStorage.clear();
+      dispatch(setLoggedIn(false));
+      navigate("/login", { replace: true });
+      resetState({})
+    }
+  }, [profileDetails])
   return (
     <>
       <Header />

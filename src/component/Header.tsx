@@ -28,6 +28,7 @@ function Header() {
     />
   };
 
+  
   if (Object.keys(profileDetails).length === 0) return null;
 
   return (

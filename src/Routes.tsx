@@ -83,7 +83,7 @@ const Routes: React.FC = () => {
 
             <Route path="cms-page" >
               <Route index={true} element={<Cmspage />} />
-              <Route path="cms-editor" element={<CmsEditor />} />
+              <Route path="cms-editor/:type" element={<CmsEditor />} />
             </Route>
 
             <Route path="notification" element={<Notification />} />

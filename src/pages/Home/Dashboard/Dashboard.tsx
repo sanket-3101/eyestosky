@@ -58,7 +58,6 @@ export default function Dashboard() {
   const dispatch = useAppDispatch();
   
   useEffect(() => {
-    dispatch(getProfileDetails({}));
     getDetails();
   }, [dispatch]);
 
