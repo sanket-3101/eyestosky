@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { DisputeRequestType } from "../../../constant/constant";
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import axios from "../../../constant/axios";
-import { apiConstants } from "../../../constant/constant";
+
+
 
 interface CmsPageType {
   id: string;
@@ -18,7 +16,6 @@ function Cmspage() {
   const [loading, setLoading] = useState(true);
   const [cmsPages, setCmsPages] = useState<CmsPageType[]>([]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const columns = [
     {

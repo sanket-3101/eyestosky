@@ -85,8 +85,8 @@ function PostList() {
     const details = {
       search: data.search,
       page: data.page,
-      status: data.status || currentFilters.status,
-      postType: data.postType || currentFilters.postType,
+      status: data.status !== undefined ? data.status : currentFilters.status,
+      postType: data.postType !== undefined ? data.postType : currentFilters.postType,
     };
     await axios
       .get(apiConstants.baseUrl + apiConstants.postList(details))
@@ -115,6 +115,7 @@ function PostList() {
       status: filters.status,
       postType: filters.postType,
     });
+    setShowpopup(false);
   };
 
   const onActionClick = (data: any) => {
@@ -129,6 +130,8 @@ function PostList() {
     setShowpopup(true)
   }
 
+  const isFilterApplied = currentFilters.status !== "" || currentFilters.postType !== "";
+
   return loading ? (
     <Loader />
   ) : (
@@ -140,7 +143,25 @@ function PostList() {
           onActionClick={onActionClick}
           onEditAction={onEditAction}
           onCustomButtonClick={onCustomButtonClick}
-          customButtonName={'Add Filter'}
+          customButtonName={
+            <span style={{ position: 'relative', display: 'inline-block', paddingRight: '18px' }}>
+              Add Filter
+              {isFilterApplied && (
+                <span style={{
+                  position: 'absolute',
+                  top: 2,
+                  right: 2,
+                  width: 10,
+                  height: 10,
+                  background: 'red',
+                  borderRadius: '50%',
+                  display: 'inline-block',
+                  border: '2px solid white',
+                  zIndex: 1,
+                }} />
+              )}
+            </span>
+          }
           showCustomButton={true}
           onPageChange={(pageNumber: number) =>
             getDetails({ search: "", page: pageNumber })
@@ -154,6 +175,7 @@ function PostList() {
         <FilterPopup
           closeModal={() => setShowpopup(false)}
           onApplyFilter={onApplyFilter}
+          initialFilters={currentFilters}
         />
       )}
     </section>

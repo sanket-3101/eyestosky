@@ -4,9 +4,9 @@ import { apiConstants } from "../../../constant/constant";
 import axios from "../../../constant/axios";
 import { showToast } from "../../../constant/util";
 import {
-    getProfileDetails,
-    setUserProfileDetails,
-  } from "../../../redux/slice/Auth";
+  getProfileDetails,
+  setUserProfileDetails,
+} from "../../../redux/slice/Auth";
 import { Loader } from "../../../component/Loader";
 
 interface UserDetailsType {
@@ -52,30 +52,55 @@ function Profile() {
     if (e.target.files && e.target.files.length > 0) {
       setImageLoading(true);
       try {
-        const formData = new FormData();
-        formData.append("avatar", e.target.files[0]);
 
-        const response = await axios.post(
-          apiConstants.baseUrl + apiConstants.updateProfileImage,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+        const formdata = new FormData()
+        const file = e.target.files[0];
+
+        formdata.append('file', file)
+
+        // Step 1: Get presigned URL from S3
+        // const uploadResponse = await axios.post(apiConstants.baseUrl + apiConstants.presign, {
+        //   body: formdata
+        // });
+
+        // if (!presignResponse.data || !presignResponse.data.uploadUrl) {
+        //   throw new Error('Failed to get upload URL');
+        // }
+
+        // // Step 2: Upload file to S3 using presigned URL
+        const auth_token = await localStorage.getItem('auth_token')
+
+        const uploadResponse = await fetch('http://3.95.198.60:3000/api/v1/presign', {
+          method: 'POST',
+          body: file,
+          headers: {
+            Authorization: 'Bearer' + ' ' + auth_token
           }
-        );
+        });
 
-        if (response.data) {
-          const updatedDetails: UserDetailsType = {
-            ...userDetails!,
-            avatar: response.data.avatar || response.data.url,
-          };
-          setUserDetails(updatedDetails);
-          dispatch(setUserProfileDetails(updatedDetails));
-          showToast("Profile picture updated successfully", {
-            type: "success",
-          });
+        if (!uploadResponse) {
+          throw new Error('Failed to upload file to S3');
         }
+
+        // Step 3: Update profile avatar with the S3 link
+        // const avatarResponse = await axios.post(
+        //   apiConstants.baseUrl + apiConstants.updateProfileAvatar,
+        //   {
+        //     avatar: presignResponse.data.fileUrl || presignResponse.data.url
+        //   }
+        // );
+
+        // if (avatarResponse.data) {
+        //   const updatedDetails: UserDetailsType = {
+        //     ...userDetails!,
+        //     avatar: presignResponse.data.fileUrl || presignResponse.data.url,
+        //   };
+        //   setUserDetails(updatedDetails);
+        //   dispatch(setUserProfileDetails(updatedDetails));
+        //   showToast("Profile picture updated successfully", {
+        //     type: "success",
+        //   });
+        // }
       } catch (error) {
         console.error("Error uploading image:", error);
         showToast("Error uploading profile picture", {
@@ -133,7 +158,7 @@ function Profile() {
       );
     }
     return (
-      <div 
+      <div
         className="rounded-circle bg-light d-flex align-items-center justify-content-center"
         style={{ width: "150px", height: "150px" }}
       >
@@ -148,7 +173,7 @@ function Profile() {
     <section className="card">
       <div className="card-body">
         <h2 className="mb-4" style={{ color: '#04105a' }}>Profile Settings</h2>
-        
+
         <div className="row">
           {/* Profile Image Section */}
           <div className="col-lg-4 col-xl-3 mb-4">
@@ -163,7 +188,7 @@ function Profile() {
                   </div>
                 )}
               </div>
-              
+
               <div className="mt-3">
                 <input
                   type="file"

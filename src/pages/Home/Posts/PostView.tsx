@@ -72,7 +72,7 @@ function PostView() {
       showToast("Invalid details", { type: "error" });
       return;
     }
-    
+
     setSubmitLoading(true);
     try {
       // Prepare payload with correct types
@@ -136,7 +136,7 @@ function PostView() {
                       className="form-control"
                       value={details.media_type}
                       disabled={true}
-                      // onChange={e => onChange('media_type', e.target.value)}
+                    // onChange={e => onChange('media_type', e.target.value)}
                     >
                       <option value="">Select Type</option>
                       <option value="video">Video</option>
@@ -228,24 +228,6 @@ function PostView() {
               </div>
             </div>
             <div className="row mb-3">
-              <div className="form-group col-sm-6">
-                <div className="row align-items-center">
-                  <div className="col-md-4">
-                    <label htmlFor="" className="mb-0">
-                      Caption
-                    </label>
-                  </div>
-                  <div className="col-md-8">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={details.caption || ''}
-                      disabled={action === TableAction.view}
-                      onChange={e => onChange('caption', e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
               <div className="form-group col-sm-6 pt-0">
                 <div className="row align-items-center">
                   <div className="col-md-4">
@@ -272,6 +254,25 @@ function PostView() {
                   </div>
                 </div>
               </div>
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Caption
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={details.caption || ''}
+                      disabled={action === TableAction.view}
+                      onChange={e => onChange('caption', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
             </div>
           </form>
           {action !== TableAction.view && (

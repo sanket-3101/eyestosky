@@ -3,6 +3,7 @@ import React, { useState } from "react";
 interface FilterPopupProps {
   closeModal: () => void;
   onApplyFilter: (filters: FilterData) => void;
+  initialFilters?: FilterData;
 }
 
 interface FilterData {
@@ -10,11 +11,13 @@ interface FilterData {
   postType: string;
 }
 
-function FilterPopup({ closeModal, onApplyFilter }: FilterPopupProps) {
-  const [filters, setFilters] = useState<FilterData>({
-    status: "",
-    postType: ""
-  });
+function FilterPopup({ closeModal, onApplyFilter, initialFilters }: FilterPopupProps) {
+  const [filters, setFilters] = useState<FilterData>(
+    initialFilters || {
+      status: "",
+      postType: ""
+    }
+  );
   const [loading, setLoading] = useState(false);
 
   const handleFilterChange = (field: keyof FilterData, value: string) => {

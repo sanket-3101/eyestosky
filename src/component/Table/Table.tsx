@@ -16,7 +16,7 @@ const SearchInput = ({
       <input
         type="search"
         className="form-control"
-        placeholder="search"
+        placeholder=" Search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -194,12 +194,13 @@ const TableSection = ({
           {
             showCustomButton &&
             <div className="col-md-6 d-flex justify-content-end">
-              <input
+              <button
                 type="button"
-                defaultValue={customButtonName}
                 className="btn btn-primary w-5"
                 onClick={onCustomButtonClick}
-              />
+              >
+                {customButtonName}
+              </button>
             </div>
           }
 

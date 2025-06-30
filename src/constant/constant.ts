@@ -10,8 +10,19 @@ export const apiConstants = {
     updateProfileById: (id: string) => `user/${id}`,                     
     updateProfileImage: 'profile/update-profile-image',
     updateProfile: 'profile/update-profile',
+    presign: 'profile/presign',
+    updateProfileAvatar: 'profile/avatar',
     addContact: 'contact/add-contact',
-    postList: (details: any) => `post?page=${details.page}&search=${details.search}`,
+    postList: (details: any) => {
+        let url = `post?page=${details.page}&search=${details.search}`;
+        if (details.postType) {
+            url += `&mediaType=${details.postType}`;
+        }
+        if (details.status) {
+            url += `&status=${details.status}`;
+        }
+        return url;
+    },
     postDetailsById: (id: string) => `post/${id}`,
     cms: 'cms/get-cms',
     getCmsPrivacyPolicy: 'cms/privacy_policy/details',
