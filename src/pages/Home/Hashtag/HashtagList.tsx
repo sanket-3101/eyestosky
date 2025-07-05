@@ -26,14 +26,14 @@ function HashtagList() {
   const [showPopup, setShowpopup] = useState(false)
   const [loading, setLoading] = useState(true);
   const columns = [
-    {
-      id: "1",
-      name: "Id",
-      fieldName: "id",
-      style: {
-        width: "15%",
-      },
-    },
+    // {
+    //   id: "1",
+    //   name: "Id",
+    //   fieldName: "id",
+    //   style: {
+    //     width: "15%",
+    //   },
+    // },
     {
       id: "6",
       name: "Date",

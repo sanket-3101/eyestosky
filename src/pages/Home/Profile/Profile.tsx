@@ -50,65 +50,146 @@ function Profile() {
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      
+      // File validation
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+      
+      if (file.size > maxSize) {
+        showToast("File size too large. Please select a file under 5MB.", { type: "error" });
+        return;
+      }
+      
+      if (!allowedTypes.includes(file.type)) {
+        showToast("Invalid file type. Please select an image file.", { type: "error" });
+        return;
+      }
+      
       setImageLoading(true);
       try {
-
-        const formdata = new FormData()
-        const file = e.target.files[0];
-
-        formdata.append('file', file)
+        const auth_token = localStorage.getItem('auth_token');
 
         // Step 1: Get presigned URL from S3
-        // const uploadResponse = await axios.post(apiConstants.baseUrl + apiConstants.presign, {
-        //   body: formdata
-        // });
+        const presignResponse = await axios.post(
+          apiConstants.baseUrl + apiConstants.presign,
+          {
+            file_name: 'avatar.jpg',
+            content_type: file.type
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + auth_token
+            }
+          }
+        );
 
-        // if (!presignResponse.data || !presignResponse.data.uploadUrl) {
-        //   throw new Error('Failed to get upload URL');
-        // }
+        if (!presignResponse.data || !presignResponse.data.url) {
+          throw new Error('Failed to get upload URL');
+        }
 
-        // // Step 2: Upload file to S3 using presigned URL
-        const auth_token = await localStorage.getItem('auth_token')
-
-        const uploadResponse = await fetch('http://3.95.198.60:3000/api/v1/presign', {
-          method: 'POST',
+        // Step 2: Upload file to S3 using presigned URL
+        const uploadResponse = await fetch(presignResponse.data.url, {
+          method: 'PUT',
           body: file,
           headers: {
-            Authorization: 'Bearer' + ' ' + auth_token
+            'Content-Type': file.type
           }
         });
 
-        if (!uploadResponse) {
+        if (!uploadResponse.ok) {
           throw new Error('Failed to upload file to S3');
         }
 
-        // Step 3: Update profile avatar with the S3 link
-        // const avatarResponse = await axios.post(
-        //   apiConstants.baseUrl + apiConstants.updateProfileAvatar,
-        //   {
-        //     avatar: presignResponse.data.fileUrl || presignResponse.data.url
-        //   }
-        // );
+        // Step 3: Extract clean S3 URL from presigned URL
+        const presignedUrl = presignResponse.data.url;
+        const cleanS3Url = presignedUrl.split('?')[0]; // Remove query parameters
+        
+        // Update profile avatar with the clean S3 link (backend will handle old image cleanup)
+        const avatarResponse = await axios.put(
+          apiConstants.baseUrl + apiConstants.updateProfileAvatar,
+          {
+            avatar: cleanS3Url,
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + auth_token
+            }
+          }
+        );
 
-        // if (avatarResponse.data) {
-        //   const updatedDetails: UserDetailsType = {
-        //     ...userDetails!,
-        //     avatar: presignResponse.data.fileUrl || presignResponse.data.url,
-        //   };
-        //   setUserDetails(updatedDetails);
-        //   dispatch(setUserProfileDetails(updatedDetails));
-        //   showToast("Profile picture updated successfully", {
-        //     type: "success",
-        //   });
-        // }
-      } catch (error) {
+        if (avatarResponse.data) {
+          const updatedDetails: UserDetailsType = {
+            ...userDetails!,
+            avatar: cleanS3Url,
+          };
+          setUserDetails(updatedDetails);
+          dispatch(setUserProfileDetails(updatedDetails));
+          showToast("Profile picture updated successfully", {
+            type: "success",
+          });
+        }
+      } catch (error: any) {
         console.error("Error uploading image:", error);
-        showToast("Error uploading profile picture", {
-          type: "error",
-        });
+        
+        if (error.response?.status === 413) {
+          showToast("File too large", { type: "error" });
+        } else if (error.response?.status === 415) {
+          showToast("Invalid file type", { type: "error" });
+        } else if (error.message === 'Failed to get upload URL') {
+          showToast("Upload service unavailable", { type: "error" });
+        } else {
+          showToast("Error uploading profile picture", { type: "error" });
+        }
       } finally {
         setImageLoading(false);
+        // Reset file input
+        e.target.value = '';
       }
+    }
+  };
+
+  const handleRemoveProfileImage = async () => {
+    if (!userDetails?.avatar) {
+      showToast("No profile image to remove", { type: "info" });
+      return;
+    }
+
+    setImageLoading(true);
+    try {
+      const auth_token = localStorage.getItem('auth_token');
+      
+      // Option 1: Backend handles S3 deletion (recommended)
+      const response = await axios.put(
+        apiConstants.baseUrl + apiConstants.updateProfileAvatar,
+        {
+          avatar: "",
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + auth_token
+          }
+        }
+      );
+
+      if (response.data) {
+        const updatedDetails: UserDetailsType = {
+          ...userDetails!,
+          avatar: "",
+        };
+        setUserDetails(updatedDetails);
+        dispatch(setUserProfileDetails(updatedDetails));
+        showToast("Profile picture removed successfully", {
+          type: "success",
+        });
+      }
+    } catch (error) {
+      console.error("Error removing profile image:", error);
+      showToast("Error removing profile picture", {
+        type: "error",
+      });
+    } finally {
+      setImageLoading(false);
     }
   };
 
@@ -197,24 +278,46 @@ function Profile() {
                   onChange={handleImageChange}
                   accept="image/*"
                 />
-                <button
-                  type="button"
-                  className="btn btn-outline-primary"
-                  onClick={() => document.getElementById("fileInput")?.click()}
-                  disabled={imageLoading}
-                >
-                  {imageLoading ? (
-                    <>
-                      <span className="spinner-border spinner-border-sm me-2" role="status"></span>
-                      Uploading...
-                    </>
-                  ) : (
-                    <>
-                      <i className="bx bx-camera me-2"></i>
-                      Change Photo
-                    </>
+                                <div className="d-flex gap-2 justify-content-center">
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary"
+                    onClick={() => document.getElementById("fileInput")?.click()}
+                    disabled={imageLoading}
+                  >
+                    {imageLoading ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        <i className="bx bx-camera me-2"></i>
+                        Change Photo
+                      </>
+                    )}
+                  </button>
+                  {userDetails?.avatar && (
+                    <button
+                      type="button"
+                      className="btn btn-outline-danger"
+                      onClick={handleRemoveProfileImage}
+                      disabled={imageLoading}
+                    >
+                      {imageLoading ? (
+                        <>
+                          <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                          Removing...
+                        </>
+                      ) : (
+                        <>
+                          <i className="bx bx-trash me-2"></i>
+                          Remove
+                        </>
+                      )}
+                    </button>
                   )}
-                </button>
+                </div>
               </div>
             </div>
           </div>

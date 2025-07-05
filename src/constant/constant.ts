@@ -9,8 +9,8 @@ export const apiConstants = {
     getProfileById: (id: string) => `user/${id}/details`,
     updateProfileById: (id: string) => `user/${id}`,                     
     updateProfileImage: 'profile/update-profile-image',
-    updateProfile: 'profile/update-profile',
-    presign: 'profile/presign',
+    updateProfile: 'profile',
+    presign: 'presign',
     updateProfileAvatar: 'profile/avatar',
     addContact: 'contact/add-contact',
     postList: (details: any) => {
