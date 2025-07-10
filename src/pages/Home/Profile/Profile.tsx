@@ -321,7 +321,7 @@ function Profile() {
           <div className="col-lg-8 col-xl-9">
             <form>
               <div className="row mb-3">
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                   <label htmlFor="firstName" className="form-label">Username</label>
                   <input
                     type="text"
@@ -331,7 +331,7 @@ function Profile() {
                     onChange={(e) => handleChange('user_name', e.target.value)}
                     disabled={true}
                   />
-                </div>
+                </div> */}
                 <div className="col-md-6">
                   <label htmlFor="firstName" className="form-label">First Name</label>
                   <input
@@ -342,10 +342,6 @@ function Profile() {
                     onChange={(e) => handleChange('first_name', e.target.value)}
                   />
                 </div>
-
-              </div>
-
-              <div className="row mb-3">
                 <div className="col-md-6">
                   <label htmlFor="lastName" className="form-label">Last Name</label>
                   <input
@@ -356,6 +352,10 @@ function Profile() {
                     onChange={(e) => handleChange('last_name', e.target.value)}
                   />
                 </div>
+              </div>
+
+              <div className="row mb-3">
+
                 <div className="col-md-6">
                   <label htmlFor="email" className="form-label">Email Address</label>
                   <input
