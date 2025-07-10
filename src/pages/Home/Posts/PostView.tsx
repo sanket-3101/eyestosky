@@ -5,6 +5,7 @@ import axios from "../../../constant/axios";
 import { Loader } from "../../../component/Loader";
 import { apiConstants, TableAction } from "../../../constant/constant";
 import Popup from "../../../component/Popup";
+import Title from "../../../component/Title";
 
 interface PostDetailsType {
   id: string;
@@ -105,6 +106,7 @@ function PostView() {
       {/* start: page */}
       <section className="card">
         <div className="card-body">
+          <Title title="Post Details" />
           <form method="post">
             <div className="row mb-3">
               <div className="form-group col-sm-6">

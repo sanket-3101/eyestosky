@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
 import { useNavigate } from "react-router-dom";
+import Title from "../../../component/Title";
 
 
 
@@ -61,7 +62,7 @@ function Cmspage() {
   ) : (
     <section className="card">
       <div className="card-body">
-        <h2 className="mb-4" style={{ color: '#04105a' }}>CMS Pages</h2>
+        <Title title="CMS Pages" />
         <TableSection
           data={{
             data: cmsPages,

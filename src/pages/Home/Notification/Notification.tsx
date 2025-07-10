@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "../../../constant/axios";
 import { apiConstants } from "../../../constant/constant";
 import { showToast } from "../../../constant/util";
+import Title from "../../../component/Title";
 
 function Notification() {
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ function Notification() {
   return <section className="card">
     <div className="card-body">
       <form method="post">
+        <Title title="Notification" />
         <div className="row mb-3">
           <div className="form-group col-sm-6 pt-0">
             <div className="row align-items-center">

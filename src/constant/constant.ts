@@ -62,7 +62,8 @@ export interface UserDetailsType {
     avatar: string,
     email: string,
     salutation: string,
-    id: string
+    id: string,
+    user_name: string
 }
 
 export interface TotalCasesType {

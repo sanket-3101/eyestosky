@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Bar, Pie } from 'react-chartjs-2';
 import {
@@ -9,12 +9,13 @@ import {
   ArcElement,
   Tooltip,
   Legend,
+  
 } from 'chart.js';
 import axios from 'axios';
 import { apiConstants } from '../../../constant/constant';
 import { useNavigate } from 'react-router-dom';
-import { getProfileDetails } from '../../../redux/slice/Auth';
 import { useAppDispatch } from '../../../redux/reduxHook';
+import Title from '../../../component/Title';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
 
@@ -88,7 +89,7 @@ export default function Dashboard() {
   return (
     <section className="card">
       <div className="card-body">
-        <h2 className="mb-4" style={{ color: '#04105a' }}>Dashboard Overview</h2>
+        <Title title="Dashboard Overview" />
 
         <div className="row">
           {loading ? (

@@ -5,6 +5,7 @@ import axios from "../../../constant/axios";
 import { Loader } from "../../../component/Loader";
 import { apiConstants, TableAction } from "../../../constant/constant";
 import Popup from "../../../component/Popup";
+import Title from "../../../component/Title";
 
 interface HashTagDetailsType {
   id: string;
@@ -82,6 +83,7 @@ function HashtagView() {
       {/* start: page */}
       <section className="card">
         <div className="card-body">
+          <Title title="Hashtag Details" />
           <form method="post">
             <div className="row mb-3">
               <div className="form-group col-sm-6">

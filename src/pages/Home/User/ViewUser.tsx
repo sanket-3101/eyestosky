@@ -8,6 +8,7 @@ import TextWithViewMore from "../../../component/TextWithViewMore";
 import Popup from "../../../component/Popup";
 import { useAppSelector } from "../../../redux/reduxHook";
 import moment from "moment";
+import Title from "../../../component/Title";
 
 interface UserDetailsApiType {
   id: string,
@@ -98,7 +99,7 @@ function ViewUser() {
       status: details.status,
       avatar: details.avatar,
     }
-    
+
     try {
       const response = await axios.put(apiConstants.baseUrl + apiConstants.updateProfileById(details.id), data);
       console.log(response);
@@ -134,6 +135,7 @@ function ViewUser() {
       {/* start: page */}
       <section className="card">
         <div className="card-body">
+        <Title title="User Details" />
           <form action="" method="post">
             <div className="row mb-3">
               <div className="form-group col-sm-12 pt-0">
@@ -156,6 +158,25 @@ function ViewUser() {
                         alt="Select Image"
                       />
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Username
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={details?.user_name}
+                      disabled={true}
+                    />
                   </div>
                 </div>
               </div>
@@ -196,154 +217,154 @@ function ViewUser() {
                       onChange={(e) => onChange('last_name', e.target.value)}
                     />
                   </div>
+                </div>
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="form-group col-sm-6">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Email Address
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={details?.email}
+                      disabled={true}
+                    />
                   </div>
                 </div>
               </div>
-              <div className="row mb-3">
-                <div className="form-group col-sm-6">
-                  <div className="row align-items-center">
-                    <div className="col-md-4">
-                      <label htmlFor="" className="mb-0">
-                        Email Address
-                      </label>
-                    </div>
-                    <div className="col-md-8">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={details?.email}
-                        disabled={true}
-                      />
-                    </div>
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Country
+                    </label>
                   </div>
-                </div>
-                <div className="form-group col-sm-6 pt-0">
-                  <div className="row align-items-center">
-                    <div className="col-md-4">
-                      <label htmlFor="" className="mb-0">
-                        Country
-                      </label>
-                    </div>
-                    <div className="col-md-8">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={details?.country_name}
-                        disabled={action === TableAction.view}
-                        onChange={(e) => onChange('country_name', e.target.value)}
-                      />
-                    </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={details?.country_name}
+                      disabled={action === TableAction.view}
+                      onChange={(e) => onChange('country_name', e.target.value)}
+                    />
                   </div>
                 </div>
               </div>
-              <div className="row mb-3">
-                <div className="form-group col-sm-6 pt-0">
-                  <div className="row align-items-center">
-                    <div className="col-md-4">
-                      <label htmlFor="" className="mb-0">
-                        Description
-                      </label>
-                    </div>
-                    {
-                      action === TableAction.edit ? (
-                        <div className="col-md-8">
-                          <textarea
-                            name=" Assigned Client"
-                            className="form-control"
-                            value={details?.description}
-                            rows={4}
-                            cols={50}
-                            onChange={(e) => onChange('description', e.target.value)}
-                          />
-                        </div>
-                      ) : (
-                        <div className="col-md-6">
-                          <input
-                            defaultValue="Description"
-                            className="btn btn-primary w-60"
-                            onClick={(e) =>
-                              setPopupDetails({
-                                show: true,
-                                text: details?.description || '',
-                              })
-                            }
-                          />
-                        </div>
-                      )
-                    }
+            </div>
+            <div className="row mb-3">
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Description
+                    </label>
+                  </div>
+                  {
+                    action === TableAction.edit ? (
+                      <div className="col-md-8">
+                        <textarea
+                          name=" Assigned Client"
+                          className="form-control"
+                          value={details?.description}
+                          rows={4}
+                          cols={50}
+                          onChange={(e) => onChange('description', e.target.value)}
+                        />
+                      </div>
+                    ) : (
+                      <div className="col-md-6">
+                        <input
+                          defaultValue="Description"
+                          className="btn btn-primary w-60"
+                          onClick={(e) =>
+                            setPopupDetails({
+                              show: true,
+                              text: details?.description || '',
+                            })
+                          }
+                        />
+                      </div>
+                    )
+                  }
 
+                </div>
+              </div>
+              <div className="form-group col-sm-6">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      UFO Witnessed
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <select
+                      className="d-block form-control"
+                      disabled={action === TableAction.view}
+                      value={details?.ufo_witnessed}
+                      onChange={(e) => onChange('ufo_witnessed', e.target.value)}
+                    >
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
                   </div>
                 </div>
-                <div className="form-group col-sm-6">
-                  <div className="row align-items-center">
-                    <div className="col-md-4">
-                      <label htmlFor="" className="mb-0">
-                        UFO Witnessed
-                      </label>
-                    </div>
-                    <div className="col-md-8">
-                      <select
-                        className="d-block form-control"
-                        disabled={action === TableAction.view}
-                        value={details?.ufo_witnessed}
-                        onChange={(e) => onChange('ufo_witnessed', e.target.value)}
-                      >
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+              </div>
 
-              </div>
-              <div className="row mb-3">
-                <div className="form-group col-sm-6 pt-0">
-                  <div className="row align-items-center">
-                    <div className="col-md-4">
-                      <label htmlFor="" className="mb-0">
-                        Status
-                      </label>
-                    </div>
-                    <div className="col-md-8">
-                      <select
-                        className="d-block form-control"
-                        disabled={action === TableAction.view}
-                        // style={{ width: "4.5rem" }}
-                        value={details?.status}
-                        onChange={(e) => {
-                          onChange('status', e.target.value);
-                        }}
-                      >
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                      </select>
-                    </div>
+            </div>
+            <div className="row mb-3">
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Status
+                    </label>
                   </div>
-                </div>
-                <div className="form-group col-sm-6 pt-0">
-                  <div className="row align-items-center">
-                    <div className="col-md-4">
-                      <label htmlFor="" className="mb-0">
-                        Gender
-                      </label>
-                    </div>
-                    <div className="col-md-8">
-                      <select
-                        className="d-block form-control"
-                        disabled={action === TableAction.view}
-                        // style={{ width: "4.5rem" }}
-                        value={details?.gender}
-                        onChange={(e) => {
-                          onChange('gender', e.target.value);
-                        }}
-                      >
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
-                    </div>
+                  <div className="col-md-8">
+                    <select
+                      className="d-block form-control"
+                      disabled={action === TableAction.view}
+                      // style={{ width: "4.5rem" }}
+                      value={details?.status}
+                      onChange={(e) => {
+                        onChange('status', e.target.value);
+                      }}
+                    >
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                    </select>
                   </div>
                 </div>
               </div>
+              <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Gender
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <select
+                      className="d-block form-control"
+                      disabled={action === TableAction.view}
+                      // style={{ width: "4.5rem" }}
+                      value={details?.gender}
+                      onChange={(e) => {
+                        onChange('gender', e.target.value);
+                      }}
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
           </form>
           {
             action != TableAction.view && (
@@ -386,9 +407,9 @@ function ViewUser() {
                     <td>{formatDate(item.created_at)}</td>
                     <td>{item.media_type}</td>
                     <td>
-                      <a 
-                        href={item.media_url} 
-                        target="_blank" 
+                      <a
+                        href={item.media_url}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary text-decoration-none"
                       >
@@ -412,8 +433,6 @@ function ViewUser() {
 
         </div>
       </section>
-      s
-
       {/* end: page */}
       {popup_details.show && (
         <Popup

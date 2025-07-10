@@ -8,14 +8,9 @@ import {
   setUserProfileDetails,
 } from "../../../redux/slice/Auth";
 import { Loader } from "../../../component/Loader";
+import { UserDetailsType } from "../../../constant/constant";
+import Title from "../../../component/Title";
 
-interface UserDetailsType {
-  id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  avatar: string;
-}
 
 function Profile() {
   const dispatch = useAppDispatch();
@@ -51,21 +46,21 @@ function Profile() {
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      
+
       // File validation
       const maxSize = 5 * 1024 * 1024; // 5MB
       const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-      
+
       if (file.size > maxSize) {
         showToast("File size too large. Please select a file under 5MB.", { type: "error" });
         return;
       }
-      
+
       if (!allowedTypes.includes(file.type)) {
         showToast("Invalid file type. Please select an image file.", { type: "error" });
         return;
       }
-      
+
       setImageLoading(true);
       try {
         const auth_token = localStorage.getItem('auth_token');
@@ -104,7 +99,7 @@ function Profile() {
         // Step 3: Extract clean S3 URL from presigned URL
         const presignedUrl = presignResponse.data.url;
         const cleanS3Url = presignedUrl.split('?')[0]; // Remove query parameters
-        
+
         // Update profile avatar with the clean S3 link (backend will handle old image cleanup)
         const avatarResponse = await axios.put(
           apiConstants.baseUrl + apiConstants.updateProfileAvatar,
@@ -131,7 +126,7 @@ function Profile() {
         }
       } catch (error: any) {
         console.error("Error uploading image:", error);
-        
+
         if (error.response?.status === 413) {
           showToast("File too large", { type: "error" });
         } else if (error.response?.status === 415) {
@@ -158,7 +153,7 @@ function Profile() {
     setImageLoading(true);
     try {
       const auth_token = localStorage.getItem('auth_token');
-      
+
       // Option 1: Backend handles S3 deletion (recommended)
       const response = await axios.put(
         apiConstants.baseUrl + apiConstants.updateProfileAvatar,
@@ -253,7 +248,7 @@ function Profile() {
   return (
     <section className="card">
       <div className="card-body">
-        <h2 className="mb-4" style={{ color: '#04105a' }}>Profile Settings</h2>
+        <Title title="Profile Settings" />
 
         <div className="row">
           {/* Profile Image Section */}
@@ -278,7 +273,7 @@ function Profile() {
                   onChange={handleImageChange}
                   accept="image/*"
                 />
-                                <div className="d-flex gap-2 justify-content-center">
+                <div className="d-flex gap-2 justify-content-center">
                   <button
                     type="button"
                     className="btn btn-outline-primary"
@@ -327,6 +322,17 @@ function Profile() {
             <form>
               <div className="row mb-3">
                 <div className="col-md-6">
+                  <label htmlFor="firstName" className="form-label">Username</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="user_name"
+                    value={userDetails?.user_name || ""}
+                    onChange={(e) => handleChange('user_name', e.target.value)}
+                    disabled={true}
+                  />
+                </div>
+                <div className="col-md-6">
                   <label htmlFor="firstName" className="form-label">First Name</label>
                   <input
                     type="text"
@@ -336,6 +342,10 @@ function Profile() {
                     onChange={(e) => handleChange('first_name', e.target.value)}
                   />
                 </div>
+
+              </div>
+
+              <div className="row mb-3">
                 <div className="col-md-6">
                   <label htmlFor="lastName" className="form-label">Last Name</label>
                   <input
@@ -346,9 +356,6 @@ function Profile() {
                     onChange={(e) => handleChange('last_name', e.target.value)}
                   />
                 </div>
-              </div>
-
-              <div className="row mb-3">
                 <div className="col-md-6">
                   <label htmlFor="email" className="form-label">Email Address</label>
                   <input

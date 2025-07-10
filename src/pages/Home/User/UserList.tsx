@@ -5,6 +5,7 @@ import { TotalCasesType, apiConstants } from "../../../constant/constant";
 
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
+import Title from "../../../component/Title";
 
 interface UserListType {
   data: {
@@ -45,8 +46,8 @@ function UserList() {
     },
     {
       id: "3",
-      name: "Email",
-      fieldName: "email",
+      name: "Username",
+      fieldName: "user_name",
       style: {
         width: "25%",
       },
