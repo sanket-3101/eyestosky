@@ -15,8 +15,8 @@ export const apiConstants = {
     addContact: 'contact/add-contact',
     postList: (details: any) => {
         let url = `post?page=${details.page}&search=${details.search}`;
-        if (details.postType) {
-            url += `&mediaType=${details.postType}`;
+        if (details.media_type) {
+            url += `&media_type=${details.media_type}`;
         }
         if (details.status) {
             url += `&status=${details.status}`;

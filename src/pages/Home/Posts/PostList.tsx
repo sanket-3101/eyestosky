@@ -86,7 +86,7 @@ function PostList() {
       search: data.search,
       page: data.page,
       status: data.status !== undefined ? data.status : currentFilters.status,
-      postType: data.postType !== undefined ? data.postType : currentFilters.postType,
+      media_type: data.postType !== undefined ? data.postType : currentFilters.postType,
     };
     await axios
       .get(apiConstants.baseUrl + apiConstants.postList(details))
