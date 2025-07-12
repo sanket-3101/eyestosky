@@ -9,10 +9,7 @@ import Dashboard from "./pages/Home/Dashboard/Dashboard";
 import Main from "./pages/Main";
 import DisputeRequest from "./pages/Home/DisputeRequest/DisputeRequest";
 import Profile from "./pages/Home/Profile/Profile";
-import ForgotPassword from "./pages/Auth/ForgotPassword";
-import Otp from "./pages/Auth/Otp";
 import Notification from "./pages/Home/Notification/Notification";
-import ResetPassword from "./pages/Auth/ResetPassword";
 import { Loader } from "./component/Loader";
 import ViewUser from "./pages/Home/User/ViewUser";
 import PostList from "./pages/Home/Posts/PostList";
@@ -49,16 +46,10 @@ const Routes: React.FC = () => {
     <Router>
       <Suspense fallback={<Loader />}>
         <RouteConfig>
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route
-            path="/otp"
-            element={<Otp />}
-          />
           <Route
             path="/login"
             element={isLoggedIn ? <Navigate to="/" /> : <Login />}
           />
-          <Route path="/reset-password" element={<ResetPassword />} />
 
           <Route
             path="/"

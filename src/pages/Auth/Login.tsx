@@ -1,13 +1,11 @@
 // Login.tsx
 
-import { useNavigate } from "react-router-dom";
-import logo from "../../images/logo.png";
+
 import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import { useAppSelector, useAppDispatch } from "../../redux/reduxHook";
 import {
   loginWithEmailPassword,
-  verifyPhoneNumber,
 } from "../../redux/slice/Auth";
 import { apiState } from "../../constant/constant";
 import { showToast } from "../../constant/util";
@@ -17,18 +15,9 @@ function Login() {
   const [email, setEmail] = useState("admin@example.com");
   const [password, setPassword] = useState("Admin@123");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const navigate = useNavigate();
   const { status, error } = useAppSelector((state) => state.auth);
-  const { currentScreen } = useAppSelector((state) => state.navigation);
-
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   console.log(currentScreen);
-  //   if (currentScreen === "otp") {
-  //     navigate("/otp");
-  //   }
-  // }, [navigate, currentScreen]);
 
   useEffect(() => {
     if (status === apiState.failed) {
@@ -60,14 +49,7 @@ function Login() {
         <div className="center-sign pt-4 pb-3">
           <div className="panel card-sign">
             <div className="card-body pt-3 pb-3 forget-password-content">
-              <a href="/" className="logo text-center w-100 d-inline-block">
-                {/* <img
-                  src={logo}
-                  width={270}
-                  height={135}
-                  alt="Rab & Rab Associates LLP"
-                /> */}
-              </a>
+
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
                   <button

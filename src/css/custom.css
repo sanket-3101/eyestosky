@@ -1,6 +1,6 @@
 /* Common Css*/
 .form-control:focus {
-  border-color: #030844;
+  border-color: #06c;
   box-shadow: 0 1px 1px rgba(3, 8, 68, 0.075) inset, 0 0 8px rgba(3, 8, 68, 0.3);
 }
 .btn-primary,
@@ -264,7 +264,7 @@ td {
 }
 
 .thumb-info-type {
-  background: #030844 !important;
+  background: #06c !important;
 }
 
 @media (max-width: 1260px) {
@@ -341,7 +341,7 @@ td {
 
 /* Sign Up Css */
 .body-sign .card-sign .card-body {
-  border-top-color: #030844;
+  border-top-color: #06c;
 }
 
 /*Header Css*/
@@ -401,13 +401,13 @@ ul.nav-main li a.active {
 /* Forget Pasword*/
 .forget-password-content ul li button {
   background: transparent !important;
-  color: #030844 !important;
-  border-left: 1px solid #030844 !important;
-  border-right: 1px solid #030844 !important;
-  border-top: 3px solid #030844 !important;
+  color: #06c !important;
+  border-left: 1px solid #06c !important;
+  border-right: 1px solid #06c !important;
+  border-top: 3px solid #06c !important;
 }
 .forget-password-content ul li button.active {
-  background: #030844 !important;
+  background: #06c !important;
   color: #fff !important;
 }
 .forget-password-content .tab-content {

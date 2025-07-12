@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Dashboard.css';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar, Pie, Doughnut, Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,52 +9,46 @@ import {
   ArcElement,
   Tooltip,
   Legend,
-  
+  PointElement,
+  LineElement,
+  Title as ChartTitle,
 } from 'chart.js';
 import axios from 'axios';
 import { apiConstants } from '../../../constant/constant';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/reduxHook';
-import Title from '../../../component/Title';
+import { Title, ChartContainer, ChartSkeleton, CardSkeleton } from '../../../component';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
-
-// Skeleton Loading Component
-const CardSkeleton = () => (
-  <div className="col-md-6 col-lg-4 mb-4">
-    <div className="custom-card text-white p-4 rounded shadow-sm skeleton-card">
-      <div className="skeleton-title"></div>
-      <div className="skeleton-count"></div>
-    </div>
-  </div>
+ChartJS.register(
+  CategoryScale, 
+  LinearScale, 
+  BarElement, 
+  ArcElement, 
+  Tooltip, 
+  Legend,
+  PointElement,
+  LineElement,
+  ChartTitle
 );
+  
 
-// Dummy Bar Chart Data
-const barData = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-  datasets: [
-    {
-      label: 'New Users',
-      data: [150, 200, 180, 220, 300],
-      backgroundColor: '#06c',
-    },
-  ],
-};
-
-// Dummy Pie Chart Data
-const pieData = {
-  labels: ['Approved', 'Pending', 'Rejected'],
-  datasets: [
-    {
-      data: [875, 132, 50],
-      backgroundColor: ['#06c', '#ffc107', '#dc3545'],
-    },
-  ],
-};
 
 export default function Dashboard() {
   const [cards, setCards] = useState<{ title: string; count: number; onClick: string }[]>([]);
   const [loading, setLoading] = useState(true);
+  const [chartData, setChartData] = useState<{
+    monthlyUsers: any;
+    genderStats: any;
+    ageRangeStats: any;
+    ufoWitnessedStats: any;
+    beliefChoiceStats: any;
+  }>({
+    monthlyUsers: null,
+    genderStats: null,
+    ageRangeStats: null,
+    ufoWitnessedStats: null,
+    beliefChoiceStats: null
+  });
   const navigate = useNavigate(); 
   const dispatch = useAppDispatch();
   
@@ -78,6 +72,67 @@ export default function Dashboard() {
           { title: 'Inactive Hashtags', count: data.total_inactive_hashtag, onClick: '/hashtag-list' },
         ];
         setCards(cards);
+
+        // Process chart data
+        if (data.monthly_users) {
+          const monthlyData = {
+            labels: data.monthly_users.map((item: any) => `${item.month}/${item.year}`),
+            datasets: [{
+              label: 'Monthly Users',
+              data: data.monthly_users.map((item: any) => item.count),
+              backgroundColor: '#06c',
+              borderColor: '#06c',
+              tension: 0.1
+            }]
+          };
+          setChartData(prev => ({ ...prev, monthlyUsers: monthlyData }));
+        }
+
+        if (data.gender_stats) {
+          const genderData = {
+            labels: data.gender_stats.map((item: any) => item.type || 'Not Specified'),
+            datasets: [{
+              data: data.gender_stats.map((item: any) => item.count),
+              backgroundColor: ['#06c', '#ff6b6b', '#4ecdc4', '#45b7d1'],
+            }]
+          };
+          setChartData(prev => ({ ...prev, genderStats: genderData }));
+        }
+
+        if (data.age_range_stats) {
+          const ageData = {
+            labels: data.age_range_stats.map((item: any) => item.type || 'Not Specified'),
+            datasets: [{
+              data: data.age_range_stats.map((item: any) => item.count),
+              backgroundColor: ['#06c', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'],
+            }]
+          };
+          setChartData(prev => ({ ...prev, ageRangeStats: ageData }));
+        }
+
+        if (data.ufo_witnessed_stats) {
+          const ufoData = {
+            labels: data.ufo_witnessed_stats.map((item: any) => item.type || 'Not Specified'),
+            datasets: [{
+              data: data.ufo_witnessed_stats.map((item: any) => item.count),
+              backgroundColor: ['#06c', '#ff6b6b', '#4ecdc4'],
+            }]
+          };
+          setChartData(prev => ({ ...prev, ufoWitnessedStats: ufoData }));
+        }
+
+        if (data.belief_choice_stats) {
+          const beliefData = {
+            labels: data.belief_choice_stats.map((item: any) => 
+              item.type ? (item.type.length > 20 ? item.type.substring(0, 20) + '...' : item.type) : 'Not Specified'
+            ),
+            datasets: [{
+              data: data.belief_choice_stats.map((item: any) => item.count),
+              backgroundColor: ['#06c', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'],
+            }]
+          };
+          setChartData(prev => ({ ...prev, beliefChoiceStats: beliefData }));
+        }
       }
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
@@ -111,19 +166,124 @@ export default function Dashboard() {
         </div>
 
         <div className="row mt-5">
-          <div className="col-md-6 mb-4">
-            <div className="p-3 bg-white rounded shadow-sm">
-              <h5 className="mb-3">User Growth</h5>
-              <Bar data={barData} />
-            </div>
-          </div>
+          {loading ? (
+            // Show skeleton loading for charts
+            <>
+              <ChartSkeleton />
+              <ChartSkeleton />
+              <ChartSkeleton />
+              <ChartSkeleton />
+              <ChartSkeleton fullWidth />
+            </>
+          ) : (
+            // Show actual charts
+            <>
+              {/* Monthly Users Chart */}
+              {chartData.monthlyUsers && (
+                <ChartContainer title="Monthly User Growth">
+                  <Line 
+                    data={chartData.monthlyUsers}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: {
+                          position: 'top' as const,
+                        },
+                      },
+                      scales: {
+                        y: {
+                          beginAtZero: true,
+                        },
+                      },
+                    }}
+                  />
+                </ChartContainer>
+              )}
 
-          <div className="col-md-6 mb-4">
-            <div className="p-3 bg-white rounded shadow-sm">
-              <h5 className="mb-3">Post Status Distribution</h5>
-              <Pie data={pieData} />
-            </div>
-          </div>
+              {/* Gender Distribution */}
+              {chartData.genderStats && (
+                <ChartContainer title="Gender Distribution">
+                  <Doughnut 
+                    data={chartData.genderStats}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: {
+                          position: 'bottom' as const,
+                        },
+                      },
+                    }}
+                  />
+                </ChartContainer>
+              )}
+
+              {/* Age Range Distribution */}
+              {chartData.ageRangeStats && (
+                <ChartContainer title="Age Range Distribution">
+                  <Pie 
+                    data={chartData.ageRangeStats}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: {
+                          position: 'bottom' as const,
+                        },
+                      },
+                    }}
+                  />
+                </ChartContainer>
+              )}
+
+              {/* UFO Witnessed Stats */}
+              {chartData.ufoWitnessedStats && (
+                <ChartContainer title="UFO Witnessed Statistics">
+                  <Bar 
+                    data={chartData.ufoWitnessedStats}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                      scales: {
+                        y: {
+                          beginAtZero: true,
+                        },
+                      },
+                    }}
+                  />
+                </ChartContainer>
+              )}
+
+              {/* Belief Choice Stats */}
+              {chartData.beliefChoiceStats && (
+                <ChartContainer title="Belief Choice Distribution" fullWidth>
+                  <Bar 
+                    data={chartData.beliefChoiceStats}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                      scales: {
+                        y: {
+                          beginAtZero: true,
+                        },
+                      },
+                    }}
+                  />
+                </ChartContainer>
+              )}
+            </>
+          )}
         </div>
       </div>
     </section>

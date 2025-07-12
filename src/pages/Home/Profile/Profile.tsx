@@ -155,11 +155,8 @@ function Profile() {
       const auth_token = localStorage.getItem('auth_token');
 
       // Option 1: Backend handles S3 deletion (recommended)
-      const response = await axios.put(
+      const response = await axios.delete(
         apiConstants.baseUrl + apiConstants.updateProfileAvatar,
-        {
-          avatar: "",
-        },
         {
           headers: {
             Authorization: 'Bearer ' + auth_token
