@@ -18,6 +18,9 @@ interface PostDetailsType {
   status: string;
   created_at: string;
   caption?: string;
+  user?: {
+    user_name: string;
+  };
 }
 
 function PostView() {
@@ -230,7 +233,45 @@ function PostView() {
               </div>
             </div>
             <div className="row mb-3">
+
+              <div className="form-group col-sm-6 pt-20">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Username
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={details?.user?.user_name || ''}
+                      disabled={true}
+
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="form-group col-sm-6 pt-0">
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <label htmlFor="" className="mb-0">
+                      Caption
+                    </label>
+                  </div>
+                  <div className="col-md-8">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={details.caption || ''}
+                      disabled={action === TableAction.view}
+                      onChange={e => onChange('caption', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-group col-sm-6 pt-20">
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
@@ -256,25 +297,6 @@ function PostView() {
                   </div>
                 </div>
               </div>
-              <div className="form-group col-sm-6 pt-0">
-                <div className="row align-items-center">
-                  <div className="col-md-4">
-                    <label htmlFor="" className="mb-0">
-                      Caption
-                    </label>
-                  </div>
-                  <div className="col-md-8">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={details.caption || ''}
-                      disabled={action === TableAction.view}
-                      onChange={e => onChange('caption', e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-
             </div>
           </form>
           {action !== TableAction.view && (

@@ -55,7 +55,15 @@ function PostList() {
       name: "Post-Link",
       fieldName: "media_url",
       style: {
-        width: "30%",
+        width: "25%",
+      },
+    },
+    {
+      id: "4",
+      name: "Username",
+      fieldName: "username",
+      style: {
+        width: "15%",
       },
     },
     {
@@ -63,7 +71,7 @@ function PostList() {
       name: "Status",
       fieldName: "status",
       style: {
-        width: "20%",
+        width: "15%",
       },
     },
     {
@@ -93,13 +101,17 @@ function PostList() {
       .then((response) => {
         console.log(response.data)
         const { data } = response
+        const updatedData = data.data.map((item: any) => ({
+          ...item,
+          username: item.user.user_name
+        }));
         if (data) {
           const details = {
             pageNumber: data.page,
             totalItems: data.total,
             itemsPerPage: data.limit,
             totalPage: data.total_pages,
-            data: data.data,
+            data: updatedData,
           }
           setPostList(details);
         }
