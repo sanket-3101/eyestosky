@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "./Pagination";
+
 import { formatDate } from "../../constant/util";
 
 // Functional component for the search input
@@ -34,11 +35,14 @@ const getDescriptionText = (text: string) => {
 
   return text.substring(0, 320) + "...";
 };
+
+
+
 // Functional component for a table row
-const TableRow = ({ rowData, columns, onActionClick, onEditAction }: any) => {
+const TableRow = ({ rowData, columns, onActionClick, onEditAction, onDownloadAction }: any) => {
   const renderCell = (column: any, index: number) => {
     const { name, fieldName, style } = column;
-    
+
     // Handle different column types
     switch (name) {
       case "Action":
@@ -49,14 +53,21 @@ const TableRow = ({ rowData, columns, onActionClick, onEditAction }: any) => {
                 <i className="bx bx-show text-6" />
               </a>
               {onEditAction && (
-                <a onClick={() => onEditAction(rowData)} className="cur-pointer text-primary" title="Edit">
+                <a onClick={() => onEditAction(rowData)} className="cur-pointer text-primary mr-6"  title="Edit">
                   <i className="bx bx-edit text-6" />
                 </a>
               )}
+              {
+                onDownloadAction && (
+                  <a onClick={() => onDownloadAction(rowData)} className="cur-pointer text-primary" title="Download">
+                    <i className="bx bx-download text-6" />
+                  </a>
+                )
+              }
             </span>
           </td>
         );
-        
+
       case "Status":
         return (
           <td key={index}>
@@ -65,42 +76,29 @@ const TableRow = ({ rowData, columns, onActionClick, onEditAction }: any) => {
             </span>
           </td>
         );
-        
+
       case "Action Required":
         return (
           <td key={index} style={{ ...style }}>
             {rowData[fieldName][0]?.actionRequired}
           </td>
         );
-        
+
       case "Date":
         return (
           <td key={index} style={{ ...style }}>
             {formatDate(rowData[fieldName])}
           </td>
         );
-        
+
       case "Description":
         return (
           <td key={index} style={{ ...style }}>
             {getDescriptionText(rowData[fieldName])}
           </td>
         );
-        
-      case "Post-Link":
-        return (
-          <td key={index} style={{ ...style }}>
-            <a 
-              href={rowData[fieldName]} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-primary text-decoration-none"
-            >
-              {rowData[fieldName]}
-            </a>
-          </td>
-        );
-        
+
+
       default:
         return (
           <td key={index} style={{ ...style }}>
@@ -118,7 +116,7 @@ const TableRow = ({ rowData, columns, onActionClick, onEditAction }: any) => {
 };
 
 // Functional component for the table
-const Table = ({ data, columns, onActionClick, onPageChange, onEditAction, setCurrentPage, currentPage }: any) => {
+const Table = ({ data, columns, onActionClick, onPageChange, onEditAction, setCurrentPage, currentPage, onDownloadAction }: any) => {
 
   const totalPages = data.totalPage;
   const currentPageData = data.data;
@@ -146,6 +144,7 @@ const Table = ({ data, columns, onActionClick, onPageChange, onEditAction, setCu
                 columns={columns}
                 onActionClick={onActionClick}
                 onEditAction={onEditAction}
+                onDownloadAction={onDownloadAction}
               />
             ))}
           </tbody>
@@ -170,6 +169,7 @@ const TableSection = ({
   showCustomButton,
   onCustomButtonClick,
   onEditAction,
+  onDownloadAction,
   customButtonName
 }: any) => {
   const [search, setSearch] = useState("");
@@ -215,6 +215,7 @@ const TableSection = ({
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           onRowClick
+          onDownloadAction={onDownloadAction}
         />
       </div>
     </section>

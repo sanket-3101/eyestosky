@@ -5,7 +5,6 @@ import { TotalCasesType, apiConstants } from "../../../constant/constant";
 
 import { Loader } from "../../../component/Loader";
 import TableSection from "../../../component/Table/Table";
-import { PostListMock } from "../../../constant/mock";
 import FilterPopup from "../../../component/FilterPopup";
 
 
@@ -28,6 +27,7 @@ function PostList() {
   const [postlist, setPostList] = useState<PosListType | null | any>(null);
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowpopup] = useState(false);
+  const [showDownloadLoading, setShowDownloadLoading] = useState(false);
   const [currentFilters, setCurrentFilters] = useState({
     status: "",
     postType: ""
@@ -50,14 +50,7 @@ function PostList() {
         width: "20%",
       },
     },
-    {
-      id: "3",
-      name: "Post-Link",
-      fieldName: "media_url",
-      style: {
-        width: "25%",
-      },
-    },
+
     {
       id: "4",
       name: "Username",
@@ -130,12 +123,42 @@ function PostList() {
     setShowpopup(false);
   };
 
+  const handleDownload = async (audioUrl: string) => {
+    try {
+      setShowDownloadLoading(true);
+      const response = await fetch(
+        audioUrl
+      );
+  
+      if (!response.ok) throw new Error("Network response was not ok");
+  
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+  
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = audioUrl.split("/").pop() || "audio.m4a"; // You can set any file name here
+      a.click();
+  
+      // Cleanup
+      window.URL.revokeObjectURL(url);
+      setShowDownloadLoading(false);
+    } catch (error) {
+      setShowDownloadLoading(false);
+      console.error("Download failed:", error);
+    }
+  };
+
   const onActionClick = (data: any) => {
     navigate(`view/${data.id}`);
   };
 
   const onEditAction = (data: any) => {
     navigate(`edit/${data.id}`);
+  }
+
+  const onDownloadAction = (data: any) => {
+    handleDownload(data.media_url);
   }
 
   const onCustomButtonClick = () => {
@@ -181,6 +204,7 @@ function PostList() {
           onSearchChange={(value: string) =>
             getDetails({ search: value, page: 1 })
           }
+          onDownloadAction={onDownloadAction}
         />
       </div>
       {showPopup && (
@@ -189,6 +213,9 @@ function PostList() {
           onApplyFilter={onApplyFilter}
           initialFilters={currentFilters}
         />
+      )}
+      {showDownloadLoading && ( 
+        <Loader />
       )}
     </section>
   );
