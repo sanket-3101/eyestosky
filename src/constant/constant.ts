@@ -12,7 +12,7 @@ export const apiConstants = {
     updateProfile: 'profile',
     presign: 'presign',
     updateProfileAvatar: 'profile/avatar',
-    addContact: 'contact/add-contact',
+    addContact: 'contact',
     postList: (details: any) => {
         let url = `post?page=${details.page}&search=${details.search}`;
         if (details.media_type) {
@@ -45,7 +45,9 @@ export const apiConstants = {
     getHashtagDetailsById: (id: string) => `hashtag/${id}/details`,
     updateHashtagById: (id: string) => `hashtag/${id}`,
     sendNotification: () => `notification/send`,
-    dashboard: () => `dashboard`
+    dashboard: () => `dashboard`,
+    getContactList: (details: any) => `contact?search=${details.search}&page=${details.page}&limit=${details.limit}`,
+    updateContactStatus: (id: string) => `contact/${id}`
 
 }
 export enum apiState {

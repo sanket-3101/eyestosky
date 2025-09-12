@@ -39,7 +39,7 @@ const getDescriptionText = (text: string) => {
 
 
 // Functional component for a table row
-const TableRow = ({ rowData, columns, onActionClick, onEditAction, onDownloadAction }: any) => {
+const TableRow = ({ rowData, columns, onActionClick, onEditAction, onDownloadAction, onStatusClick }: any) => {
   const renderCell = (column: any, index: number) => {
     const { name, fieldName, style } = column;
 
@@ -71,7 +71,11 @@ const TableRow = ({ rowData, columns, onActionClick, onEditAction, onDownloadAct
       case "Status":
         return (
           <td key={index}>
-            <span className="badge badge-info" style={{ fontSize: '12px' }}>
+            <span onClick={() => {
+              if(onStatusClick) {
+                onStatusClick(rowData)
+              }
+            }} className="badge badge-info" style={{ fontSize: '12px', cursor: "pointer" }}>
               {rowData[fieldName]}
             </span>
           </td>
@@ -116,7 +120,7 @@ const TableRow = ({ rowData, columns, onActionClick, onEditAction, onDownloadAct
 };
 
 // Functional component for the table
-const Table = ({ data, columns, onActionClick, onPageChange, onEditAction, setCurrentPage, currentPage, onDownloadAction }: any) => {
+const Table = ({ data, columns, onActionClick, onPageChange, onEditAction, setCurrentPage, currentPage, onDownloadAction, onStatusClick }: any) => {
 
   const totalPages = data.totalPage;
   const currentPageData = data.data;
@@ -145,6 +149,7 @@ const Table = ({ data, columns, onActionClick, onPageChange, onEditAction, setCu
                 onActionClick={onActionClick}
                 onEditAction={onEditAction}
                 onDownloadAction={onDownloadAction}
+                onStatusClick={onStatusClick}
               />
             ))}
           </tbody>
@@ -170,7 +175,8 @@ const TableSection = ({
   onCustomButtonClick,
   onEditAction,
   onDownloadAction,
-  customButtonName
+  customButtonName,
+  onStatusClick
 }: any) => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -215,6 +221,7 @@ const TableSection = ({
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           onRowClick
+          onStatusClick={onStatusClick}
           onDownloadAction={onDownloadAction}
         />
       </div>

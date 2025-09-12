@@ -19,6 +19,7 @@ import HashtagView from "./pages/Home/Hashtag/HashtagView";
 import UserList from "./pages/Home/User/UserList";
 import Cmspage from "./pages/Home/Cmspage/Cmspage";
 import CmsEditor from "./pages/Home/Cmspage/CmsEditor";
+import Contactus from "./pages/Home/Contactus/Contactus";
 import { useAppSelector } from "./redux/reduxHook";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
@@ -78,6 +79,7 @@ const Routes: React.FC = () => {
             </Route>
 
             <Route path="notification" element={<Notification />} />
+            <Route path="contact-us" element={<Contactus />} />
             {/* <Route path="service-request" element={<RequestService />} /> */}
           </Route>
         </RouteConfig>
