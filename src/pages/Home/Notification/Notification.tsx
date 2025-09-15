@@ -21,7 +21,12 @@ function Notification() {
     setLoading(true);
     axios.post(apiConstants.baseUrl + apiConstants.sendNotification(), notificationDetails).then((response) => {
       setLoading(false);
-      if (response.data) {
+      if (response.data && !response.data.isError) {
+        setNotificationDetails({
+          device_type: "android",
+          title: "",
+          message: "",
+        })
         showToast("Notification Send Successfully", { type: "success" });
         return
       }
