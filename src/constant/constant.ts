@@ -23,7 +23,7 @@ export const apiConstants = {
         }
         return url;
     },
-    postDetailsById: (id: string) => `post/${id}`,
+    postDetailsById: (id: string) => `post/status/${id}`,
     cms: 'cms/get-cms',
     getCmsPrivacyPolicy: 'cms/privacy_policy/details',
     getCmsTerms: 'cms/terms/details',

@@ -20,6 +20,9 @@ interface PostDetailsType {
   caption?: string;
   user?: {
     user_name: string;
+    id: string;
+    device_token: string;
+    device_type: string;
   };
 }
 
@@ -80,14 +83,20 @@ function PostView() {
     setSubmitLoading(true);
     try {
       // Prepare payload with correct types
+
       const payload = {
-        media_url: details.media_url,
-        media_type: details.media_type,
-        description: details.description || '',
-        location: details.location || '',
-        latitude: details.latitude ? Number(details.latitude) : undefined,
-        longitude: details.longitude ? Number(details.longitude) : undefined,
+        // media_url: details.media_url,
+        // media_type: details.media_type,
+        // description: details.description || '',
+        // location: details.location || '',
+        // latitude: details.latitude ? Number(details.latitude) : undefined,
+        // longitude: details.longitude ? Number(details.longitude) : undefined,
         status: details.status,
+        user_id: details.user?.id,
+        device_type: details.user?.device_type || "android",
+        device_token: details.user?.device_token || ""
+
+
         // caption: details.caption || '',
       };
       await axios.put(
@@ -207,7 +216,7 @@ function PostView() {
                       type="text"
                       className="form-control"
                       value={details.latitude || ''}
-                      disabled={action === TableAction.view}
+                      disabled={true}
                       onChange={e => onChange('latitude', e.target.value)}
                     />
                   </div>
@@ -225,7 +234,7 @@ function PostView() {
                       type="text"
                       className="form-control"
                       value={details.longitude || ''}
-                      disabled={action === TableAction.view}
+                      disabled={true}
                       onChange={e => onChange('longitude', e.target.value)}
                     />
                   </div>
@@ -285,6 +294,7 @@ function PostView() {
                         value={details.description || ''}
                         rows={3}
                         onChange={e => onChange('description', e.target.value)}
+                        disabled={true}
                       />
                     ) : (
                       <input
