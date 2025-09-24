@@ -35,7 +35,7 @@ function Header() {
     <header className="header">
       <div className="logo-container">
         <Link className="logo" to="/" >
-          <h3 style={{ marginLeft: '5px' }}>Eyes On the Sky</h3>
+          <h3 style={{ marginLeft: '5px' }}>Eyes to Sky</h3>
         </Link>
 
         <div
