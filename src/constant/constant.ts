@@ -1,5 +1,5 @@
 export const apiConstants = {
-    baseUrl: process.env.NODE_ENV === 'production' ? 'http://3.95.198.60:3000/api/v1/admin/' : 'http://3.95.198.60:3000/api/v1/admin/',
+    baseUrl: 'https://api.eyestosky.com/api/v1/admin/',
     loginEmailPassword: 'auth/login',
     verifyPhoneNumber: 'auth/login-with-mobile',
     verifyOtp: 'auth/verify-otp',
