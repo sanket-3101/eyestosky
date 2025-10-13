@@ -135,31 +135,40 @@ function ViewUser() {
       {/* start: page */}
       <section className="card">
         <div className="card-body">
-        <Title title="User Details" />
+          <Title title="User Details" />
           <form action="" method="post">
             <div className="row mb-3">
               <div className="form-group col-sm-12 pt-0">
-                <div className="row">
-                  <div className="col-md-2">
-                    <label htmlFor="" className="mb-0">
-                      Profile Picture
-                    </label>
-                  </div>
-                  <div className="col-md-10">
-                    <div
-                      // className="thumb-info"
-                      style={{ display: "flex", justifyContent: "center", height: '150px', width: '150px' }}
-                      // onClick={() => document.getElementById("fileInput")?.click()}
-                      id="uploadButton"
-                    >
-                      <img
-                        src={details?.avatar}
-                        className="rounded img-fluid"
-                        alt="Select Image"
-                      />
-                    </div>
-                  </div>
-                </div>
+
+                {
+                  details?.avatar && (
+                    <>
+                      <div className="row">
+                        <div className="col-md-2">
+                          <label htmlFor="" className="mb-0">
+                            Profile Picture
+                          </label>
+                        </div>
+                        <div className="col-md-10">
+                          <div
+                            // className="thumb-info"
+                            style={{ display: "flex", justifyContent: "center", height: '150px', width: '150px' }}
+                            // onClick={() => document.getElementById("fileInput")?.click()}
+                            id="uploadButton"
+                          >
+                            <img
+                              src={details?.avatar}
+                              className="rounded img-fluid"
+                              alt="Select Image"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )
+                }
+
+
               </div>
             </div>
             <div className="row mb-3">

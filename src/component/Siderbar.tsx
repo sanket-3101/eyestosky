@@ -57,6 +57,13 @@ function Sidebar() {
             </NavLink>
           </li>
 
+          <li>
+            <NavLink to="/report-list" className="nav-link">
+              <i className="bx bx-flag" aria-hidden="true" />
+              <span>Reports</span>
+            </NavLink>
+          </li>
+
           {/* <li>
             <NavLink to="/owner-list" className="nav-link">
               <i className="bx bx-user" aria-hidden="true" />

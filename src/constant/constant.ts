@@ -47,7 +47,8 @@ export const apiConstants = {
     sendNotification: () => `notification/send`,
     dashboard: () => `dashboard`,
     getContactList: (details: any) => `contact?search=${details.search}&page=${details.page}&limit=${details.limit}`,
-    updateContactStatus: (id: string) => `contact/${id}`
+    updateContactStatus: (id: string) => `contact/${id}`,
+    getReports: (details: any) => `user/reported?search=${details.search || ''}&page=${details.page}&limit=${details.limit}`
 
 }
 export enum apiState {
