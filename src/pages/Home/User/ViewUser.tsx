@@ -93,11 +93,11 @@ function ViewUser() {
       first_name: details.first_name,
       last_name: details.last_name,
       country_name: details.country_name,
-      description: details.description,
+      // description: details.description,
       gender: details.gender,
       ufo_witnessed: details.ufo_witnessed,
       status: details.status,
-      avatar: details.avatar,
+      // avatar: details.avatar,
     }
 
     try {
@@ -283,7 +283,8 @@ function ViewUser() {
                           value={details?.description}
                           rows={4}
                           cols={50}
-                          onChange={(e) => onChange('description', e.target.value)}
+                          disabled={true}
+                          // onChange={(e) => onChange('description', e.target.value)}
                         />
                       </div>
                     ) : (
