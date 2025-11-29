@@ -62,8 +62,13 @@ function ViewUser() {
 
   const getDetails = async (id: string) => {
     await axios.get(apiConstants.baseUrl + apiConstants.getProfileById(id)).then((response) => {
-      console.log(response.data);
-      setDetails(response.data);
+      const details: any ={
+        ...response.data,
+        country_name: response.data.country_name || "",
+        gender: response.data.gender || "",
+        ufo_witnessed: response.data.ufo_witnessed || "",
+      }
+      setDetails(details);
       setLoading(false);
     });
   };
@@ -89,16 +94,28 @@ function ViewUser() {
     }
 
     setSubmitLoading(true);
-    const data = {
+    const data: any = {
       first_name: details.first_name,
       last_name: details.last_name,
-      country_name: details.country_name,
       // description: details.description,
-      gender: details.gender,
-      ufo_witnessed: details.ufo_witnessed,
       status: details.status,
       // avatar: details.avatar,
     }
+
+
+    if (details.country_name.length > 0) {
+      data.country_name = details.country_name;
+    }
+
+    if (details.gender.length > 0) {
+      data.gender = details.gender;
+    }
+
+    if (details.ufo_witnessed.length > 0) {
+      data.ufo_witnessed = details.ufo_witnessed;
+    }
+
+
 
     try {
       const response = await axios.put(apiConstants.baseUrl + apiConstants.updateProfileById(details.id), data);
@@ -251,7 +268,7 @@ function ViewUser() {
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      Country
+                      Country<span className="text-danger">*</span>
                     </label>
                   </div>
                   <div className="col-md-8">
@@ -284,7 +301,7 @@ function ViewUser() {
                           rows={4}
                           cols={50}
                           disabled={true}
-                          // onChange={(e) => onChange('description', e.target.value)}
+                        // onChange={(e) => onChange('description', e.target.value)}
                         />
                       </div>
                     ) : (
@@ -309,7 +326,7 @@ function ViewUser() {
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      UFO Witnessed
+                      UFO Witnessed<span className="text-danger">*</span>
                     </label>
                   </div>
                   <div className="col-md-8">
@@ -319,6 +336,7 @@ function ViewUser() {
                       value={details?.ufo_witnessed}
                       onChange={(e) => onChange('ufo_witnessed', e.target.value)}
                     >
+                      <option value="">Select UFO Witnessed</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
@@ -355,7 +373,7 @@ function ViewUser() {
                 <div className="row align-items-center">
                   <div className="col-md-4">
                     <label htmlFor="" className="mb-0">
-                      Gender
+                      Gender<span className="text-danger">*</span>
                     </label>
                   </div>
                   <div className="col-md-8">
@@ -368,6 +386,7 @@ function ViewUser() {
                         onChange('gender', e.target.value);
                       }}
                     >
+                      <option value="">Select Gender</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
